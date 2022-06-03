@@ -10,6 +10,6 @@ public class SessionsController {
 
     @GetMapping(path = "/login")
     public String index() {
-        return "sessions/login";
+        return "session/login";
     }
 }
