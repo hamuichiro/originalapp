@@ -29,6 +29,10 @@ public class PagesController {
     	 return "pages/index";
     }
     
+	@RequestMapping("/login")
+    public String login() {
+        return "session/login";
+    }
     
     @RequestMapping("/selenium")
     public String selenium() {
