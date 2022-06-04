@@ -34,6 +34,11 @@ public class PagesController {
         return "session/login";
     }
     
+	@RequestMapping("/users/new")
+    public String user() {
+        return "users/new";
+    }
+	
     @RequestMapping("/selenium")
     public String selenium() {
     	String  driver_path = "/app/.chromedriver/bin/chromedriver";
