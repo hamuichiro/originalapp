@@ -29,6 +29,11 @@ public class PagesController {
     	 return "pages/index";
     }
     
+    @RequestMapping("/home")
+    public String home() {  
+    	 return "pages/home";
+    }
+    
     
 
 	
