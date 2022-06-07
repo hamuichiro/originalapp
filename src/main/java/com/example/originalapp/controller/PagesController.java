@@ -29,15 +29,8 @@ public class PagesController {
     	 return "pages/index";
     }
     
-	@RequestMapping("/login")
-    public String login() {
-        return "session/login";
-    }
     
-	@RequestMapping("/users/new")
-    public String user() {
-        return "users/new";
-    }
+
 	
     @RequestMapping("/selenium")
     public String selenium() {
