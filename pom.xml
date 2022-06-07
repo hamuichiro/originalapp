@@ -8,11 +8,11 @@
 		<version>2.7.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example.tradeTool</groupId>
-	<artifactId>tradeTool</artifactId>
+	<groupId>com.example.originalapp</groupId>
+	<artifactId>originalapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tradeTool</name>
-	<description>tradeTool</description>
+	<name>originalapp</name>
+	<description>originalapp</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
