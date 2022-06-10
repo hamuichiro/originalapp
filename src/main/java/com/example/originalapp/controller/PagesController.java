@@ -26,12 +26,12 @@ public class PagesController {
 
     @RequestMapping("/")
     public String index() {  
-    	 return "pages/home";
+    	 return "pages/index";
     }
     
     @RequestMapping("/home")
     public String home() {  
-    	 return "pages/home";
+    	 return "pages/index";
     }
     
     
