@@ -12,7 +12,7 @@ public class SessionsController {
 
     @GetMapping(path = "/login")
     public String index() {
-        return "pages/home";
+        return "pages/index";
     }
     
 	@RequestMapping("/users/new")
