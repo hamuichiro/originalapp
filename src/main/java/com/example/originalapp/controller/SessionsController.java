@@ -12,21 +12,21 @@ public class SessionsController {
 
     @GetMapping(path = "/login")
     public String index() {
-        return "sessions/login";
+        return "pages/home";
     }
     
 	@RequestMapping("/users/new")
     public String user() {
         return "users/new";
     }
-
-    @GetMapping(path = "/login-failure")
+    
+	@GetMapping(path = "/login-failure")
     public String loginFailure(Model model) {
         model.addAttribute("hasMessage", true);
         model.addAttribute("class", "alert-danger");
         model.addAttribute("message", "Nameまたはパスワードに誤りがあります。");
 
-        return "sessions/new";
+        return "pages/home";
     }
 
     @GetMapping(path = "/logout-complete")

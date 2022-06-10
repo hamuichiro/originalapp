@@ -26,7 +26,7 @@ public class PagesController {
 
     @RequestMapping("/")
     public String index() {  
-    	 return "pages/index";
+    	 return "pages/home";
     }
     
     @RequestMapping("/home")

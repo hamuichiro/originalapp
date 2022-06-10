@@ -43,7 +43,7 @@ public class AccountController {
         String passwordConfirmation = form.getPasswordConfirmation();
 
         if (repository.findByUsername(name) != null) {
-            FieldError fieldError = new FieldError(result.getObjectName(), "email", "その E メールはすでに使用されています。");
+            FieldError fieldError = new FieldError(result.getObjectName(), "name", "その名前はすでに使用されています。");
             result.addError(fieldError);
         }
         if (result.hasErrors()) {
@@ -53,6 +53,6 @@ public class AccountController {
         Account entity = new Account(name, passwordEncoder.encode(password), Authority.ROLE_USER);
         repository.saveAndFlush(entity);
 
-        return "layouts/complete";
+        return "pages/home";
     }
 }
