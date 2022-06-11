@@ -12,7 +12,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String index() {
-        return "pages/index";
+        return "sessions/login";
     }
     
 	@RequestMapping("/users/new")

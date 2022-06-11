@@ -24,7 +24,7 @@ import org.openqa.selenium.interactions.Actions;
 @Controller
 public class PagesController {
 
-    @RequestMapping(path = "/")
+    @RequestMapping(path = "/index")
     public String index() {  
     	 return "pages/index";
     }

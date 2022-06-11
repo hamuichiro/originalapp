@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // ログアウト処理
                 .and()
                 .logout()
-                .logoutUrl("/logout") //ログアウトのURL
+                .logoutUrl("/") //ログアウトのURL
                 .logoutSuccessUrl("/logout-complete") //ログアウト時の遷移先
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
@@ -62,8 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // form
                 .and()
                 .formLogin()
-                .loginPage("/login") //ログインページ
-                .defaultSuccessUrl("/login-complete") //ログイン成功時の遷移先
+                .loginPage("/index") //ログインページ
+                .defaultSuccessUrl("/index") //ログイン成功時の遷移先
                 .failureUrl("/login-failure") //ログインエラー時の遷移先
                 .permitAll();
         // @formatter:on
