@@ -53,6 +53,6 @@ public class AccountController {
         Account entity = new Account(name, passwordEncoder.encode(password), Authority.ROLE_USER);
         repository.saveAndFlush(entity);
 
-        return "pages/home";
+        return "pages/index";
     }
 }
