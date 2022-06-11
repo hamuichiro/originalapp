@@ -16,7 +16,15 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
   </head>
   <body class="text-center">
+  <header>
+  <p><div id="messages" layout:fragment="messages" th:if="!${#lists.isEmpty(#fields.detailedErrors())}">
+      <ul>
+        <li th:each="error : ${#fields.detailedErrors()}" class="error-message" th:text="${error.message}"/>
+      </ul>
+    </div></p>
+  </header>
     <main>
+
     <!-- 
 	Please note, that you can apply .m--global-blending-active to .fnc-slider 
 	to enable blend-mode for all background-images or apply .m--blend-bg-active
@@ -109,7 +117,7 @@
 	        <div class="fnc-nav__bg m--navbg-blue"></div>
 	      </div>
 	      <div class="fnc-nav__controls">
-	        <button class="fnc-nav__control">         
+	        <button onclick="location.href='/pages/analysistool'" class="fnc-nav__control" >         
 			  Analysis Tool
 	          <span class="fnc-nav__control-progress"></span>
 	        </button>
@@ -135,95 +143,15 @@
 	    <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/142996/profile/profile-512_5.jpg" alt="" class="demo-cont__credits-img" />
 	    <h3 class="demo-cont__credits-name">Sing In</h3>
 	    <a href="#" data-micromodal-trigger="modal-login"  class="demo-cont__credits-link">Log In</a>
-	    <a href="#"  class="demo-cont__credits-link">Log Out</a>
-	    <h2 class="demo-cont__credits-heading">Sing Up</h2>
-	    <a href="/users/new" data-micromodal-trigger="modal-singup" class="demo-cont__credits-link" th:action="@{/users/new}">New Create</a>
+	    <a href="#" onclick="clickEvent()" class="demo-cont__credits-link">Log Out</a>
+	    <h3 class="demo-cont__credits-heading">Sign Up</h3>
+	    <a href="/users/new">New Create</a>
 	  </div>
 	</div>
 	<div th:include="~{sessions/login::modal-login}"></div>
-	<!-- div th:include="~{sessions/new::modal-signup}"></div -->
-<!-- 
-	  <div class="modal modal-dialog" tabindex="-1" role="dialog" id="modal-login" aria-hidden="true">
-		<div class="modal-overlay" data-micromodal-close>
-  		  <div class="modal-dialog" role="document">
-    		<div class="modal-content rounded-4 shadow ">
-      		  <div class="modal-header p-5 pb-4 border-bottom-0">
-        		<h2 class="fw-bold mb-0">Sign up for free</h2>
-        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-micromodal-close></button>
-      		  </div>
-			  <div class="modal-body p-5 pt-0">
-         		<form class="" method="post" th:action="@{/home}">
-          		<div class="form-floating mb-3">
-            	  <input type="text" class="form-control rounded-3" id="session_name" placeholder="Account Name">
-            	  <label for="session_name">Account Name</label>
-           		</div>
-          		<div class="form-floating mb-3">
-            	  <input type="password" class="form-control rounded-3" id="session_password" placeholder="Password">
-            	  <label for="session_password">Password</label>
-          		</div>
-              	<div class="checkbox mb-3">
-      			  <label>
-        		  <input type="checkbox" value="remember-me"> Remember me
-      			  </label>
-    			</div>
-          		<button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
-          		<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-          		<hr class="my-4">
-          		<h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-          		<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" type="submit">
-	              <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
-	              Sign up with Twitter
-          		</button>
-          		<button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
-            	  <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"/></svg>
-            	  Sign up with Facebook
-          		</button>
-          		<button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
-            	  <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"/></svg>
-            	  Sign up with GitHub
-          		</button>
-        	  </form>
-      		</div>
-    	  </div>
-  		</div>
-	  </div>
-    </div>
-     -->
-    <!--
-    <div class="modal modal-dialog" tabindex="-1" role="dialog" id="modal-singup" aria-hidden="true">
-		<div class="modal-overlay" data-micromodal-close>
-  		  <div class="modal-dialog" role="document">
-    		<div class="modal-content rounded-4 shadow ">
-      		  <div class="modal-header p-5 pb-4 border-bottom-0">
-        		<h2 class="fw-bold mb-0">Sign up</h2>
-        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-micromodal-close></button>
-      		  </div>
-			  <div class="modal-body p-5 pt-0">
-         		<form class="" method="post" th:action="@{/user}" th:object="${form}">
-         		<div layout:replace="~{layouts/common::messages}"></div>
-          		<div class="form-floating mb-3">
-          		  <label for="user_name">Account Name</label>
-            	  <input type="text" class="form-control rounded-3" th:field="*{name}" id="user_name" placeholder="Account Name">
-            	  <p th:if="${#fields.hasErrors('name')}" class="error-message" th:errors="*{name}"></p>
-           		</div>
-          		<div class="form-floating mb-3">
-          		  <label for="user_password">Password</label>
-            	  <input type="password" class="form-control rounded-3" th:field="*{password}" id="user_password" placeholder="Password">
-            	  <p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message" th:errors="*{passwordConfirmation}"></p>
-          		</div>
-          		<div class="form-floating mb-3">
-          		  <label for="user_password_confirmation">Password confirmation</label>
-            	  <input type="password" class="form-control rounded-3" th:field="*{passwordConfirmation}" id="user_password_confirmation" placeholder="Password">
-            	  <p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message" th:errors="*{passwordConfirmation}"></p>
-          		</div>
-          		<button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
-        	  </form>
-      		</div>
-    	  </div>
-  		</div>
-	  </div>
-    </div>
-      -->
+
+	
+	
   </main>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
@@ -238,6 +166,18 @@
          convertMethod('.convert');
           $(".alert").fadeOut(5000);
       });
+	</script>
+	<script>
+	function clickEvent() {
+	var result = confirm('ログアウトしますか？');
+	 
+	if( result ) {
+	    alert('ログアウトしました');
+	}
+	else {
+		alert('ログインできませんでした');
+	}
+	}
 	</script>
   </body>
 </html>

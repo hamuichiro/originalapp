@@ -8,17 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class SessionsController {
+public class LoginController {
 
-    @GetMapping(path = "/login")
+    @GetMapping("/login")
     public String index() {
-        return "sessions/login";
+        return "pages/index";
     }
     
 	@RequestMapping("/users/new")
     public String user() {
-        return "users/new";
+        return "/users/new";
     }
+
+
     
 	@GetMapping(path = "/login-failure")
     public String loginFailure(Model model) {
@@ -26,7 +28,7 @@ public class SessionsController {
         model.addAttribute("class", "alert-danger");
         model.addAttribute("message", "Nameまたはパスワードに誤りがあります。");
 
-        return "pages/home";
+        return "pages/index";
     }
 
     @GetMapping(path = "/logout-complete")
@@ -35,6 +37,6 @@ public class SessionsController {
         model.addAttribute("class", "alert-info");
         model.addAttribute("message", "ログアウトしました。");
 
-        return "layouts/complete";
+        return "pages/index";
     }
 }

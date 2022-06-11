@@ -24,17 +24,15 @@ import org.openqa.selenium.interactions.Actions;
 @Controller
 public class PagesController {
 
-    @RequestMapping("/")
+    @RequestMapping(path = "/")
     public String index() {  
     	 return "pages/index";
     }
     
-    @RequestMapping("/home")
-    public String home() {  
-    	 return "pages/index";
+    @RequestMapping(path = "/pages/analysistool")
+    public String tool() {  
+    	 return "pages/analysistool";
     }
-    
-    
 
 	
     @RequestMapping("/selenium")

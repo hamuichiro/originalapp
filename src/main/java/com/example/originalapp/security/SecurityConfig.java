@@ -1,4 +1,4 @@
-package com.example.originalapp;
+package com.example.originalapp.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,15 +47,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-        http.authorizeRequests().antMatchers("/login", "/logout-complete", "/users/new", "/user").permitAll()
-                .anyRequest().authenticated()
+        http.authorizeRequests()
+        	.antMatchers("/login", "/logout-complete", "/users/new", "/user").permitAll() //ログイン不要でアクセス可能
+                .anyRequest().authenticated() //上記以外は直リンク禁止
                 // ログアウト処理
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)
+                .and()
+                .logout()
+                .logoutUrl("/logout") //ログアウトのURL
+                .logoutSuccessUrl("/logout-complete") //ログアウト時の遷移先
+                .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true).permitAll().and().csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 // form
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
+                .and()
+                .formLogin()
+                .loginPage("/login") //ログインページ
+                .defaultSuccessUrl("/login-complete") //ログイン成功時の遷移先
+                .failureUrl("/login-failure") //ログインエラー時の遷移先
                 .permitAll();
         // @formatter:on
     }
