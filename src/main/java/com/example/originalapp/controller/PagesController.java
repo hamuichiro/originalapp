@@ -86,7 +86,7 @@ public class PagesController {
         
         //WebDriverManager.chromedriver().setup();
         
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
+
 
 
         
