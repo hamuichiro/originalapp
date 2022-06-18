@@ -87,8 +87,7 @@ public class PagesController {
         //WebDriverManager.chromedriver().setup();
         
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
-        driver.manage().timeouts().setScriptTimeout(5,TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
+
 
         
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
