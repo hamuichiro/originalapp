@@ -89,7 +89,7 @@ public class PagesController {
         
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
         
-        /* driver.findElement(By.id("inputName")).sendKeys(userId); //ユーザーIDの入力
+        /*driver.findElement(By.id("inputName")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.id("inputPass")).sendKeys(password); //パスワードの入力
         driver.findElement(By.xpath("//*[@id=\"lionFxLogin\"]/button")).click(); //ログインボタンのクリック
         driver.findElement(By.xpath("//*[@id=\"site-navbar-collapse\"]/ul/li[8]/a/gl-switchery/span/small")).click(); //約定一覧の選択
@@ -213,9 +213,9 @@ public class PagesController {
 		    driver.findElement(By.className("content-YKkCvwjV")).click(); //移動ボタンのクリック
 		    
 		    Action keydownEnd = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
-		    keydownEnd.perform();*/
+		    keydownEnd.perform();
 		    break;
-	    }
+	    }*/
 
 
         return "pages/analysistool";
