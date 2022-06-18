@@ -112,12 +112,12 @@ public class PagesController {
         			breakFlag = true;
         			break;
         		}
-        		try {
-        			  wait();
-        			} catch (InterruptedException e) {
-        			  //例外処理
-        				continue;
-        			}
+                //10秒待つ
+                try {
+                    Thread.sleep(1 * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
         	}
         	if (breakFlag) {
         		break;
