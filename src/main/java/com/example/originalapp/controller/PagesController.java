@@ -112,6 +112,12 @@ public class PagesController {
         			breakFlag = true;
         			break;
         		}
+        		try {
+        			  wait();
+        			} catch (InterruptedException e) {
+        			  //例外処理
+        				continue;
+        			}
         	}
         	if (breakFlag) {
         		break;
