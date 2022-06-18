@@ -158,7 +158,7 @@ public class PagesController {
     	
     	
     	
-        driver.get("https://jp.tradingview.com/"); //tradigView表示
+        /*driver.get("https://jp.tradingview.com/"); //tradigView表示
         driver.findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[3]/button[1]")).click(); //アイコンクリック
 	    driver.findElement(By.className("label-4TFSfyGO")).click(); //ログインボタンクリック
 	    driver.findElement(By.className("tv-signin-dialog__toggle-email")).click(); //Eメールアイコンクリック
