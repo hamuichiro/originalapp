@@ -89,7 +89,7 @@ public class PagesController {
         
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
         
-        /*driver.findElement(By.id("inputName")).sendKeys(userId); //ユーザーIDの入力
+        driver.findElement(By.id("inputName")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.id("inputPass")).sendKeys(password); //パスワードの入力
         driver.findElement(By.xpath("//*[@id=\"lionFxLogin\"]/button")).click(); //ログインボタンのクリック
         driver.findElement(By.xpath("//*[@id=\"site-navbar-collapse\"]/ul/li[8]/a/gl-switchery/span/small")).click(); //約定一覧の選択
@@ -98,7 +98,7 @@ public class PagesController {
         driver.findElement(By.id("DealingFromDatePickerCompId")).click(); //開始日付
         
         //月初めの選択
-        boolean breakFlag = false;
+        /*boolean breakFlag = false;
         for(int i = 1; i <= 6; i++) {
         	for(int j = 1; j <= 7; j++ ) {
         		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
