@@ -99,7 +99,7 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/div[1]/date-picker/input")).click(); //開始日付
         
         //月初めの選択
-        boolean breakFlag = false;
+        /*boolean breakFlag = false;
         for(int i = 1; i <= 6; i++) {
         	for(int j = 1; j <= 7; j++ ) {
         		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
