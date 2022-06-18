@@ -14,9 +14,11 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 //import org.openqa.selenium.interactions.Action;
 //import org.openqa.selenium.interactions.Actions;
 
@@ -97,7 +99,7 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]")).click(); //+ボタンクリック
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/input")).click(); //期間指定クリック
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/div[1]/date-picker/input")).click(); //開始日付
-        
+
         //月初めの選択
         boolean breakFlag = false;
         for(int i = 1; i <= 6; i++) {
@@ -124,7 +126,7 @@ public class PagesController {
         
        
 
-        List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")); //全約定履歴の取得
+        /*List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")); //全約定履歴の取得
         
         /*for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
         	String tradeHistory = tradeHistoryList.getText();
