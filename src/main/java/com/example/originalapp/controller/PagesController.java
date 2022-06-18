@@ -89,13 +89,13 @@ public class PagesController {
         
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
         
-        driver.findElement(By.id("inputName")).sendKeys(userId); //ユーザーIDの入力
-        driver.findElement(By.id("inputPass")).sendKeys(password); //パスワードの入力
-        driver.findElement(By.xpath("//*[@id=\"lionFxLogin\"]/button")).click(); //ログインボタンのクリック
-        driver.findElement(By.xpath("//*[@id=\"site-navbar-collapse\"]/ul/li[8]/a/gl-switchery/span/small")).click(); //約定一覧の選択
-        driver.findElement(By.xpath("//*[@id=\"dealing-history-id\"]/div[1]/div[2]/button[1]")).click(); //+ボタンクリック
-        driver.findElement(By.id("inputBasicDateTimeDealing")).click(); //期間指定クリック
-        driver.findElement(By.id("DealingFromDatePickerCompId")).click(); //開始日付
+        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
+        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
+        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/button")).click(); //ログインボタンのクリック
+        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small")).click(); //約定一覧の選択
+        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]")).click(); //+ボタンクリック
+        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/input")).click(); //期間指定クリック
+        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/div[1]/date-picker/input")).click(); //開始日付
         
         //月初めの選択
         /*boolean breakFlag = false;
