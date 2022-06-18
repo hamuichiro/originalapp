@@ -43,8 +43,8 @@ public class PagesController {
     @RequestMapping(path = "/selenium")
     public String selenium() {
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
+    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -128,8 +128,8 @@ public class PagesController {
         
        
 
-        int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")).size();
-        /*for(int i = 1; i <= count; i++) {
+        //int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")).size();
+        for(int i = 1; i <= 14; i++) {
      	   String tradeHistory = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div["+i+"]")).getText();
 
          	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
@@ -167,11 +167,11 @@ public class PagesController {
     	
         /*driver.get("https://jp.tradingview.com/"); //tradigView表示
         driver.findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[3]/button[1]")).click(); //アイコンクリック
-	    driver.findElement(By.className("label-4TFSfyGO")).click(); //ログインボタンクリック
-	    driver.findElement(By.className("tv-signin-dialog__toggle-email")).click(); //Eメールアイコンクリック
+	    driver.findElement(By.xpath("/html/body/div[6]/div/span/div[1]/div/div/div[1]/div[2]/div")).click(); //ログインボタンクリック
+	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]/div/span/span")).click(); //Eメールアイコンクリック
 	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input")).sendKeys(emailChart); //メールアドレス入力
 	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input")).sendKeys(passwordChart); //パスワード入力
-	    driver.findElement(By.className("tv-button__loader")).click(); //ログインボタンクリック
+	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button/span[2]")).click(); //ログインボタンクリック
 	    driver.findElement(By.xpath("/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a")).click(); //メニューアイコンクリック
 	    
 	    //チャート画像取得
@@ -179,10 +179,10 @@ public class PagesController {
 	    	System.out.println(tradeAllList.get(i));
 		    //通貨ペア変更
 	    	driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/div[1]/div[1]/div/div/div/div/div[2]/div[1]")).click();
-	    	driver.findElement(By.className("search-RSKUFnp7")).sendKeys(tradeAllList.get(i).get(3));
+	    	driver.findElement(By.xpath("/html/body/div[5]/div/div/div[2]/div/div[2]/div[1]/input")).sendKeys(tradeAllList.get(i).get(3));
 	    	driver.findElement(By.xpath("/html/body/div[5]/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]")).click();
 	    	
-		    driver.findElement(By.className("icon-wNyKS1Qc")).click(); //移動ボタンクリック
+		    driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span")).click(); //移動ボタンクリック
 		    
 		    
 		    //新規約定時チャート画像取得
@@ -196,7 +196,7 @@ public class PagesController {
 		    }
 		    driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input")).sendKeys(tradeAllList.get(i).get(8));
 		   
-		    driver.findElement(By.className("content-YKkCvwjV")).click(); //移動ボタンのクリック
+		    driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[4]/div/span/button")).click(); //移動ボタンのクリック
 		    
 		    File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
 		    System.out.println(screenshot);
@@ -207,7 +207,7 @@ public class PagesController {
 		    keydownNew.perform();
 		    
 		    
-		    driver.findElement(By.className("icon-wNyKS1Qc")).click(); //移動ボタンクリック
+		    driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span")).click(); //移動ボタンクリック
 		    
 		    //決済時チャート画像取得
 		    /*for(int j=0; j< 10; j++) { //日付の入力
@@ -219,10 +219,11 @@ public class PagesController {
 		    }
 		    driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input")).sendKeys(tradeAllList.get(i).get(1));
 		   
-		    driver.findElement(By.className("content-YKkCvwjV")).click(); //移動ボタンのクリック
+		    driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[4]/div/span/button")).click(); //移動ボタンのクリック
 		    
 		    Action keydownEnd = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
 		    keydownEnd.perform();
+		    
 		    break;
 	    }*/
 
