@@ -99,7 +99,23 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/div[1]/date-picker/input")).click(); //開始日付
         
         //月初めの選択
-
+        boolean breakFlag = false;
+        for(int i = 1; i <= 6; i++) {
+        	for(int j = 1; j <= 7; j++ ) {
+        		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
+        		if( Integer.valueOf(date) == 1) {
+        			driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
+        			breakFlag = true;
+        			break;
+        		}
+        	}
+        	if (breakFlag) {
+        		break;
+        	}
+        }
+        
+        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/button")).click();  //検索ボタンのクリック
+        
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span")).click(); //レート一覧の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span")).click(); //証拠金状況紹介の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery/span")).click(); //ポジション一覧の非表示
@@ -108,9 +124,9 @@ public class PagesController {
         
        
 
-        List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")); //全約定履歴の取得
+        /*List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")); //全約定履歴の取得
         
-        /*for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+        for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
@@ -138,6 +154,7 @@ public class PagesController {
         		tradeList.remove(3);
         		
         		tradeAllList.add(tradeList);
+        		System.out.println(tradeAllList);
         	}
         }
     	
