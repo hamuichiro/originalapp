@@ -65,7 +65,7 @@ public class PagesController {
         ChromeOptions options = new ChromeOptions();
         
         //ヘッドレスモード
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         //String path = "D:\\tmp\\driver\\chromedriver_win32\\chromedriver.exe";
         
         // ユーザーエージェントの変更
@@ -106,18 +106,19 @@ public class PagesController {
         boolean breakFlag = false;
         for(int i = 1; i <= 6; i++) {
         	for(int j = 1; j <= 7; j++ ) {
-        		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
-        		if( Integer.valueOf(date) == 1) {
-        			driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
-        			breakFlag = true;
-        			break;
-        		}
                 //10秒待つ
                 try {
                     Thread.sleep(1 * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+        		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
+        		if( Integer.valueOf(date) == 1) {
+        			driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
+        			breakFlag = true;
+        			break;
+        		}
+
         	}
         	if (breakFlag) {
         		break;
@@ -134,7 +135,7 @@ public class PagesController {
         
        
 
-        /*int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")).size();
+        int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")).size();
         for(int i = 1; i <= 14; i++) {
      	   String tradeHistory = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div["+i+"]")).getText();
 
