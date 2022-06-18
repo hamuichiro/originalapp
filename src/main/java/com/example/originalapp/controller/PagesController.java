@@ -41,8 +41,8 @@ public class PagesController {
     @RequestMapping("/selenium")
     public String selenium() {
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
+    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -69,7 +69,7 @@ public class PagesController {
         // ユーザーエージェントの変更
         options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
         
-        //options.addArguments("-headless");
+        options.addArguments("-headless");
         options.addArguments("-disable-gpu");
         options.addArguments("-no-sandbox");
         options.addArguments("--disable-extensions");
