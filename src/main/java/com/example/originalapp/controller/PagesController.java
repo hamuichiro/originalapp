@@ -65,7 +65,7 @@ public class PagesController {
         ChromeOptions options = new ChromeOptions();
         
         //ヘッドレスモード
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         //String path = "D:\\tmp\\driver\\chromedriver_win32\\chromedriver.exe";
         
         // ユーザーエージェントの変更
@@ -86,9 +86,9 @@ public class PagesController {
         
         //WebDriverManager.chromedriver().setup();
         
-
-
-
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
+        
+       
         
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
         
