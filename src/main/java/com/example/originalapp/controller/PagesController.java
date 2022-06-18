@@ -117,18 +117,18 @@ public class PagesController {
         		break;
         	}
         }
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/button")).click();  //検索ボタンのクリック
         
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span")).click(); //レート一覧の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span")).click(); //証拠金状況紹介の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery/span")).click(); //ポジション一覧の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery/span/small")).click(); //注文一覧の非表示
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        
         
        
 
-        //int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")).size();
+        /*int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")).size();
         for(int i = 1; i <= 14; i++) {
      	   String tradeHistory = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div["+i+"]")).getText();
 
