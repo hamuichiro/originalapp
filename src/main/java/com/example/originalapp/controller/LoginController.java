@@ -19,6 +19,11 @@ public class LoginController {
     public String user() {
         return "/users/new";
     }
+	
+    @RequestMapping("/index")
+    public String login() {  
+    	 return "pages/index";
+    }
 
 
     

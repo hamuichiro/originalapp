@@ -17,11 +17,7 @@
   </head>
   <body class="text-center">
   <header>
-  <p><div id="messages" layout:fragment="messages" th:if="!${#lists.isEmpty(#fields.detailedErrors())}">
-      <ul>
-        <li th:each="error : ${#fields.detailedErrors()}" class="error-message" th:text="${error.message}"/>
-      </ul>
-    </div></p>
+
   </header>
     <main>
 
@@ -117,7 +113,7 @@
 	        <div class="fnc-nav__bg m--navbg-blue"></div>
 	      </div>
 	      <div class="fnc-nav__controls">
-	        <button onclick="location.href='/pages/analysistool'" class="fnc-nav__control" >         
+	        <button onclick="location.href='/analysistool'" class="fnc-nav__control" >         
 			  Analysis Tool
 	          <span class="fnc-nav__control-progress"></span>
 	        </button>
@@ -143,7 +139,7 @@
 	    <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/142996/profile/profile-512_5.jpg" alt="" class="demo-cont__credits-img" />
 	    <h3 class="demo-cont__credits-name">Sing In</h3>
 	    <a href="#" data-micromodal-trigger="modal-login"  class="demo-cont__credits-link">Log In</a>
-	    <!-- a href="/login">Log In</a-->
+	    <a href="/login">Log In</a>
 	    <a href="/logout-complete" onclick="clickEvent()" class="demo-cont__credits-link">Log Out</a>
 	    <h3 class="demo-cont__credits-heading">Sign Up</h3>
 	    <a href="/users/new">New Create</a>

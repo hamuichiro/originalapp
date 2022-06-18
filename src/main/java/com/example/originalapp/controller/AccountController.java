@@ -17,6 +17,8 @@ import com.example.originalapp.entity.Account.Authority;
 import com.example.originalapp.form.AccountForm;
 import com.example.originalapp.repository.AccountRepository;
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 //「@PostMapping」を付与すると画面からPOSTメソッドで送られてきた場合の処理ができる引数には「hello.html」のフォームで設定したaction属性のパスを設定する
 //メソッドの引数に「@RequestParam」を付与すると画面で入力した値が受け取れる引数にはformのname属性を指定する
 //直後に記述した変数で値を受け取る「String responseVal」
@@ -37,7 +39,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public String create(@Validated @ModelAttribute("form") AccountForm form, BindingResult result, Model model) {
+    public String create(@Validated @ModelAttribute("form") AccountForm form, BindingResult result, Model model, RedirectAttributes redirAttrs) {
         String name = form.getName();
         String password = form.getPassword();
         String passwordConfirmation = form.getPasswordConfirmation();
@@ -47,11 +49,19 @@ public class AccountController {
             result.addError(fieldError);
         }
         if (result.hasErrors()) {
+        	model.addAttribute("hasMessage", true);
+        	model.addAttribute("class", "alert-danger");
+        	model.addAttribute("message", "ユーザー登録に失敗しました。");
             return "users/new";
         }
 
         Account entity = new Account(name, passwordEncoder.encode(password), Authority.ROLE_USER);
         repository.saveAndFlush(entity);
+        
+        model.addAttribute("hasMessage", true);
+        model.addAttribute("class", "alert-info");
+        model.addAttribute("message", "ユーザー登録が完了しました。");
+
 
         return "pages/index";
     }

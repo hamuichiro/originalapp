@@ -1,0 +1,154 @@
+$color-black: rgb(33,37,41);
+$box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+.header {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+    background-color: white;
+    position: fixed;
+    height: 60px!important;
+    overflow: hidden;
+    z-index: 90;
+}
+.wrapper {
+  display: flex;
+}
+
+main {
+    margin: 0 auto;
+    display: block;
+    height: 100%;
+    margin-top: 60px;
+    position: relative;
+    flex: auto;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+  background-color:rgb(237,242,249);
+}
+
+.navigation {
+  height: max;
+  width: 70px;
+  position: relative;
+  background-color: $color-black;
+  box-shadow: 10px 0 0 $color-black;
+  border-left: 10px solid $color-black;
+  overflow-x: hidden;
+  transition: all 0.5s;
+  z-index: 100;
+  &:hover {
+    width: 300px;
+  }
+  ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 10px;
+    li {
+	  list-style: none;
+	  display: block;
+	  position: relative;
+	  border-radius: 15px;
+	  &:hover {
+  		background-color: rgba(65, 69, 88, 0.1);
+	  }
+	  a {
+	    text-decoration: none;
+	    color: white;
+	    width: 100%;
+	    display: flex;
+	    position: relative;
+	    .icon {
+		  display: block;
+		  min-width: 45px;
+		  height: 60px;
+		  line-height: 70px;
+		  text-align: center;
+		  ion-icon {
+		    font-size: 1.5rem;
+		  }
+		}
+		.title {
+		  padding-left: 10px;
+		  height: 60px;
+		  line-height: 60px;
+		  white-space: nowrap;
+		}
+	  }
+	}
+  }
+}
+
+
+.navigation ul li.active {
+
+}
+
+
+.row {
+	
+}
+
+.col-md {
+  &-4 {
+	margin: 20px 10px;
+	width:300px; 
+	height:300px; 
+	background-color:white;
+	border-radius: 10px;
+	box-shadow: $box-shadow;
+  }
+  &-12 {
+	margin: 20px 10px;
+	background-color:white;
+	border-radius: 10px;
+	box-shadow: $box-shadow;
+  }
+}
+
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  padding: 0;
+  width: max;
+  box-shadow: $box-shadow;
+  tr {
+    background-color: #fff;
+    tr:hover{
+      background-color: #fffae9;
+    }
+  }
+  th, td {
+    padding: .35em 1em;
+    border-bottom: 1px solid #eee;
+  }
+  thead th {
+    font-size: .85em;
+    padding: 1em;
+  }
+  thead tr{
+    background-color: #FFC107;
+    color:#fff;
+  }
+  tbody td {
+    text-align: left;
+    font-size: .8em;
+  }
+}
+@media screen and (max-width: 600px) {
+  table{width: 100%;}
+}

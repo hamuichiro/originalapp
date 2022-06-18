@@ -31,12 +31,16 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
         log.debug("password={}", password);
 
         if ("".equals(name) || "".equals(password)) {
+            System.out.println(name);
             throw new AuthenticationCredentialsNotFoundException("ログイン情報に不備があります。");
+
         }
 
         Account entity = repository.findByUsername(name);
+
         if (entity == null) {
             throw new AuthenticationCredentialsNotFoundException("ログイン情報が存在しません。");
+  
         }
 
         return new UsernamePasswordAuthenticationToken(entity, password, entity.getAuthorities());

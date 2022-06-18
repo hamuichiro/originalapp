@@ -1,0 +1,121 @@
+.header {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: none;
+  background-color: white;
+  position: fixed;
+  height: 60px !important;
+  overflow: hidden;
+  z-index: 90; }
+
+.wrapper {
+  display: flex; }
+
+main {
+  margin: 0 auto;
+  display: block;
+  height: 100%;
+  margin-top: 60px;
+  position: relative;
+  flex: auto; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  height: 100vh;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+  background-color: #edf2f9; }
+
+.navigation {
+  height: max;
+  width: 70px;
+  position: relative;
+  background-color: #212529;
+  box-shadow: 10px 0 0 #212529;
+  border-left: 10px solid #212529;
+  overflow-x: hidden;
+  transition: all 0.5s;
+  z-index: 100; }
+  .navigation:hover {
+    width: 300px; }
+  .navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 10px; }
+    .navigation ul li {
+      list-style: none;
+      display: block;
+      position: relative;
+      border-radius: 15px; }
+      .navigation ul li:hover {
+        background-color: rgba(65, 69, 88, 0.1); }
+      .navigation ul li a {
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        display: flex;
+        position: relative; }
+        .navigation ul li a .icon {
+          display: block;
+          min-width: 45px;
+          height: 60px;
+          line-height: 70px;
+          text-align: center; }
+          .navigation ul li a .icon ion-icon {
+            font-size: 1.5rem; }
+        .navigation ul li a .title {
+          padding-left: 10px;
+          height: 60px;
+          line-height: 60px;
+          white-space: nowrap; }
+
+.col-md-4 {
+  margin: 20px 10px;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07); }
+.col-md-12 {
+  margin: 20px 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07); }
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  padding: 0;
+  width: max;
+  box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07); }
+  table tr {
+    background-color: #fff; }
+    table tr tr:hover {
+      background-color: #fffae9; }
+  table th, table td {
+    padding: .35em 1em;
+    border-bottom: 1px solid #eee; }
+  table thead th {
+    font-size: .85em;
+    padding: 1em; }
+  table thead tr {
+    background-color: #FFC107;
+    color: #fff; }
+  table tbody td {
+    text-align: left;
+    font-size: .8em; }
+
+@media screen and (max-width: 600px) {
+  table {
+    width: 100%; } }
+
+/*# sourceMappingURL=analysistool.css.map */

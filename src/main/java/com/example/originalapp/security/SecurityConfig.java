@@ -48,12 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-        	.antMatchers("/login", "/logout-complete", "/users/new", "/user").permitAll() //ログイン不要でアクセス可能
+        	.antMatchers("/", "/login", "/logout-complete", "/users/new", "/user").permitAll() //ログイン不要でアクセス可能
                 .anyRequest().authenticated() //上記以外は直リンク禁止
                 // ログアウト処理
                 .and()
                 .logout()
-                .logoutUrl("/") //ログアウトのURL
+                .logoutUrl("/logout") //ログアウトのURL
                 .logoutSuccessUrl("/logout-complete") //ログアウト時の遷移先
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // form
                 .and()
                 .formLogin()
-                .loginPage("/index") //ログインページ
+                .loginPage("/login") //ログインページ
                 .defaultSuccessUrl("/index") //ログイン成功時の遷移先
                 .failureUrl("/login-failure") //ログインエラー時の遷移先
                 .permitAll();

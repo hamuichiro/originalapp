@@ -18,13 +18,13 @@
         		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-micromodal-close></button>
       		  </div>
 			  <div class="modal-body p-5 pt-0">
-         		<form class="" method="post" th:action="@{/index}">
+         		<form class="" method="post" th:action="@{/login}">
           		<div class="form-floating mb-3">
-            	  <input type="text" class="form-control rounded-3" id="session_name" placeholder="Account Name">
+            	  <input type="text" class="form-control rounded-3" name="username" id="session_name" placeholder="Account Name">
             	  <label for="session_name">Account Name</label>
            		</div>
           		<div class="form-floating mb-3">
-            	  <input type="password" class="form-control rounded-3" id="session_password" placeholder="Password">
+            	  <input type="password" class="form-control rounded-3" name="password" id="session_password" placeholder="Password">
             	  <label for="session_password">Password</label>
           		</div>
               	<div class="checkbox mb-3">
