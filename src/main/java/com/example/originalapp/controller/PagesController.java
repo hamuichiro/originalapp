@@ -9,6 +9,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.io.File;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +22,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -90,22 +94,26 @@ public class PagesController {
         //WebDriverManager.chromedriver().setup();
         
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
-        
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(4))
+                .pollingEvery(Duration.ofMillis(500));
        
-        
+        wait.until(ExpectedConditions.elementToBeClickable(element));
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/button")).click(); //ログインボタンのクリック
+        
+        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery")).click(); //レート一覧の非表示
         System.out.println(driver.getPageSource());
-        /*driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery")).click(); //レート一覧の非表示
-        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery")).click(); //証拠金状況紹介の非表示
+        /*driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery")).click(); //証拠金状況紹介の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery")).click(); //ポジション一覧の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery")).click(); //約定一覧の選択
         
         
         /*WebElement element = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery"));
         element.click(); //注文一覧の非表示
+        wait.until(ExpectedConditions.elementToBeClickable(element));
         
         System.out.println(driver.getPageSource());
         //System.out.println(driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div")).getText());
