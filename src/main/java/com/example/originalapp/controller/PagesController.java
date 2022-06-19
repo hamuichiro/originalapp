@@ -50,8 +50,8 @@ public class PagesController {
     @RequestMapping(path = "/selenium")
     public String selenium() {
 
-    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	String  driver_path = "./exe/chromedriver.exe";
+    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	//String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
