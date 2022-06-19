@@ -78,7 +78,7 @@ public class PagesController {
         // ユーザーエージェントの変更
         options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
         
-        options.addArguments("-headless");
+        //options.addArguments("-headless");
         options.addArguments("-disable-gpu");
         options.addArguments("-no-sandbox");
         options.addArguments("--disable-extensions");
