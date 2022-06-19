@@ -110,7 +110,7 @@ public class PagesController {
         //System.out.println(driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery")).getLocation());
         
         
-       Actions action = new Actions(driver);
+       /*Actions action = new Actions(driver);
 
         action.moveByOffset(element.getLocation().getX()-670,element.getLocation().getY()+64)
               .click()
