@@ -94,11 +94,7 @@ public class PagesController {
         //WebDriverManager.chromedriver().setup();
         
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(4))
-                .pollingEvery(Duration.ofMillis(500));
-       
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
