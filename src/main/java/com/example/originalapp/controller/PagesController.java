@@ -111,6 +111,8 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/button")).click(); //ログインボタンのクリック
         this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span");
         this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span");
+        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery/span");
+        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span");
         driver.quit();
         //driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery")).click(); //レート一覧の非表示
         //System.out.println(driver.getPageSource());
