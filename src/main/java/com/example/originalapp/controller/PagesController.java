@@ -127,8 +127,8 @@ public class PagesController {
         this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery/span"); //注文一覧の非表示
         this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small"); //約定一覧の選択
         
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]"); //+ボタンクリック
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/label"); //期間指定クリック
+        this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home"); //+ボタンクリック
+        this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.time-area > div:nth-child(2) > label"); //期間指定クリック
         this.elememtClickSelector(driver, "#DealingFromDatePickerCompId"); //開始日付
         
         //月初めの選択
@@ -137,7 +137,7 @@ public class PagesController {
         	for(int j = 1; j <= 7; j++ ) {
         		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
         		if( Integer.valueOf(date) == 1) {
-        			this.elememtClickXpath(driver, "/html/body/div[3]/div[1]/table/tbody/tr[\"+i+\"]/td[\"+j+\"]"); 
+        			driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
         			breakFlag = true;
         			break;
         		}
