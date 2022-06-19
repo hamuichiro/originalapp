@@ -113,10 +113,11 @@ public class PagesController {
         this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span"); //レート一覧の非表示
         this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span"); //証拠金状況紹介の非表示
         this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery/span"); //ポジション一覧の非表示
+        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery/span"); //注文一覧の非表示
         this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small"); //約定一覧の選択
         
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]");
-       
+        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]");
+        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/label");
   
         driver.quit();
         
