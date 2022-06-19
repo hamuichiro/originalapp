@@ -107,8 +107,8 @@ public class PagesController {
         
         WebElement element = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery"));
         element.click(); //注文一覧の非表示
-        
-        driver.findElement(By.cssSelector("#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home")).click();
+        System.out.println(driver.findElement(By.cssSelector("#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-primary.btn-in-home.main-button")).getText());
+        //driver.findElement(By.cssSelector("#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home")).click();
         //System.out.println(driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery")).getLocation());
         
         
