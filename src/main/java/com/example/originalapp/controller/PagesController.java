@@ -74,7 +74,7 @@ public class PagesController {
         // ユーザーエージェントの変更
         options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
         
-        options.addArguments("-headless");
+        //options.addArguments("-headless");
         options.addArguments("-disable-gpu");
         options.addArguments("-no-sandbox");
         options.addArguments("--disable-extensions");
@@ -105,7 +105,7 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery")).click(); //ポジション一覧の非表示
         
         
-        WebElement element = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery"));
+        /*WebElement element = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery"));
         element.click(); //注文一覧の非表示
         
         System.out.println(driver.getPageSource());
