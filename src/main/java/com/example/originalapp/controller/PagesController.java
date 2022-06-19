@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,8 +22,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-//import org.openqa.selenium.interactions.Action;
-//import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 
 
@@ -101,7 +104,19 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery")).click(); //証拠金状況紹介の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery")).click(); //ポジション一覧の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery")).click(); //注文一覧の非表示
-        driver.findElement(By.cssSelector("#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home")).click(); //+ボタンクリック
+        
+//90,257
+        //System.out.println(driver.findElement(By.cssSelector("#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home")).getLocation());
+        
+        Actions action = new Actions(driver);
+
+        action.keyDown(Keys.CONTROL)
+              .moveByOffset(driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]")).getLocation().getX()+5,driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]"))
+                                   .getLocation().getY()+5)
+              .click()
+              .perform();
+        
+        //driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]")).click(); //+ボタンクリック
         /*driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]")).click(); //期間指定クリック
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/div[1]/date-picker/input")).click(); //開始日付
 
