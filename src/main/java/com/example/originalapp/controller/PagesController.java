@@ -46,12 +46,23 @@ public class PagesController {
     	 return "pages/analysistool";
     }
 
-    public void elememtClick(ChromeDriver  driver,String path) {
+    public void elememtClickXpath(ChromeDriver  driver,String path) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(4))
                 .pollingEvery(Duration.ofMillis(500));
         WebElement element = driver.findElement(By.xpath(path)); 
+       
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+    }
+    
+    public void elememtClickSelector(ChromeDriver  driver,String selecter) {
+    	
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(4))
+                .pollingEvery(Duration.ofMillis(500));
+        WebElement element = driver.findElement(By.cssSelector(selecter)); 
        
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
@@ -109,16 +120,16 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/button")).click(); //ログインボタンのクリック
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a"); //全画面表示
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span"); //レート一覧の非表示
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span"); //証拠金状況紹介の非表示
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery/span"); //ポジション一覧の非表示
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery/span"); //注文一覧の非表示
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small"); //約定一覧の選択
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a"); //全画面表示
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span"); //レート一覧の非表示
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span"); //証拠金状況紹介の非表示
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery/span"); //ポジション一覧の非表示
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery/span"); //注文一覧の非表示
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small"); //約定一覧の選択
         
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]");
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/label");
-        this.elememtClick(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/div[1]/date-picker/input"); 
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]");
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/label");
+        this.elememtClickSelector(driver, "#DealingFromDatePickerCompId"); 
         driver.quit();
         
         
