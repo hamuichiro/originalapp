@@ -46,8 +46,8 @@ public class PagesController {
     @RequestMapping(path = "/selenium")
     public String selenium() {
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
+    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -111,7 +111,7 @@ public class PagesController {
         Actions action = new Actions(driver);
 
         action.keyDown(Keys.CONTROL)
-              .moveByOffset(driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]")).getLocation().getX()+5,driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]"))
+              .moveByOffset(driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]")).getLocation().getX()+5,driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]"))
                                    .getLocation().getY()+5)
               .click()
               .perform();
