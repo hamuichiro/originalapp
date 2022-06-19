@@ -65,13 +65,13 @@ public class PagesController {
         ChromeOptions options = new ChromeOptions();
         
         //ヘッドレスモード
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         //String path = "D:\\tmp\\driver\\chromedriver_win32\\chromedriver.exe";
         
         // ユーザーエージェントの変更
         options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
         
-        //options.addArguments("-headless");
+        options.addArguments("-headless");
         options.addArguments("-disable-gpu");
         options.addArguments("-no-sandbox");
         options.addArguments("--disable-extensions");
@@ -95,7 +95,7 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/button")).click(); //ログインボタンのクリック
-        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a")).click(); //全画面表示
+        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]")).click(); //全画面表示
         /*driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small")).click(); //約定一覧の選択
         /*driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span")).click(); //レート一覧の非表示
         driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span")).click(); //証拠金状況紹介の非表示
