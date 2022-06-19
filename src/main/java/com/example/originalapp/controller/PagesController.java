@@ -127,9 +127,26 @@ public class PagesController {
         this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery/span"); //注文一覧の非表示
         this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small"); //約定一覧の選択
         
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]");
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/label");
-        this.elememtClickSelector(driver, "#DealingFromDatePickerCompId"); 
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]"); //+ボタンクリック
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]/label"); //期間指定クリック
+        this.elememtClickSelector(driver, "#DealingFromDatePickerCompId"); //開始日付
+        
+        //月初めの選択
+        boolean breakFlag = false;
+        for(int i = 1; i <= 6; i++) {
+        	for(int j = 1; j <= 7; j++ ) {
+        		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
+        		if( Integer.valueOf(date) == 1) {
+        			this.elememtClickXpath(driver, "/html/body/div[3]/div[1]/table/tbody/tr[\"+i+\"]/td[\"+j+\"]"); 
+        			breakFlag = true;
+        			break;
+        		}
+
+        	}
+        	if (breakFlag) {
+        		break;
+        	}
+        }
         driver.quit();
         
         
