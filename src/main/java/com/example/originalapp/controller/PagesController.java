@@ -198,7 +198,7 @@ public class PagesController {
         	}
         }
         
-        
+        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
         
         driver.get("https://jp.tradingview.com/"); //tradigView表示
         driver.quit();
