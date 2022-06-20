@@ -133,7 +133,7 @@ public class PagesController {
         //this.elementSendkeys(driver, "#inputPass", password); //パスワードの入力
         this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
         
-       
+        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(2) > a > gl-switchery > span"); //レート一覧の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(5) > a > gl-switchery > span"); //ポジション一覧の非表示
@@ -162,7 +162,7 @@ public class PagesController {
         }
         
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.filter-box.display-small-screen > button");  //検索ボタンのクリック
-        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        
         
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.cssSelector("#center > div > div.ag-body > div.ag-body-viewport-wrapper > div > div > div")); //全約定履歴の取得
         
