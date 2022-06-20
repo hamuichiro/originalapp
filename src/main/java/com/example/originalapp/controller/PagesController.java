@@ -134,6 +134,9 @@ public class PagesController {
         this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
         
         this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        for(int i = 0; i < 50; i++) {
+        	continue;
+        }
 
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span > small"); //約定一覧の選択
         
