@@ -49,7 +49,7 @@ public class PagesController {
     public void elememtClickXpath(ChromeDriver  driver, String path) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(4))
+                .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofMillis(500));
         WebElement element = driver.findElement(By.xpath(path)); 
        
@@ -60,7 +60,7 @@ public class PagesController {
     public void elememtClickSelector(ChromeDriver  driver, String selecter) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(4))
+                .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofMillis(500));
         WebElement element = driver.findElement(By.cssSelector(selecter)); 
        
@@ -71,7 +71,7 @@ public class PagesController {
     public void elementSendkeys(ChromeDriver  driver, String selecter, String keys) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(4))
+                .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selecter)));
         WebElement element = driver.findElement(By.cssSelector(selecter)); 
