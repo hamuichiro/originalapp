@@ -81,8 +81,8 @@ public class PagesController {
     @RequestMapping(path = "/selenium")
     public String selenium() {
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
+    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -133,7 +133,7 @@ public class PagesController {
         //this.elementSendkeys(driver, "#inputPass", password); //パスワードの入力
         this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
         
-        this.elememtClickSelector(driver, "#toggleFullscreen"); //全画面表示
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a"); //全画面表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(2) > a > gl-switchery > span"); //レート一覧の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(5) > a > gl-switchery > span"); //ポジション一覧の非表示
@@ -200,7 +200,7 @@ public class PagesController {
 
         
         //driver.get("https://jp.tradingview.com/"); //tradigView表示
-        driver.quit();
+        //driver.quit();
         /*this.elememtClickSelector(driver, "body > div.tv-main > div.tv-header.tv-header__top.js-site-header-container.tv-header--sticky.tv-header--promo.tv-header--animated > div.tv-header__inner > div.tv-header__area.tv-header__area--user > button.tv-header__user-menu-button.tv-header__user-menu-button--anonymous.js-header-user-menu-button > svg"); //アイコンクリック
         this.elememtClickSelector(driver, "#overlap-manager-root > div > span > div.menu-xamafYNf.menuWrap-8MKeZifP > div > div > div.item-4TFSfyGO.item-ykcJIrqq.item-50IqnBef.withIcon-4TFSfyGO.withIcon-ykcJIrqq > div.labelRow-4TFSfyGO.labelRow-ykcJIrqq > div");  //ログインボタンクリック
         this.elememtClickSelector(driver, "#overlap-manager-root > div > div.tv-dialog__modal-wrap.tv-dialog__modal-wrap--contain-size > div > div > div > div > div > div > div:nth-child(1) > div.i-clearfix > div > span > span"); //Eメールアイコンクリック
