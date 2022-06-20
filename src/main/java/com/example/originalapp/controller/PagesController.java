@@ -163,14 +163,12 @@ public class PagesController {
         
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.filter-box.display-small-screen > button");  //検索ボタンのクリック
         
-        //int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div")).size();
-        //System.out.println(count);
+        List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("//*[@id=\"center\"]/div/div[4]/div[3]/div/div/div")); //全約定履歴の取得
         driver.quit();
-        /*for(int i = 1; i <= 14; i++) {
-     	   String tradeHistory = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div["+i+"]")).getText();
-
-         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
-         	
+        /*for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+        	String tradeHistory = tradeHistoryList.getText();
+        	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
+        	System.out.println(tradeList);
      	  
         	if(tradeList.size() == 15) { //通貨ペア、約定日時を取り出し、成形、リスト化
 
@@ -199,7 +197,7 @@ public class PagesController {
         		System.out.println(tradeAllList);
         	}
         }
-        driver.quit();
+        //driver.quit();
         
         
         //driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a")).click(); //全画面表示
