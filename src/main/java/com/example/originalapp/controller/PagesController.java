@@ -161,7 +161,42 @@ public class PagesController {
         	}
         }
         
-        this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.filter-box.display-small-screen > button");
+        this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.filter-box.display-small-screen > button");  //検索ボタンのクリック
+        
+        //int count = driver.findElements(By.cssSelector("#center > div > div.ag-body > div.ag-body-viewport-wrapper > div > div")).size();
+        for(int i = 1; i <= 14; i++) {
+     	   String tradeHistory = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div["+i+"]")).getText();
+
+         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
+         	
+        	
+        	if(tradeList.size() == 15) { //通貨ペア、約定日時を取り出し、成形、リスト化
+
+        		currencyPair = tradeList.get(4);
+        		currencyPair = currencyPair.replace("/", "");
+        		tradeList.set(4, currencyPair);
+        		
+        		settlementTime = tradeList.get(0);
+        		settlementTimeList = settlementTime.split(" ");
+        		settlementTimeList[0] = settlementTimeList[0].replace("/", "-");
+        		settlementTimeList[1] = settlementTimeList[1].substring(0, 5);
+        		tradeList.set(0, settlementTimeList[0]);
+        		tradeList.add(1, settlementTimeList[1]);
+        		
+        		newTime = tradeList.get(9);
+        		newTimeList = newTime.split(" ");
+        		newTimeList[0] = newTimeList[0].replace("/", "-");
+        		newTimeList[1] = newTimeList[1].substring(0, 5);
+        		tradeList.set(9, newTimeList[0]);
+        		tradeList.add(10, newTimeList[1]);
+        		
+        		tradeList.remove(2);
+        		tradeList.remove(3);
+        		
+        		tradeAllList.add(tradeList);
+        		System.out.println(tradeAllList);
+        	}
+        }
         driver.quit();
         
         
