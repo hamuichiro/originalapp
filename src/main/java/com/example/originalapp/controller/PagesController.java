@@ -126,7 +126,7 @@ public class PagesController {
         
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
 
-        driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
+        /*driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
         //this.elementSendkeys(driver, "#inputName", userId); //ユーザーIDの入力
@@ -164,7 +164,7 @@ public class PagesController {
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.filter-box.display-small-screen > button");  //検索ボタンのクリック
         
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("//*[@id=\"center\"]/div/div[4]/div[3]/div/div/div")); //全約定履歴の取得
-        System.out.println(tradeHistoryAlllist);
+        
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
@@ -196,8 +196,22 @@ public class PagesController {
         		tradeAllList.add(tradeList);
         		System.out.println(tradeAllList);
         	}
-        }
-        driver.quit();
+        }*/
+        
+        
+        driver.get("https://jp.tradingview.com/"); //tradigView表示
+        this.elememtClickSelector(driver, "body > div.tv-main > div.tv-header.tv-header__top.js-site-header-container.tv-header--sticky.tv-header--promo.tv-header--animated > div.tv-header__inner > div.tv-header__area.tv-header__area--user > button.tv-header__user-menu-button.tv-header__user-menu-button--anonymous.js-header-user-menu-button > svg"); //アイコンクリック
+        this.elememtClickSelector(driver, "#overlap-manager-root > div > span > div.menu-xamafYNf.menuWrap-8MKeZifP > div > div > div.item-4TFSfyGO.item-ykcJIrqq.item-50IqnBef.withIcon-4TFSfyGO.withIcon-ykcJIrqq > div.labelRow-4TFSfyGO.labelRow-ykcJIrqq > div");  //ログインボタンクリック
+        this.elememtClickSelector(driver, "#overlap-manager-root > div > div.tv-dialog__modal-wrap.tv-dialog__modal-wrap--contain-size > div > div > div > div > div > div > div:nth-child(1) > div.i-clearfix > div > span > span"); //Eメールアイコンクリック
+        //this.elementSendkeys(driver, "#email-signin__user-name-input__ca74da8f-0b36-4a3f-8c47-51735232ca76", emailChart); //メールアドレス入力
+        //this.elementSendkeys(driver, "#email-signin__password-input__ca74da8f-0b36-4a3f-8c47-51735232ca76", passwordChart); //パスワード入力
+      
+	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input")).sendKeys(emailChart); //メールアドレス入力
+	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input")).sendKeys(passwordChart); //パスワード入力
+	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
+	    this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
+	    driver.quit();
+        
         
         
         //driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a")).click(); //全画面表示
@@ -271,7 +285,7 @@ public class PagesController {
         		tradeAllList.add(tradeList);
         		System.out.println(tradeAllList);
         	}
-        }
+        }/*
     	
     	
     	
