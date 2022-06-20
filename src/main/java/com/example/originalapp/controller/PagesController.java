@@ -133,7 +133,8 @@ public class PagesController {
         //this.elementSendkeys(driver, "#inputPass", password); //パスワードの入力
         this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
         
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a"); //全画面表示
+        
+        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]"); //全画面表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(2) > a > gl-switchery > span"); //レート一覧の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(5) > a > gl-switchery > span"); //ポジション一覧の非表示
