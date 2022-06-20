@@ -120,12 +120,12 @@ public class PagesController {
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
         driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/button")).click(); //ログインボタンのクリック
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a"); //全画面表示
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery/span"); //レート一覧の非表示
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery/span"); //証拠金状況紹介の非表示
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery/span"); //ポジション一覧の非表示
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[6]/a/gl-switchery/span"); //注文一覧の非表示
-        this.elememtClickXpath(driver, "/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery/span/small"); //約定一覧の選択
+        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(2) > a > gl-switchery > span"); //レート一覧の非表示
+        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
+        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(5) > a > gl-switchery > span"); //ポジション一覧の非表示
+        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(6) > a > gl-switchery > span"); //注文一覧の非表示
+        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span"); //約定一覧の選択
         
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home"); //+ボタンクリック
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.time-area > div:nth-child(2) > label"); //期間指定クリック
