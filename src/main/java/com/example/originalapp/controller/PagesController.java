@@ -198,9 +198,9 @@ public class PagesController {
         	}
         }
         
-        driver.quit();
-        ChromeDriver  driver2 = new ChromeDriver(options);
-        driver2.get("https://jp.tradingview.com/"); //tradigView表示
+        
+        
+        driver.get("https://jp.tradingview.com/"); //tradigView表示
         driver.quit();
         /*this.elememtClickSelector(driver, "body > div.tv-main > div.tv-header.tv-header__top.js-site-header-container.tv-header--sticky.tv-header--promo.tv-header--animated > div.tv-header__inner > div.tv-header__area.tv-header__area--user > button.tv-header__user-menu-button.tv-header__user-menu-button--anonymous.js-header-user-menu-button > svg"); //アイコンクリック
         this.elememtClickSelector(driver, "#overlap-manager-root > div > span > div.menu-xamafYNf.menuWrap-8MKeZifP > div > div > div.item-4TFSfyGO.item-ykcJIrqq.item-50IqnBef.withIcon-4TFSfyGO.withIcon-ykcJIrqq > div.labelRow-4TFSfyGO.labelRow-ykcJIrqq > div");  //ログインボタンクリック
