@@ -73,9 +73,8 @@ public class PagesController {
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(4))
                 .pollingEvery(Duration.ofMillis(500));
-        WebElement element = driver.findElement(By.cssSelector(selecter)); 
-       
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selecter)));
+        WebElement element = driver.findElement(By.cssSelector(selecter)); 
         element.sendKeys(keys); 
     }
 	
@@ -161,6 +160,8 @@ public class PagesController {
         		break;
         	}
         }
+        
+        this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.filter-box.display-small-screen > button");
         driver.quit();
         
         
