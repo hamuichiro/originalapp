@@ -168,7 +168,7 @@ public class PagesController {
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
-        	System.out.println(tradeList);
+        	
      	  
         	if(tradeList.size() == 15) { //通貨ペア、約定日時を取り出し、成形、リスト化
 
@@ -199,8 +199,9 @@ public class PagesController {
         }
         
         driver.quit();
-        //driver.get("https://jp.tradingview.com/"); //tradigView表示
-       
+        ChromeDriver  driver2 = new ChromeDriver(options);
+        driver2.get("https://jp.tradingview.com/"); //tradigView表示
+        driver.quit();
         /*this.elememtClickSelector(driver, "body > div.tv-main > div.tv-header.tv-header__top.js-site-header-container.tv-header--sticky.tv-header--promo.tv-header--animated > div.tv-header__inner > div.tv-header__area.tv-header__area--user > button.tv-header__user-menu-button.tv-header__user-menu-button--anonymous.js-header-user-menu-button > svg"); //アイコンクリック
         this.elememtClickSelector(driver, "#overlap-manager-root > div > span > div.menu-xamafYNf.menuWrap-8MKeZifP > div > div > div.item-4TFSfyGO.item-ykcJIrqq.item-50IqnBef.withIcon-4TFSfyGO.withIcon-ykcJIrqq > div.labelRow-4TFSfyGO.labelRow-ykcJIrqq > div");  //ログインボタンクリック
         this.elememtClickSelector(driver, "#overlap-manager-root > div > div.tv-dialog__modal-wrap.tv-dialog__modal-wrap--contain-size > div > div > div > div > div > div > div:nth-child(1) > div.i-clearfix > div > span > span"); //Eメールアイコンクリック
@@ -213,91 +214,6 @@ public class PagesController {
 	    this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
 	    driver.quit();
         
-        
-        
-        //driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[1]/div/div/ul/li[4]/a")).click(); //全画面表示
-        //driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[2]/a/gl-switchery")).click(); //レート一覧の非表示
-        //System.out.println(driver.getPageSource());
-        /*driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[3]/a/gl-switchery")).click(); //証拠金状況紹介の非表示
-        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[5]/a/gl-switchery")).click(); //ポジション一覧の非表示
-        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/p7-topbar/nav[2]/div/div/ul/li[8]/a/gl-switchery")).click(); //約定一覧の選択
-        
-        /html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]/button[1]
-         * 
-         */
-        //driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[2]")).click(); //+ボタンクリック
-        /*driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[1]/div[2]")).click(); //期間指定クリック
-        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/div[1]/date-picker/input")).click(); //開始日付
-
-        //月初めの選択
-        /*boolean breakFlag = false;
-        for(int i = 1; i <= 6; i++) {
-        	for(int j = 1; j <= 7; j++ ) {
-        		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
-        		if( Integer.valueOf(date) == 1) {
-        			driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
-        			breakFlag = true;
-        			break;
-        		}
-
-        	}
-        	if (breakFlag) {
-        		break;
-        	}
-        }
-        
-        driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div[7]/div[2]/div/div/p20-dealing-list/div/div[1]/div[1]/div[2]/div[2]/button")).click();  //検索ボタンのクリック
-        
-
-        
-        
-       
-
-        /*int count = driver.findElements(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div")).size();
-        for(int i = 1; i <= 14; i++) {
-     	   String tradeHistory = driver.findElement(By.xpath("/html/body/p7-app/p7-home/div/div/div/div/div/div/div/div/div[2]/div/div/p20-dealing-list/div/p20-list/div/ag-grid-ng2/div/div/div/div[1]/div/div[4]/div[3]/div/div/div["+i+"]")).getText();
-
-         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
-         	
-        	
-        	if(tradeList.size() == 15) { //通貨ペア、約定日時を取り出し、成形、リスト化
-
-        		currencyPair = tradeList.get(4);
-        		currencyPair = currencyPair.replace("/", "");
-        		tradeList.set(4, currencyPair);
-        		
-        		settlementTime = tradeList.get(0);
-        		settlementTimeList = settlementTime.split(" ");
-        		settlementTimeList[0] = settlementTimeList[0].replace("/", "-");
-        		settlementTimeList[1] = settlementTimeList[1].substring(0, 5);
-        		tradeList.set(0, settlementTimeList[0]);
-        		tradeList.add(1, settlementTimeList[1]);
-        		
-        		newTime = tradeList.get(9);
-        		newTimeList = newTime.split(" ");
-        		newTimeList[0] = newTimeList[0].replace("/", "-");
-        		newTimeList[1] = newTimeList[1].substring(0, 5);
-        		tradeList.set(9, newTimeList[0]);
-        		tradeList.add(10, newTimeList[1]);
-        		
-        		tradeList.remove(2);
-        		tradeList.remove(3);
-        		
-        		tradeAllList.add(tradeList);
-        		System.out.println(tradeAllList);
-        	}
-        }/*
-    	
-    	
-    	
-        /*driver.get("https://jp.tradingview.com/"); //tradigView表示
-        driver.findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[3]/button[1]")).click(); //アイコンクリック
-	    driver.findElement(By.xpath("/html/body/div[6]/div/span/div[1]/div/div/div[1]/div[2]/div")).click(); //ログインボタンクリック
-	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]/div/span/span")).click(); //Eメールアイコンクリック
-	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input")).sendKeys(emailChart); //メールアドレス入力
-	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input")).sendKeys(passwordChart); //パスワード入力
-	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button/span[2]")).click(); //ログインボタンクリック
-	    driver.findElement(By.xpath("/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a")).click(); //メニューアイコンクリック
 	    
 	    //チャート画像取得
 	    for(int i = 0; i < tradeAllList.size(); i++) {
