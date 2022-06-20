@@ -128,10 +128,10 @@ public class PagesController {
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
 
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
-        //driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
-        //driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
-        this.elementSendkeys(driver, "#inputName", userId); //ユーザーIDの入力
-        this.elementSendkeys(driver, "#inputPass", password); //パスワードの入力
+        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
+        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
+        //this.elementSendkeys(driver, "#inputName", userId); //ユーザーIDの入力
+        //this.elementSendkeys(driver, "#inputPass", password); //パスワードの入力
         this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
         
         this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
