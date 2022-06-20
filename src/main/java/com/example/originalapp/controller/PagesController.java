@@ -46,7 +46,7 @@ public class PagesController {
     	 return "pages/analysistool";
     }
 
-    public void elememtClickXpath(ChromeDriver  driver,String path) {
+    public void elememtClickXpath(ChromeDriver  driver, String path) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(4))
@@ -57,7 +57,7 @@ public class PagesController {
         element.click();
     }
     
-    public void elememtClickSelector(ChromeDriver  driver,String selecter) {
+    public void elememtClickSelector(ChromeDriver  driver, String selecter) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(4))
@@ -66,6 +66,17 @@ public class PagesController {
        
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
+    }
+    
+    public void elementSendkeys(ChromeDriver  driver, String selecter, String keys) {
+    	
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(4))
+                .pollingEvery(Duration.ofMillis(500));
+        WebElement element = driver.findElement(By.cssSelector(selecter)); 
+       
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selecter)));
+        element.sendKeys(keys); 
     }
 	
     @RequestMapping(path = "/selenium")
@@ -117,9 +128,12 @@ public class PagesController {
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
 
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
-        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
-        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
-        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/button")).click(); //ログインボタンのクリック
+        //driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
+        //driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
+        this.elementSendkeys(driver, "#inputName", userId); //ユーザーIDの入力
+        this.elementSendkeys(driver, "#inputPass", password); //パスワードの入力
+        this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
+        
         this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(2) > a > gl-switchery > span"); //レート一覧の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
