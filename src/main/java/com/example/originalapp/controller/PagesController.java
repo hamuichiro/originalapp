@@ -135,7 +135,7 @@ public class PagesController {
         
         this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
 
-        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span > small"); //約定一覧の選択
+        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span"); //約定一覧の選択
         
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home"); //+ボタンクリック
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.time-area > div:nth-child(2) > label"); //期間指定クリック
