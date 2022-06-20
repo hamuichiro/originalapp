@@ -125,7 +125,7 @@ public class PagesController {
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(5) > a > gl-switchery > span"); //ポジション一覧の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(6) > a > gl-switchery > span"); //注文一覧の非表示
-        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span"); //約定一覧の選択
+        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span > small"); //約定一覧の選択
         
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home"); //+ボタンクリック
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.time-area > div:nth-child(2) > label"); //期間指定クリック
