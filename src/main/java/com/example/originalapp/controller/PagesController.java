@@ -195,7 +195,7 @@ public class PagesController {
         		tradeList.remove(3);
         		
         		tradeAllList.add(tradeList);
-        		System.out.println(tradeAllList);
+        		
         	}
         }
 
@@ -254,19 +254,22 @@ public class PagesController {
 		    driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span")).click(); //移動ボタンクリック
 		    
 		    //決済時チャート画像取得
-		    /*for(int j=0; j< 10; j++) { //日付の入力
-		    	driver.findElement(By.xpath("//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input")).sendKeys(Keys.chord(Keys.BACK_SPACE));  
+		    for(int j=0; j< 10; j++) { //日付の入力
+		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+  
 		    }
-		    driver.findElement(By.xpath("//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input")).sendKeys(tradeAllList.get(i).get(0));
-		    for(int j=0; j< 5; j++) { //時間の入力
-		    	driver.findElement(By.xpath("//*[@id="overlap-manager-root"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input")).sendKeys(Keys.chord(Keys.BACK_SPACE));
-		    }
-		    driver.findElement(By.xpath("//*[@id="overlap-manager-root"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input")).sendKeys(tradeAllList.get(i).get(1));
+		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", tradeAllList.get(i).get(0));
+
 		   
-		    driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[4]/div/span/button")).click(); //移動ボタンのクリック
+		    for(int j=0; j< 5; j++) { //時間の入力
+		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+
+		    }
+		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", tradeAllList.get(i).get(1));
+
+		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
+		    */
 		    
-		    Action keydownEnd = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
-		    keydownEnd.perform();*/
 		    
 		    break;
 	    }
