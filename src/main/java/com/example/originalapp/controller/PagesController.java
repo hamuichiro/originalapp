@@ -241,13 +241,13 @@ public class PagesController {
 		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
 
 		  
-		    File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
-		    System.out.println(screenshot);
-		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
+		    File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+		    System.out.println(screenshotNew);
+		    //FileUtils.copyFile(screenshotNew, new File(“screenshotNew.png”));
 		    
 		    /*Actions actionProvider = new Actions(driver);
 		    Action keydownNew = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
-		    keydownNew.perform();
+		    keydownNew.perform();*/
 		    
 		    
 		    this.elememtClickSelector(driver, "#header-toolbar-symbol-search > div");
@@ -268,8 +268,10 @@ public class PagesController {
 		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", tradeAllList.get(i).get(1));
 
 		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
-		    */
 		    
+		    File screenshotSet = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+		    System.out.println(screenshotSet);
+		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
 		    
 		    break;
 	    }
