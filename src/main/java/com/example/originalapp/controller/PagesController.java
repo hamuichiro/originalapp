@@ -102,9 +102,6 @@ public class PagesController {
     	
         ChromeOptions options = new ChromeOptions();
         
-        //ヘッドレスモード
-        //options.addArguments("--headless");
-        //String path = "D:\\tmp\\driver\\chromedriver_win32\\chromedriver.exe";
         
         // ユーザーエージェントの変更
         options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
@@ -115,7 +112,7 @@ public class PagesController {
         options.addArguments("--disable-extensions");
         options.addArguments("--proxy-server=\"direct://\"");
         options.addArguments("--proxy-bypass-list=*");
-        //options.addArguments("--start-maximized");
+        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("-window-size=1920,1080");
         
         
