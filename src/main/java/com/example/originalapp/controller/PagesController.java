@@ -68,13 +68,13 @@ public class PagesController {
         element.click();
     }
     
-    public void elementSendkeys(ChromeDriver  driver, String selecter, String keys) {
+    public void elementSendkeys(ChromeDriver  driver, String path, String keys) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(4))
                 .pollingEvery(Duration.ofMillis(500));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selecter)));
-        WebElement element = driver.findElement(By.cssSelector(selecter)); 
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path)));
+        WebElement element = driver.findElement(By.xpath(path)); 
         element.sendKeys(keys); 
     }
 	
@@ -119,15 +119,13 @@ public class PagesController {
         System.setProperty("webdriver.chrome.driver", driver_path);
         ChromeDriver  driver = new ChromeDriver(options);
         
-        //WebDriverManager.chromedriver().setup();
         
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
 
         driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
-        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]")).sendKeys(userId); //ユーザーIDの入力
-        driver.findElement(By.xpath("/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]")).sendKeys(password); //パスワードの入力
-        //this.elementSendkeys(driver, "#inputName", userId); //ユーザーIDの入力
-        //this.elementSendkeys(driver, "#inputPass", password); //パスワードの入力
+
+        this.elementSendkeys(driver, "/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]", userId); //ユーザーIDの入力
+        this.elementSendkeys(driver, "/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]", password); //パスワードの入力
         this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
         
         this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
@@ -203,22 +201,20 @@ public class PagesController {
 
         
         driver.get("https://jp.tradingview.com/"); //tradigView表示
-        driver.quit();
-        /*this.elememtClickSelector(driver, "body > div.tv-main > div.tv-header.tv-header__top.js-site-header-container.tv-header--sticky.tv-header--promo.tv-header--animated > div.tv-header__inner > div.tv-header__area.tv-header__area--user > button.tv-header__user-menu-button.tv-header__user-menu-button--anonymous.js-header-user-menu-button > svg"); //アイコンクリック
-        this.elememtClickSelector(driver, "#overlap-manager-root > div > span > div.menu-xamafYNf.menuWrap-8MKeZifP > div > div > div.item-4TFSfyGO.item-ykcJIrqq.item-50IqnBef.withIcon-4TFSfyGO.withIcon-ykcJIrqq > div.labelRow-4TFSfyGO.labelRow-ykcJIrqq > div");  //ログインボタンクリック
-        this.elememtClickSelector(driver, "#overlap-manager-root > div > div.tv-dialog__modal-wrap.tv-dialog__modal-wrap--contain-size > div > div > div > div > div > div > div:nth-child(1) > div.i-clearfix > div > span > span"); //Eメールアイコンクリック
-        //this.elementSendkeys(driver, "#email-signin__user-name-input__ca74da8f-0b36-4a3f-8c47-51735232ca76", emailChart); //メールアドレス入力
-        //this.elementSendkeys(driver, "#email-signin__password-input__ca74da8f-0b36-4a3f-8c47-51735232ca76", passwordChart); //パスワード入力
-      
-	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input")).sendKeys(emailChart); //メールアドレス入力
-	    driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input")).sendKeys(passwordChart); //パスワード入力
+        
+        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
+        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div[1]");  //ログインボタンクリック
+        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]"); //Eメールアイコンクリック
+        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input", emailChart); //メールアドレス入力
+        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
+
 	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
 	    this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
 	    driver.quit();
         
 	    
 	    //チャート画像取得
-	    for(int i = 0; i < tradeAllList.size(); i++) {
+	    /*for(int i = 0; i < tradeAllList.size(); i++) {
 	    	System.out.println(tradeAllList.get(i));
 		    //通貨ペア変更
 	    	driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/div[1]/div[1]/div/div/div/div/div[2]/div[1]")).click();
