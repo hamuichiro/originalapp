@@ -81,8 +81,8 @@ public class PagesController {
     @RequestMapping(path = "/selenium")
     public String selenium() {
 
-    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	String  driver_path = "./exe/chromedriver.exe";
+    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	//String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -227,17 +227,17 @@ public class PagesController {
 		    //新規約定時チャート画像取得
 		    for(int j=0; j< 10; j++) { //日付の入力
 		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-		    	//driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input")).sendKeys(Keys.chord(Keys.BACK_SPACE));  
+  
 		    }
 		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", tradeAllList.get(i).get(7));
-		    //driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input")).sendKeys(tradeAllList.get(i).get(7));
+
 		   
 		    for(int j=0; j< 5; j++) { //時間の入力
 		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-		    	//driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input")).sendKeys(Keys.chord(Keys.BACK_SPACE));
+
 		    }
 		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", tradeAllList.get(i).get(8));
-		    //driver.findElement(By.xpath("/html/body/div[5]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input")).sendKeys(tradeAllList.get(i).get(8));
+
 		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
 
 		  
