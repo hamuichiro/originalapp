@@ -13,5 +13,6 @@ spring:
     console:
       enabled: true
       
-
+image:
+  local: true
   

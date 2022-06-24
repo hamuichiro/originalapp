@@ -1,9 +1,13 @@
 package com.example.originalapp.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.originalapp.entity.TransactionData;
+import com.example.originalapp.repository.TransactionDataRepository;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -28,6 +32,9 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.originalapp.repository.TransactionDataRepository;
 
 
 
@@ -35,6 +42,9 @@ import org.openqa.selenium.interactions.Actions;
 
 @Controller
 public class PagesController {
+	
+    @Autowired //TransactionDataRepositoryを@Autowiredを付けて定義してController内で使用できるようにしている
+    private TransactionDataRepository repository;
 
     @RequestMapping("/")
     public String index() {  
@@ -80,9 +90,11 @@ public class PagesController {
 	
     @RequestMapping(path = "/selenium")
     public String selenium() {
+    	
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
+
+    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -95,7 +107,7 @@ public class PagesController {
     	String currencyPair = null;
     	String[] newTimeList = new String[2];
     	String[] settlementTimeList = new String[2];
-    	ArrayList<ArrayList<String>> tradeAllList = new ArrayList<ArrayList<String>>();
+
 
     	
     
@@ -128,7 +140,7 @@ public class PagesController {
         this.elementSendkeys(driver, "/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]", password); //パスワードの入力
         this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
         
-        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        
         for(int i = 0; i < 50; i++) {
         	continue;
         }
@@ -162,6 +174,8 @@ public class PagesController {
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(5) > a > gl-switchery > span"); //ポジション一覧の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(6) > a > gl-switchery > span"); //注文一覧の非表示
+        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        
         
         
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.cssSelector("#center > div > div.ag-body > div.ag-body-viewport-wrapper > div > div > div")); //全約定履歴の取得
@@ -173,34 +187,93 @@ public class PagesController {
      	  
         	if(tradeList.size() == 15) { //通貨ペア、約定日時を取り出し、成形、リスト化
 
-        		currencyPair = tradeList.get(4);
+        		tradeList.remove(1);
+        		tradeList.remove(2);
+        		tradeList.remove(3);
+        		tradeList.remove(7);
+        		tradeList.remove(8);
+        		
+        		double rateDifference = 0;
+        		double profitlossParseint = 0;
+        		double newRate = Double.parseDouble(tradeList.get(6));
+        		double settlementRate = Double.parseDouble(tradeList.get(1));
+        		double newRatePip;
+        		double settlementRatePip;
+        		
+        		currencyPair = tradeList.get(2);
         		currencyPair = currencyPair.replace("/", "");
-        		tradeList.set(4, currencyPair);
+        		tradeList.set(2, currencyPair);
+        		
+        		
+        		
+        		if(newRate <= 2) {
+        			newRatePip = newRate * 10000;
+        			settlementRatePip = settlementRate * 10000;
+        		}
+        		else {
+        			newRatePip = newRate * 100;
+        			settlementRatePip = settlementRate * 100;
+        		}
+        		
+        		
+        		if((tradeList.get(3)).equals("売")) {
+        			
+        			rateDifference = settlementRatePip -  newRatePip;
+
+        			tradeList.set(3, "Long");
+        		}
+        		else {
+        			
+        			rateDifference = newRatePip -  settlementRatePip;
+
+        			tradeList.set(3, "Short");
+        		}
+        		
+        		profitlossParseint = rateDifference / newRatePip * 100;
+        		 
+        		System.out.println(tradeList);
         		
         		settlementTime = tradeList.get(0);
         		settlementTimeList = settlementTime.split(" ");
-        		settlementTimeList[0] = settlementTimeList[0].replace("/", "-");
         		settlementTimeList[1] = settlementTimeList[1].substring(0, 5);
-        		tradeList.set(0, settlementTimeList[0]);
+        		tradeList.set(0, settlementTimeList[0].substring(3, 8));
         		tradeList.add(1, settlementTimeList[1]);
+        		settlementTimeList[0] = settlementTimeList[0].replace("/", "-");
         		
-        		newTime = tradeList.get(9);
+        		
+        		newTime = tradeList.get(6);
         		newTimeList = newTime.split(" ");
-        		newTimeList[0] = newTimeList[0].replace("/", "-");
         		newTimeList[1] = newTimeList[1].substring(0, 5);
-        		tradeList.set(9, newTimeList[0]);
-        		tradeList.add(10, newTimeList[1]);
+        		tradeList.set(6, newTimeList[0].substring(3, 8));
+        		tradeList.add(7, newTimeList[1]);
+        		newTimeList[0] = newTimeList[0].replace("/", "-");
+
         		
-        		tradeList.remove(2);
-        		tradeList.remove(3);
         		
-        		tradeAllList.add(tradeList);
+        		TransactionData transactionData = new TransactionData();
+        		transactionData.setTransactionSettlementDate(tradeList.get(0));
+        		transactionData.setTransactionSettlementTime(tradeList.get(1));
+        		transactionData.setRateSettlement(tradeList.get(2));
+        	    transactionData.setCurrencyPair(tradeList.get(3));
+        	    transactionData.setTransactionType(tradeList.get(4));
+        	    transactionData.setTransactionLot(tradeList.get(5));
+        	    transactionData.setTransactionNewDate(tradeList.get(6));
+        	    transactionData.setTransactionNewTime(tradeList.get(7));
+        	    transactionData.setRateNew(tradeList.get(8));
+        	    transactionData.setProfitLoss(tradeList.get(9));
+        	    transactionData.setSwap(tradeList.get(10));
+        	    transactionData.setProfitLossConfirm(tradeList.get(11) );
+        	    transactionData.setRateDifference((double) (Math.round(rateDifference*100.0)/100.0));
+        	    transactionData.setProfitlossParseint((double) (Math.round(profitlossParseint*100.0)/100.0));
+
+        		
+        	   	repository.saveAndFlush(transactionData);
         		
         	}
         }
 
         
-        driver.get("https://jp.tradingview.com/"); //tradigView表示
+        /*driver.get("https://jp.tradingview.com/"); //tradigView表示
         
         this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
         this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div[1]");  //ログインボタンクリック
@@ -247,11 +320,11 @@ public class PagesController {
 		    
 		    /*Actions actionProvider = new Actions(driver);
 		    Action keydownNew = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
-		    keydownNew.perform();*/
+		    keydownNew.perform();
 		    
 		    
-		    this.elememtClickSelector(driver, "#header-toolbar-symbol-search > div");
-		    driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span")).click(); //移動ボタンクリック
+		    this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
+
 		    
 		    //決済時チャート画像取得
 		    for(int j=0; j< 10; j++) { //日付の入力
@@ -274,9 +347,15 @@ public class PagesController {
 		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
 		    
 		    break;
-	    }
+	    }*/
+        driver.quit();
 
+      
+      
+      
 
-        return "pages/analysistool";
+   	
+   	
+      return "redirect:/analysistool";
     }
 }
