@@ -75,20 +75,5 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 	    }
 	    
-	    
-
-
-
-
-	    private String getJson(Iterable<TransactionData> TransactionDatas){
-	        String retVal = null;
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        try{
-	            retVal = objectMapper.writeValueAsString(TransactionDatas);
-	        } catch (JsonProcessingException e) {
-	            System.err.println(e);
-	        }
-	        return retVal;
-	    }
 
 	}
