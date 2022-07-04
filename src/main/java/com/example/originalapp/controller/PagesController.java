@@ -89,8 +89,8 @@ public class PagesController {
     	
 
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
+    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -172,13 +172,44 @@ public class PagesController {
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(3) > a > gl-switchery > span"); //証拠金状況紹介の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(5) > a > gl-switchery > span"); //ポジション一覧の非表示
         this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(6) > a > gl-switchery > span"); //注文一覧の非表示
-        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        
+        String Handle = driver.getWindowHandle();
+        this.elememtClickSelector(driver, "#site-menubar > div > ul > li:nth-child(6) > a > div");
+        this.elememtClickSelector(driver, "#menu-help > li:nth-child(3) > a > span");
+        
+        String newHandle = null;
+        for (String id : driver.getWindowHandles()) {
+            if (!id.equals(Handle)) {
+                newHandle = id;
+            }
+        }
+        
+        driver.switchTo().window(newHandle);
+        
+        driver.get("https://jp.tradingview.com/"); //tradigView表示
+        
+        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
+        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div[1]");  //ログインボタンクリック
+        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]"); //Eメールアイコンクリック
+        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input", emailChart); //メールアドレス入力
+        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
+
+	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
+	    this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
+        
+        
+        driver.switchTo().window(Handle);
+        
+        
         
         
         
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.cssSelector("#center > div > div.ag-body > div.ag-body-viewport-wrapper > div > div > div")); //全約定履歴の取得
         
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+        	
+        	this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        	
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
@@ -266,97 +297,75 @@ public class PagesController {
         	    transactionData.setProfitLossConfirm(tradeList.get(12).replace(",", ""));
         	    transactionData.setRateDifference((double) (Math.round(rateDifference*100.0)/100.0));
         	    transactionData.setProfitlossParseint((double) (Math.round(profitlossParseint*100.0)/100.0));
+        	    
+        	    driver.switchTo().window(newHandle);
+        	    
+        	    //チャート画像取得
+    		    //通貨ペア変更
+    			this.elememtClickSelector(driver, "#header-toolbar-symbol-search > div");
+    			this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[2]/div/div[2]/div[1]/input", tradeList.get(4));
+    			this.elememtClickXpath(driver, "/html/body/div[5]/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]");
+    			this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
+    		    
+    		    
+    		    
+    		    //新規約定時チャート画像取得
+    		    for(int j=0; j< 10; j++) { //日付の入力
+    		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+      
+    		    }
+    		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", newTimeList[0]);
 
+    		   
+    		    for(int j=0; j< 5; j++) { //時間の入力
+    		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+
+    		    }
+    		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", newTimeList[1]);
+
+    		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
+
+    		  
+    		    File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+    		    System.out.println(screenshotNew);
+    		    //FileUtils.copyFile(screenshotNew, new File(“screenshotNew.png”));
+    		    
+    		    /*Actions actionProvider = new Actions(driver);
+    		    Action keydownNew = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
+    		    keydownNew.perform();*/
+    		    
+    		    
+    		    this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
+
+    		    
+    		    //決済時チャート画像取得
+    		    for(int j=0; j< 10; j++) { //日付の入力
+    		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+      
+    		    }
+    		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", settlementTimeList[0]);
+
+    		   
+    		    for(int j=0; j< 5; j++) { //時間の入力
+    		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+
+    		    }
+    		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", settlementTimeList[1]);
+
+    		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
+    		    
+    		    File screenshotSet = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+    		    System.out.println(screenshotSet);
+    		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
+    		    
+    		    driver.switchTo().window(Handle);    
         		
         	   	repository.saveAndFlush(transactionData);
         		
         	}
         }
-
-        
-        /*driver.get("https://jp.tradingview.com/"); //tradigView表示
-        
-        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
-        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div[1]");  //ログインボタンクリック
-        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]"); //Eメールアイコンクリック
-        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input", emailChart); //メールアドレス入力
-        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
-
-	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
-	    this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
-	    //driver.quit();
-        
-	    
-	    //チャート画像取得
-	    for(int i = 0; i < tradeAllList.size(); i++) {
-	    	System.out.println(tradeAllList.get(i));
-		    //通貨ペア変更
-			this.elememtClickSelector(driver, "#header-toolbar-symbol-search > div");
-			this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[2]/div/div[2]/div[1]/input", tradeAllList.get(i).get(3));
-			this.elememtClickXpath(driver, "/html/body/div[5]/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]");
-			this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
-		    
-		    
-		    
-		    //新規約定時チャート画像取得
-		    for(int j=0; j< 10; j++) { //日付の入力
-		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-  
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", tradeAllList.get(i).get(7));
-
-		   
-		    for(int j=0; j< 5; j++) { //時間の入力
-		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", tradeAllList.get(i).get(8));
-
-		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
-
-		  
-		    File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
-		    System.out.println(screenshotNew);
-		    //FileUtils.copyFile(screenshotNew, new File(“screenshotNew.png”));
-		    
-		    /*Actions actionProvider = new Actions(driver);
-		    Action keydownNew = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
-		    keydownNew.perform();
-		    
-		    
-		    this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
-
-		    
-		    //決済時チャート画像取得
-		    for(int j=0; j< 10; j++) { //日付の入力
-		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-  
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", tradeAllList.get(i).get(0));
-
-		   
-		    for(int j=0; j< 5; j++) { //時間の入力
-		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", tradeAllList.get(i).get(1));
-
-		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
-		    
-		    File screenshotSet = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
-		    System.out.println(screenshotSet);
-		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
-		    
-		    break;
-	    }*/
         driver.quit();
 
-      
-      
-      
-
-   	
-   	
-      return "redirect:/analysistool";
+        return "redirect:/analysistool";
     }
 }

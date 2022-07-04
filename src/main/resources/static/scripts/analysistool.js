@@ -1,5 +1,7 @@
 
 
+
+
 $(document).ready(function(){
     //デフォルトで表示する要素を指定
     $('.dropdown__list').hide();
@@ -597,26 +599,33 @@ $(function() {
         alert("該当するデータはありませんでした");
         return;
       }
-      var currencyPair_profit = new Array(10);
-      var currencyPair_loss = new Array(10);
-      currencyPair_profit.fill(0);
-      currencyPair_loss.fill(0);
+      var weekOfDay_profit = new Array(7);
+      var weekOfDay_loss = new Array(7);
+      weekOfDay_profit.fill(0);
+      weekOfDay_loss.fill(0);
       
-      var labels = ["EURUSD", "EURJPY", "EURGBP", "EURAUD", "USDJPY", "GBPUSD", "GBPJPY", "GBPAUD", "AUDUSD", "AUDJPY"];
+      var labels = ["SUN", "MON", "TUE", "WED", "TUE", "FRI", "SAT"];
+      
 
       for (var i = 0; i < transactionDataList.length; i ++) {
+		var transactionDate = transactionDataList[i].transactionNewDate;
+		var setYear = "20" + transactionDate.substr(0, 2);
+		var setMonth = transactionDate.substr(3, 2) - 1;
+		var setDay = transactionDate.substr(6, 2);
+		var date = new Date(setYear, setMonth, setDay);
+		
 	    for (var j = 0; j < labels.length; j ++) {
-		  if(transactionDataList[i].currencyPair == labels[j]) {
+		  if(date.getDay() == j) {
 	        if(transactionDataList[i].rateDifference > 0) {
-	          currencyPair_profit[j]++;
+	          weekOfDay_profit[j]++;
 		    }
 		    else {
-		      currencyPair_loss[j]++;
+		      weekOfDay_loss[j]++;
 		    }
 		  }
 		}
 	  }
-	  drawBarchart(labels, currencyPair_profit, currencyPair_loss, "myBarChartWeek");
+	  drawBarchart(labels, weekOfDay_profit, weekOfDay_loss, "myBarChartWeek");
     })
 	.fail(function () {
       alert("ファイルが読み込めませんでした");
