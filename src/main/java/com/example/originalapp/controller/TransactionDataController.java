@@ -71,7 +71,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 	        
 	        
-	        return "/pages/analysistool";
+	        return "pages/analysistool";
 
 	    }
 	    
