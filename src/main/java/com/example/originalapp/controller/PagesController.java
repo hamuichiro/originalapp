@@ -51,10 +51,6 @@ public class PagesController {
     	 return "pages/index";
     }
     
-    @RequestMapping(path = "/analysistool")
-    public String tool() {  
-    	 return "pages/analysistool";
-    }
 
     public void elememtClickXpath(ChromeDriver  driver, String path) {
     	
@@ -93,8 +89,8 @@ public class PagesController {
     	
 
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
+    	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+    	String  driver_path = "./exe/chromedriver.exe";
     	
     	String userId = "1318221";
     	String password = "hamuichi24";
@@ -151,7 +147,9 @@ public class PagesController {
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.time-area > div:nth-child(2) > label"); //期間指定クリック
         this.elememtClickSelector(driver, "#DealingFromDatePickerCompId"); //開始日付
         
-        //月初めの選択
+      //月初めの選択
+        this.elememtClickXpath(driver, "//*[@id=\"bodyId\"]/div[3]/div[1]/table/thead/tr[2]/th[2]");
+        this.elememtClickXpath(driver, "//*[@id=\"bodyId\"]/div[3]/div[2]/table/tbody/tr/td/span[4]");
         boolean breakFlag = false;
         for(int i = 1; i <= 6; i++) {
         	for(int j = 1; j <= 7; j++ ) {
@@ -187,22 +185,22 @@ public class PagesController {
      	  
         	if(tradeList.size() == 15) { //通貨ペア、約定日時を取り出し、成形、リスト化
 
-        		tradeList.remove(1);
-        		tradeList.remove(2);
         		tradeList.remove(3);
-        		tradeList.remove(7);
+        		tradeList.remove(4);
         		tradeList.remove(8);
+        		tradeList.remove(9);
+ 
         		
         		double rateDifference = 0;
         		double profitlossParseint = 0;
-        		double newRate = Double.parseDouble(tradeList.get(6));
-        		double settlementRate = Double.parseDouble(tradeList.get(1));
+        		double newRate = Double.parseDouble(tradeList.get(7));
+        		double settlementRate = Double.parseDouble(tradeList.get(2));
         		double newRatePip;
         		double settlementRatePip;
         		
-        		currencyPair = tradeList.get(2);
+        		currencyPair = tradeList.get(3);
         		currencyPair = currencyPair.replace("/", "");
-        		tradeList.set(2, currencyPair);
+        		tradeList.set(3, currencyPair);
         		
         		
         		
@@ -216,53 +214,56 @@ public class PagesController {
         		}
         		
         		
-        		if((tradeList.get(3)).equals("売")) {
+        		if((tradeList.get(4)).equals("売")) {
         			
         			rateDifference = settlementRatePip -  newRatePip;
 
-        			tradeList.set(3, "Long");
+        			tradeList.set(4, "Long");
         		}
         		else {
         			
         			rateDifference = newRatePip -  settlementRatePip;
 
-        			tradeList.set(3, "Short");
+        			tradeList.set(4, "Short");
         		}
         		
         		profitlossParseint = rateDifference / newRatePip * 100;
         		 
-        		System.out.println(tradeList);
+        	    System.out.println(tradeList);
         		
         		settlementTime = tradeList.get(0);
         		settlementTimeList = settlementTime.split(" ");
         		settlementTimeList[1] = settlementTimeList[1].substring(0, 5);
-        		tradeList.set(0, settlementTimeList[0].substring(3, 8));
+        		tradeList.set(0, settlementTimeList[0]);
         		tradeList.add(1, settlementTimeList[1]);
         		settlementTimeList[0] = settlementTimeList[0].replace("/", "-");
         		
         		
-        		newTime = tradeList.get(6);
+        		newTime = tradeList.get(7);
         		newTimeList = newTime.split(" ");
         		newTimeList[1] = newTimeList[1].substring(0, 5);
-        		tradeList.set(6, newTimeList[0].substring(3, 8));
-        		tradeList.add(7, newTimeList[1]);
+        		tradeList.set(7, newTimeList[0]);
+        		tradeList.add(8, newTimeList[1]);
         		newTimeList[0] = newTimeList[0].replace("/", "-");
 
+        		
+        		
         		
         		
         		TransactionData transactionData = new TransactionData();
         		transactionData.setTransactionSettlementDate(tradeList.get(0));
         		transactionData.setTransactionSettlementTime(tradeList.get(1));
-        		transactionData.setRateSettlement(tradeList.get(2));
-        	    transactionData.setCurrencyPair(tradeList.get(3));
-        	    transactionData.setTransactionType(tradeList.get(4));
-        	    transactionData.setTransactionLot(tradeList.get(5));
-        	    transactionData.setTransactionNewDate(tradeList.get(6));
-        	    transactionData.setTransactionNewTime(tradeList.get(7));
-        	    transactionData.setRateNew(tradeList.get(8));
-        	    transactionData.setProfitLoss(tradeList.get(9));
-        	    transactionData.setSwap(tradeList.get(10));
-        	    transactionData.setProfitLossConfirm(tradeList.get(11) );
+        		transactionData.setTransactionNumber(tradeList.get(2));
+        		transactionData.setRateSettlement(tradeList.get(3));
+        	    transactionData.setCurrencyPair(tradeList.get(4));
+        	    transactionData.setTransactionType(tradeList.get(5));
+        	    transactionData.setTransactionLot(tradeList.get(6));
+        	    transactionData.setTransactionNewDate(tradeList.get(7));
+        	    transactionData.setTransactionNewTime(tradeList.get(8));
+        	    transactionData.setRateNew(tradeList.get(9));
+        	    transactionData.setProfitLoss(tradeList.get(10).replace(",", ""));
+        	    transactionData.setSwap(tradeList.get(11).replace(",", ""));
+        	    transactionData.setProfitLossConfirm(tradeList.get(12).replace(",", ""));
         	    transactionData.setRateDifference((double) (Math.round(rateDifference*100.0)/100.0));
         	    transactionData.setProfitlossParseint((double) (Math.round(profitlossParseint*100.0)/100.0));
 
