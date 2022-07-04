@@ -36,6 +36,7 @@
   z-index: 90; }
 
 .wrapper {
+  position: relative;
   display: flex; }
 
 main {
@@ -60,7 +61,7 @@ body {
 .navigation {
   height: 100vh;
   width: 75px;
-  position: relative;
+  position: absolute;
   background-color: #212529;
   box-shadow: 10px 0 0 #212529;
   border-left: 10px solid #212529;
