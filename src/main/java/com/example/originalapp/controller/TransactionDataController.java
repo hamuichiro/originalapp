@@ -12,7 +12,10 @@ package com.example.originalapp.controller;
 	import java.util.List;
 	import java.util.Locale;
 
-	import javax.servlet.http.HttpServletRequest;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import javax.servlet.http.HttpServletRequest;
 
 	import org.apache.commons.io.FilenameUtils;
 	import org.modelmapper.ModelMapper;
@@ -31,7 +34,8 @@ package com.example.originalapp.controller;
 	import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RequestMethod;
 	import org.springframework.web.bind.annotation.RequestParam;
-	import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 	import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 	import com.example.originalapp.entity.TransactionData;
@@ -39,6 +43,8 @@ package com.example.originalapp.controller;
 	import com.example.originalapp.form.TransactionDataForm;
 	import com.example.originalapp.form.AccountForm;
 	import com.example.originalapp.repository.TransactionDataRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 	@Controller
 	public class TransactionDataController {
@@ -56,29 +62,33 @@ package com.example.originalapp.controller;
 
 
 
-	    @GetMapping(path = "/analysistool")
+	    @RequestMapping("/analysistool")
 	    public String index(Model model) throws IOException {
 
+	    	Iterable<TransactionData> transactionDatas = repository.findAll(); //テーブルから全件取得する
 
-	        Iterable<TransactionData> TransactionDatas = repository.findAll(); //テーブルから全件取得する
+	        model.addAttribute("TransactionDatas", transactionDatas); //サーバサイドからフロントエンド（クライアント側）へデータの受け渡し
 
-	        model.addAttribute("TransactionDatas", TransactionDatas); //サーバサイドからフロントエンド（クライアント側）へデータの受け渡し
-
-	        return "pages/analysistool";
-	    }
-
-
-
-	    @GetMapping(path = "/topics/new")
-	    public String dataUpdate(Model model) {
 	        
-	    	TransactionData transactionData = new TransactionData();
-	    	 repository.saveAndFlush(transactionData);
-	    	
-	    	
-	        return "redirect:/pages/analysistool";
+	        
+	        return "/pages/analysistool";
+
 	    }
+	    
+	    
 
 
+
+
+	    private String getJson(Iterable<TransactionData> TransactionDatas){
+	        String retVal = null;
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        try{
+	            retVal = objectMapper.writeValueAsString(TransactionDatas);
+	        } catch (JsonProcessingException e) {
+	            System.err.println(e);
+	        }
+	        return retVal;
+	    }
 
 	}

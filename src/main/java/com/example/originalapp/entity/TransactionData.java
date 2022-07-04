@@ -34,6 +34,9 @@ package com.example.originalapp.entity;
 
 	    //@Column(nullable = false)
 	    //private String path;
+	    
+	    @Column(nullable = false)
+	    private String transactionNumber;
 
 	    @Column(nullable = false)
 	    private String transactionNewDate;

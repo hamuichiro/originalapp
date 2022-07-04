@@ -11,6 +11,8 @@ public class TransactionDataForm {
     //private Long userId;
 
     //private String path;
+    
+    private String transactionNumber;
 
     private String transactionNewDate;
 
