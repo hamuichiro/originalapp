@@ -154,7 +154,7 @@ body {
 		background-color: $color-black;
 		box-shadow: $box-shadow;
 		border-radius: 15px;
-	z-index: 1;
+	    overflow: hidden;
 		display: none;
 		li {
 			text-align: left;

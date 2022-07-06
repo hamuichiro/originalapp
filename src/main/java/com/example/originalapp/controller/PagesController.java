@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -392,8 +393,10 @@ public class PagesController {
 
     		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
     		    
-    		    File screenshotSet = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
-    		    System.out.println(screenshotSet);
+    		    Dimension targetSize = new Dimension(100,200);
+    		    driver.manage().window().setSize(targetSize);
+    		    byte[] screenshotSet = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.BYTES);
+    		    //System.out.println(screenshotSet);
     		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
     		    
     		    driver.switchTo().window(Handle); 
