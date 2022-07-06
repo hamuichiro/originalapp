@@ -365,8 +365,8 @@ public class PagesController {
     		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
 
     		  
-    		    byte[] screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.BYTES);
-    		    System.out.println(screenshotNew);
+    		    extracted(driver);
+    		    //System.out.println(screenshotNew);
     		    //FileUtils.copyFile(screenshotNew, new File(“screenshotNew.png”));
     		    
     		    /*Actions actionProvider = new Actions(driver);
@@ -395,9 +395,7 @@ public class PagesController {
     		    
     		    Dimension targetSize = new Dimension(100,200);
     		    driver.manage().window().setSize(targetSize);
-    		    byte[] screenshotSet = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.BYTES);
-    		    //System.out.println(screenshotSet);
-    		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
+    		    extracted(driver);
     		    
     		    driver.switchTo().window(Handle); 
         		
@@ -409,4 +407,10 @@ public class PagesController {
 
         return "redirect:/analysistool";
     }
+
+
+	private byte[] extracted(ChromeDriver driver) {
+		byte[] screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.BYTES);
+		return screenshotNew;
+	}
 }
