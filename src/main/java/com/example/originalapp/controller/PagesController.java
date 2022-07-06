@@ -393,8 +393,7 @@ public class PagesController {
 
     		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
     		    
-    		    Dimension targetSize = new Dimension(100,200);
-    		    driver.manage().window().setSize(targetSize);
+
     		    extracted(driver);
     		    
     		    driver.switchTo().window(Handle); 
