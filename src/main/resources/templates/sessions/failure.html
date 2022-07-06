@@ -4,10 +4,6 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layouts/layout}">
   <head>
-        <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="common-meta">
-    <title>originalapp</title>
     <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css}">
     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css}" rel="stylesheet">
@@ -24,9 +20,7 @@
   </header>
     <main>
   <div th:replace="layouts/layout::contents"></div>
-<div th:replace="sessions/login::modal-login"></div>
   </main>
-
 	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
 	<script th:src="@{https://unpkg.com/micromodal/dist/micromodal.min.js}"></script>
 	<script th:src="@{/scripts/method-convert.js}"></script>
@@ -36,9 +30,9 @@
 	  MicroModal.init();
 	</script>
 	<script>
-	function clickEvent() {
-	var result = confirm('ログアウトしますか？');
-	}
+	 window.onload = function() {
+    	  alert('ログインできませんでした');
+      }
 	</script>
   </body>
 </html>

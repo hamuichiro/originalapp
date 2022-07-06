@@ -24,24 +24,29 @@ public class LoginController {
     public String login() {  
     	 return "pages/index";
     }
+    
+    @RequestMapping("/complete")
+    public String loginComplete() {  
+    	 return "sessions/complete";
+    }
 
 
     
-	@GetMapping(path = "/login-failure")
+	@GetMapping(path = "/failure")
     public String loginFailure(Model model) {
         model.addAttribute("hasMessage", true);
         model.addAttribute("class", "alert-danger");
         model.addAttribute("message", "Nameまたはパスワードに誤りがあります。");
 
-        return "pages/index";
+        return "sessions/failure";
     }
 
-    @GetMapping(path = "/logout-complete")
+    @GetMapping(path = "/logout")
     public String logoutComplete(Model model) {
         model.addAttribute("hasMessage", true);
         model.addAttribute("class", "alert-info");
         model.addAttribute("message", "ログアウトしました。");
 
-        return "pages/index";
+        return "sessions/logout";
     }
 }

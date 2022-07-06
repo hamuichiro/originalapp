@@ -19,7 +19,9 @@
 	    <p>Now Loading...</p>
 	</div>
     </div>
-    <div class="header"></div>
+    <div class="header">
+
+    </div>
     <div class="wrapper" id="wrap">
       <div class="navigation active">
       
@@ -31,11 +33,11 @@
             </a>
           </li>
           <li class="menue_list">
-            <a href="#">
+            <a href="#" class="slide-btn">
               <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
               <span class="title">Account</span>
             </a>
-            <ul class="dropdown__lists">
+            <ul class="dropdown__lists slide-contents">
               <li class="dropdown__list"><a　href="#" id=""></a></li>
               <li class="dropdown__list"><a　href="#" id=""></a></li>
               <li class="dropdown__list"><a　href="#" id=""></a></li>
@@ -52,48 +54,59 @@
               <li class="dropdown__list"><a　href="#" id=""></a></li>
             </ul>
           </li>
-          <li class="menue_list">
-            <a href="#">
+          <li class="menue_list slide-btn" >
+          <div>
+            <a href="#" class="slide-btn">
               <span class="icon"><ion-icon name="reader-outline"></ion-icon></span>
               <span class="title">Date List</span>
            </a>
+           </div>
            <ul class="dropdown__lists">
-              <li class="dropdown__list"><a　href="#" id="dateList_month"></a>月間</li>
-              <li class="dropdown__list"><a　href="#" id="dateList_year"></a>年間</li>
-              <li class="dropdown__list"><a　href="#" id="dateList_all"></a>全体</li>
+              <li class="dropdown__list"><a　href="#" id="dateList_month"></a>Monthly</li>
+              <li class="dropdown__list"><a　href="#" id="dateList_year"></a>Annual</li>
+              <li class="dropdown__list"><a　href="#" id="dateList_all"></a>All</li>
             </ul>
           </li>
-          <li class="menue_list">
-            <a href="#">
+          <li class="menue_list slide-btn">
+          <div>
+            <a href="#"  class="slide-btn">
               <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
               <span class="title">Bar Chart</span>
             </a>
+           </div>
             <ul class="dropdown__lists">
-              <li class="dropdown__list"><a　href="#" id="barchart_currency"></a>通貨別</li>
-              <li class="dropdown__list"><a　href="#" id="barchart_week"></a>曜日別</li>
-              <li class="dropdown__list"><a　href="#" id="barchart_time"></a>時間別</li>
+              <li class="dropdown__list"><a　href="#" id="barchart_currency"></a>By Currency</li>
+              <li class="dropdown__list"><a　href="#" id="barchart_week"></a>By Day Of The Week</li>
+              <li class="dropdown__list"><a　href="#" id="barchart_time"></a>By Time</li>
             </ul>
+            
           </li>
-          <li class="menue_list">
-            <a href="#">
+          <li class="menue_list slide-btn">
+          <div>
+            <a href="#"  class="slide-btn">
               <span class="icon"><ion-icon name="pulse-outline"></ion-icon></span>
               <span class="title">Line Chart</span>
             </a>
-            <ul class="dropdown__lists">
-              <li class="dropdown__list"><a　href="#" id="linechart_month"></a>月間</li>
-              <li class="dropdown__list"><a　href="#" id="linechart_year"></a>年間</li>
-              <li class="dropdown__list"><a　href="#" id="linechart_all">全体</a></li>
+            </div>
+            <ul class="dropdown__lists slide-btn">
+              <li class="dropdown__list"><a　href="#" id="linechart_month"></a>Monthly</li>
+              <li class="dropdown__list"><a　href="#" id="linechart_year"></a>Annual</li>
+              <li class="dropdown__list"><a　href="#" id="linechart_all">All</a></li>
             </ul>
           </li>
           <li class="menue_list">
-            <a href="#">
+          <div>
+            <a href="#"  class="slide-btn">
               <span class="icon"><ion-icon name="pie-chart-outline"></ion-icon></span>
               <span class="title">Pie Chart</span>
             </a>
-            <ul class="dropdown__lists">           
-              <li class="dropdown__list"><a　href="#" id="piechart_month">月別</a></li>
-              <li class="dropdown__list"><a　href="#" id="piechart_year">年別</a></li>
-              <li class="dropdown__list"><a　href="#" id="piechart_all">全体</a></li>
+            </div>
+            <ul class="dropdown__lists">  
+              <li class="dropdown__list"><a　href="#" id="piechart_long">Long</a></li>
+              <li class="dropdown__list"><a　href="#" id="piechart_short">Short</a></li>          
+              <li class="dropdown__list"><a　href="#" id="piechart_month">Monthly</a></li>
+              <li class="dropdown__list"><a　href="#" id="piechart_year">By Year</a></li>
+              <li class="dropdown__list"><a　href="#" id="piechart_all">All</a></li>
             </ul>
           </li>
           <li class="menue_list">
@@ -105,23 +118,23 @@
             <div class="modal" id="acquireData" aria-hidden="true">
 		      <div class="modal-overlay" data-micromodal-close>
 		        <div class="modal-container">
-		          <h2 class="modal-title">期間指定</h2>
+		          <h2 class="modal-title">Input Data</h2>
 		          <div class="modal-content">
-		            <p>
-		            　　<form class="" method="post" th:action="@{/selenium}">
+		    
+		            　　<form class="form-inputdate" method="post" th:action="@{/selenium}">
 		            	<div class="form-floating">
-		            	  <input type="text" class="form-control rounded-3" name="start_month" id="start_month" placeholder="start_month">
-		            	  <label for="start_month">startMonth</label>
-		          		</div>		
+		            	  <input type="number" class="form-control rounded-3" name="year" id="get_year" value="2022">
+		            	  <label for="get_year">Year</label>
+		          		</div>	
 		            	<div class="form-floating">
-		            	  <input type="text" class="form-control rounded-3" name="end_month" id="end_month" placeholder="end_month">
-		            	  <label for="end_month">endMonth</label>
-		          		</div>	          
-			            <button class="button-detail" type="submit" id="button">
-			              get
+		            	  <input type="number" class="form-control rounded-3" name="month" id="get_month" value="1">
+		            	  <label for="get_month">Month</label>
+		          		</div>		          
+			            <button class="button-get" type="submit" id="button">
+			              Get Date
 			            </button>
 		              </form>
-		            </p>
+		      
 		          </div>
 		          <div class="modal-footer">
 		            <button class="button-close" data-micromodal-close>
@@ -147,8 +160,25 @@
       </div>
 
       <main>
+      
         <div class="container">
           <div class="row">
+		    <div class="col-md-4" id="pieChartLong">
+			   <a href="#" id="closeButton_pieChartLong">
+			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+  				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                 </svg>
+			   </a>
+		      <canvas id="myPieChartLong"></canvas>
+			</div>
+		    <div class="col-md-4" id="pieChartShort">
+			   <a href="#" id="closeButton_pieChartShort">
+			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+  				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                 </svg>
+			   </a>
+		      <canvas id="myPieChartShort"></canvas>
+			</div>
 		    <div class="col-md-4" id="pieChartMonth">
 			   <a href="#" id="closeButton_pieChartMonth">
 			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
@@ -177,7 +207,7 @@
 
           
 		  <div class="row">
-          	<div class="col-md-8" id="lineChartMonth">
+          	<div class="col-md-5" id="lineChartMonth">
 			   <a href="#" id="closeButton_lineChartMonth">
 			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -185,7 +215,7 @@
 			   </a>
 		      <canvas id="myLineChartMonth"></canvas>
 		    </div>
-		    <div class="col-md-8" id="lineChartYear">
+		    <div class="col-md-5" id="lineChartYear">
 			   <a href="#" id="closeButton_lineChartYear">
 			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -193,7 +223,7 @@
 			   </a>
 		      <canvas id="myLineChartYear"></canvas>
 		    </div>
-		    <div class="col-md-8" id="lineChartAll">
+		    <div class="col-md-5" id="lineChartAll">
 			   <a href="#" id="closeButton_lineChartAll">
 			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -202,10 +232,7 @@
 		      <canvas id="myLineChartAll"></canvas>
 		    </div>
 		  
-		    
-		    
-          
-          	<div class="col-md-8" id="barChartCurrency">
+          	<div class="col-md-5" id="barChartCurrency">
 			   <a href="#" id="closeButton_barChartCurrency">
 			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -213,7 +240,7 @@
 			   </a>
 		      <canvas id="myBarChartCurrency"></canvas>
 		    </div>
-		    <div class="col-md-8" id="barChartWeek">
+		    <div class="col-md-5" id="barChartWeek">
 			   <a href="#" id="closeButton_barChartWeek">
 			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -221,7 +248,7 @@
 			   </a>
 		      <canvas id="myBarChartWeek"></canvas>
 		    </div>
-		    <div class="col-md-8" id="barChartTime">
+		    <div class="col-md-5" id="barChartTime">
 			   <a href="#" id="closeButton_barChartTime">
 			     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   				   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -285,7 +312,7 @@
       </main>   
     </div>
     <script th:inline="javascript">
-    /*<![CDATA[*/
+    /*<![CDATA[*/S
       var win = /*[[${win}]]*/ 'default';
       var lose = /*[[${lose}]]*/ 'default';
       var draw = /*[[${draw}]]*/ 'default';
@@ -307,7 +334,7 @@
     
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 

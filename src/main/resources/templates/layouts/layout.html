@@ -3,24 +3,128 @@
     xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
-    <title>originalapp</title>
   </head>
   <body>
-    <nav layout:replace="~{layouts/common :: nav}"></nav>
-    <div layout:fragment="contents"></div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/scripts/method-convert.js" th:src="@{/scripts/method-convert.js}"></script>
-   <script>
-        $(function(){
-           convertMethod('.convert');
-           $(".alert").fadeOut(5000);
-        });
-    </script>
+  
+<div class="demo-cont" th:fragment="contents">
+	  <!-- slider start -->
+	  <div class="fnc-slider example-slider">
+	    <div class="fnc-slider__slides">
+	      <!-- slide start -->
+	      <div class="fnc-slide m--blend-green m--active-slide">
+	        <div class="fnc-slide__inner">
+	          <div class="fnc-slide__mask">
+	            <div class="fnc-slide__mask-inner"></div>
+	          </div>
+	          <div class="fnc-slide__content">
+	            <h2 class="fnc-slide__heading">
+	              <div class="fnc-slide__heading-line">
+	                <span>Analysis</span>
+	              </div>
+	              <div class="fnc-slide__heading-line">
+	                <span>Tool</span>
+	              </div>
+	            </h2>
+	          </div>
+	        </div>
+	      </div>
+	      <!-- slide end -->
+	      <!-- slide start -->
+	      <div class="fnc-slide m--blend-dark">
+	        <div class="fnc-slide__inner">
+	          <div class="fnc-slide__mask">
+	            <div class="fnc-slide__mask-inner"></div>
+	          </div>
+	          <div class="fnc-slide__content">
+	            <h2 class="fnc-slide__heading">
+	              <div class="fnc-slide__heading-line">
+	                <span>Automatic</span>
+	              </div>
+	              <div class="fnc-slide__heading-line">
+	                <span>Trading</span>
+	              </div>
+	            </h2>
+	          </div>
+	        </div>
+	      </div>
+	      <!-- slide end -->
+	      <!-- slide start -->
+	      <div class="fnc-slide m--blend-red">
+	        <div class="fnc-slide__inner">
+	          <div class="fnc-slide__mask">
+	            <div class="fnc-slide__mask-inner"></div>
+	          </div>
+	          <div class="fnc-slide__content">
+	            <h2 class="fnc-slide__heading">
+	              <div class="fnc-slide__heading-line">
+	                <span>Trade</span>
+	              </div>
+	              <div class="fnc-slide__heading-line">
+	                <span>Tool</span>
+	              </div>
+	            </h2>
+	          </div>
+	        </div>
+	      </div>
+	      <!-- slide end -->
+	      <!-- slide start -->
+	      <div class="fnc-slide m--blend-blue">
+	        <div class="fnc-slide__inner">
+	          <div class="fnc-slide__mask">
+	            <div class="fnc-slide__mask-inner"></div>
+	          </div>
+	          <div class="fnc-slide__content">
+	            <h2 class="fnc-slide__heading">
+	              <div class="fnc-slide__heading-line">
+	                <span>Account</span>
+	              </div>
+	            </h2>
+	          </div>
+	        </div>
+	      </div>
+	      <!-- slide end -->
+	    </div>
+	    <nav class="fnc-nav">
+	      <div class="fnc-nav__bgs">
+	        <div class="fnc-nav__bg m--navbg-green m--active-nav-bg"></div>
+	        <div class="fnc-nav__bg m--navbg-dark"></div>
+	        <div class="fnc-nav__bg m--navbg-red"></div>
+	        <div class="fnc-nav__bg m--navbg-blue"></div>
+	      </div>
+	      <div class="fnc-nav__controls">
+	        <button onclick="location.href='/analysistool'" class="fnc-nav__control" >         
+			  Analysis Tool
+	          <span class="fnc-nav__control-progress"></span>
+	        </button>
+	        <button class="fnc-nav__control">
+	          Automatic Trading
+	          <span class="fnc-nav__control-progress"></span>
+	        </button>
+	        <button class="fnc-nav__control">
+	          Trade Tool
+	          <span class="fnc-nav__control-progress"></span>
+	        </button>
+	        <button type="button" class="fnc-nav__control fnc-slide__action-btn">
+	          Account
+	          <span data-text="Account" class="fnc-nav__control-progress">Account</span>
+	        </button>
+	      </div>
+	    </nav>
+	  </div>
+	  <!-- slider end -->
+	  <div class="demo-cont__credits">
+	    <div class="demo-cont__credits-close"></div>
+	    <h2 class="demo-cont__credits-heading">Account</h2>
+	    <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/142996/profile/profile-512_5.jpg" alt="" class="demo-cont__credits-img" />
+	    <h3 class="demo-cont__credits-name">Sing In</h3>
+	    <!--  a href="#" class="demo-cont__credits-link" data-micromodal-trigger="modal-login">Log In</a -->
+	    <a href="/selenium" class="demo-cont__credits-link">Log In</a>
+	    <a href="/login">Log In</a>
+	    <a href="/logout" onclick="clickEvent()" class="demo-cont__credits-link">Log Out</a>
+	    <h3 class="demo-cont__credits-heading">Sign Up</h3>
+	    <a href="/users/new">New Create</a>
+	  </div>
+	</div>
+
   </body>
 </html>

@@ -1,32 +1,16 @@
 
 
 
-
-$(document).ready(function(){
-    //デフォルトで表示する要素を指定
-    $('.dropdown__list').hide();
-    
-
-    //buttonがクリックされたら処理を実行
-    $('.title').click(function () {
-
-         //toggleClassでshowのclassを追加または削除
-        $('.dropdown__lists').toggleClass('show');
-
-        //#appがshowのclassをを持っていれば
-        if($('.dropdown__lists').hasClass('show')){
-
-             //要素の表示を切り替える
-
-            $('.dropdown__list').show();
-        }else{
-
-             //要素の表示を切り替える
-            $('.dropdown__list').hide();
-        }
-    });
-    
-});
+$(function(){
+  $(".slide-btn").on('click', function(){
+    ($(this).parent().next(".dropdown__lists")).slideToggle();
+  });
+  });
+/*$(function(){  
+    $(".slide-btn").mouseout(function(e){
+    ($(this).parent().next(".dropdown__lists")).slideUp();
+  });
+});*/
 
 
       
@@ -163,24 +147,65 @@ $(function () {
 
 
 //勝率の円グラフ
+$('#pieChartLong').hide();
+$('#pieChartShort').hide();
 $('#pieChartMonth').hide();
 $('#pieChartYear').hide();
 $('#pieChartAll').hide();
+
+$('#closeButton_pieChartLong').click(function () {
+  $('#pieChartLong').hide();
+});
+$('#closeButton_pieChartShort').click(function () {
+  $('#pieChartShort').hide();
+});
+$('#closeButton_pieChartMonth').click(function () {
+  $('#pieChartMonth').hide();
+});
+$('#closeButton_pieChartYear').click(function () {
+  $('#pieChartYear').hide();
+});
+$('#closeButton_pieChartAll').click(function () {
+  $('#pieChartAll').hide();
+});
+	
  $(function () {  
 	
+  var title;
+  var chartType;
+  
+  var winRate = [];
+	
 
-function drawPiechart(winRate, myPieChart) {
+function drawPiechart(winRate, chartType) {
+	
+  var myPieChart;
+  if(chartType == 0) {
+	myPieChart = "myPieChartLong";
+	title = "Long勝率";
+　　}
+  else if(chartType == 1) {
+	myPieChart = "myPieChartShort";
+	title = "Short勝率";
+　　}
+  else if(chartType == 2) {
+	myPieChart = "myPieChartMonth";
+	title = "月間勝率";
+　　}
+  else if(chartType == 3) {
+	myPieChart = "myPieChartYear";
+	title = "年間勝率";
+　　}
+  else {
+	myPieChart = "myPieChartAll";
+	title = "総勝率";
+　　}
 
   var ctx = document.getElementById(myPieChart);
  
   var myPieChart = new Chart(ctx, {
     type: 'pie',
     data: {  
-      labels: [
-	    '勝ち',
-	    '負け',
-	    '引き分け'
-	  ],
 	  datasets: [{
 	    label: 'My First Dataset',
 	    data: [winRate[0], winRate[1], winRate[2]],
@@ -191,23 +216,104 @@ function drawPiechart(winRate, myPieChart) {
 	    ]
 	  }]
     },
-    options: {}
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: title
+        }  
+      }
+    }
   });
 }
+
+  $("#piechart_long").click(function() {
+	$('#pieChartLong').show();
+
+	$.ajax({
+      url: '/dateList',
+      dataType: 'json',
+      type: "GET"
+    })
+    .done(function (transactionDataList) {
+      if(!transactionDataList){
+        alert("該当するデータはありませんでした");
+        return;
+      }
+      
+      chartType = 0;
+      winRate = new Array(3);
+      winRate.fill(0);
+      
+      
+      var position;
+      
+      for (var i = 0; i < transactionDataList.length; i ++) {
+		position = (transactionDataList[i].transactionType);
+		if(position == "Long") {
+	      if(transactionDataList[i].rateDifference > 0) {
+	        winRate[0]++;
+		  }
+		  else if (transactionDataList[i].rateDifference < 0){
+		    winRate[1]++;
+		  }
+		  else {
+		    winRate[2]++;
+		  }
+		}
+	  }	    
+	 
+	  drawPiechart(winRate, chartType);
+	})
+	.fail(function () {
+      alert("ファイルが読み込めませんでした");
+    });
+  })
+  
+  $("#piechart_short").click(function() {
+	$('#pieChartShort').show();
+
+	$.ajax({
+      url: '/dateList',
+      dataType: 'json',
+      type: "GET"
+    })
+    .done(function (transactionDataList) {
+      if(!transactionDataList){
+        alert("該当するデータはありませんでした");
+        return;
+      }
+      
+      chartType = 1;
+      winRate = new Array(3);
+      winRate.fill(0);
+      
+      
+      var position;
+      
+      for (var i = 0; i < transactionDataList.length; i ++) {
+		position = (transactionDataList[i].transactionType);
+		if(position == "Short") {
+	      if(transactionDataList[i].rateDifference > 0) {
+	        winRate[0]++;
+		  }
+		  else if (transactionDataList[i].rateDifference < 0){
+		    winRate[1]++;
+		  }
+		  else {
+		    winRate[2]++;
+		  }
+		}
+	  }	    
+	 
+	  drawPiechart(winRate, chartType);
+	})
+	.fail(function () {
+      alert("ファイルが読み込めませんでした");
+    });
+  })
  
-
-		$('#closeButton_pieChartMonth').click(function () {
-		$('#pieChartMonth').hide();
-	});
-		$('#closeButton_pieChartYear').click(function () {
-		$('#pieChartYear').hide();
-	});
-		$('#closeButton_pieChartAll').click(function () {
-		$('#pieChartAll').hide();
-	});
-
-
-
   $("#piechart_month").click(function() {
 
     $('#pieChartMonth').show();
@@ -221,12 +327,15 @@ function drawPiechart(winRate, myPieChart) {
         alert("該当するデータはありませんでした");
         return;
       }
-      var winRate = new Array(3);
+      
+      chartType = 2;
+      winRate = new Array(3);
       winRate.fill(0);
       
       
       var setMonth = 5;
       var month;
+      
       for (var i = 0; i < transactionDataList.length; i ++) {
 		month = (transactionDataList[i].transactionNewDate).substr(4,1);
 		if(month == setMonth) {
@@ -242,7 +351,7 @@ function drawPiechart(winRate, myPieChart) {
 		}
 	  }	    
 	  
-	  drawPiechart(winRate, "myPieChartMonth");
+	  drawPiechart(winRate, chartType);
 	})
 	.fail(function () {
       alert("ファイルが読み込めませんでした");
@@ -264,7 +373,9 @@ function drawPiechart(winRate, myPieChart) {
         alert("該当するデータはありませんでした");
         return;
       }
-      var winRate = new Array(3);
+      
+      chartType = 3;
+      winRate = new Array(3);
       winRate.fill(0);
       
       
@@ -286,7 +397,7 @@ function drawPiechart(winRate, myPieChart) {
 		}
 	  }	    
 	 
-	  drawPiechart(winRate, "myPieChartYear");
+	  drawPiechart(winRate, chartType);
 	})
 	.fail(function () {
       alert("ファイルが読み込めませんでした");
@@ -307,7 +418,9 @@ $('#pieChartAll').show();
         alert("該当するデータはありませんでした");
         return;
       }
-      var winRate = new Array(3);
+      
+      chartType = 4;
+      winRate = new Array(3);
       winRate.fill(0);
       
 
@@ -323,7 +436,7 @@ $('#pieChartAll').show();
 		}
 	  }	    
 	  
-	  drawPiechart(winRate, "myPieChartAll");
+	  drawPiechart(winRate, chartType);
 	})
 	.fail(function () {
       alert("ファイルが読み込めませんでした");
@@ -338,48 +451,77 @@ $('#lineChartMonth').hide();
 $('#lineChartYear').hide();
 $('#lineChartAll').hide();
 
-$(function () {
-	
-  function drawLinechart(profitLoss, transactionNumberList, myLineChart) {
-	
-  var ctx = document.getElementById(myLineChart);
-  
-  var myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: transactionNumberList,
-      datasets: [
-	  {
-        data: profitLoss,
-        borderColor: "rgb(54, 162, 235)",
-        backgroundColor: "rgb(54, 162, 235, 0.5)",
-        pointStyle: 'circle',
-	    pointRadius: 5,
-	    pointHoverRadius: 10
-      },
-      ],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: (ctx) => 'Point Style: ' + ctx.chart.data.datasets[0].pointStyle,
-        }  
-      }
-    },
-  });
-}
+$('#closeButton_lineChartMonth').click(function () {
+	$('#lineChartMonth').hide();
+});
+$('#closeButton_lineChartYear').click(function () {
+	$('#lineChartYear').hide();
+});
+$('#closeButton_lineChartAll').click(function () {
+	$('#lineChartAll').hide();
+});
 
-		$('#closeButton_lineChartMonth').click(function () {
-		$('#lineChartMonth').hide();
-	});
-		$('#closeButton_lineChartYear').click(function () {
-		$('#lineChartYear').hide();
-	});
-		$('#closeButton_lineChartAll').click(function () {
-		$('#lineChartAll').hide();
-	});
+$(function () {
+  
+  var title;
+  var chartType;
+  
+  var sum;
+  var labelNumber;
+  
+  var transactionNumber;
+  
+  var profitLoss = [];
+  
+  var transactionNumberList = [];
+
+  
+	
+	function drawLinechart(profitLoss, transactionNumberList, chartType) {
+		
+	  var myLineChart;
+	  if(chartType == 0) {
+		myLineChart = "myLineChartMonth";
+		title = "月間損益";
+	　　}
+	  else if(chartType == 1) {
+		myLineChart = "myLineChartYear";
+		title = "年間損益";
+	　　}
+	  else {
+		myLineChart = "myLineChartAll";
+		title = "総損益";
+	　　}
+		
+	  var ctx = document.getElementById(myLineChart);
+	  
+	  var myLineChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	      labels: transactionNumberList,
+	      datasets: [
+		  {
+	        data: profitLoss,
+	        borderColor: "rgb(54, 162, 235)",
+	        backgroundColor: "rgb(54, 162, 235, 0.5)",
+	        pointStyle: 'circle',
+		    pointRadius: 5,
+		    pointHoverRadius: 10
+	      },
+	      ],
+	    },
+	    options: {
+	      responsive: true,
+	      plugins: {
+	        title: {
+	          display: true,
+	          text: title
+	        }  
+	      }
+	    }
+	  });
+	}
+
 
   $("#linechart_month").click(function() {
 	$('#lineChartMonth').show();
@@ -393,15 +535,18 @@ $(function () {
         alert("該当するデータはありませんでした");
         return;
       }
-      var transactionNumber = transactionDataList.length;
-      var profitLoss = [];
+      chartType = 0;
+      transactionNumber = transactionDataList.length;
+      
+      profitLoss = [];
       profitLoss.push(0);
       
-      var sum = 0;
-      var labelNumber = 0;
-      var transactionNumberList = [];
+      transactionNumberList = [];
       transactionNumberList.push(0);
       
+      sum = 0;
+      labelNumber = 0;
+
       var setMonth = 5;
       var month;
       
@@ -415,7 +560,7 @@ $(function () {
 		}
 		
 	  }
-	  drawLinechart(profitLoss, transactionNumberList, "myLineChartMonth");
+	  drawLinechart(profitLoss, transactionNumberList, chartType);
 
 	})
 	.fail(function () {
@@ -435,15 +580,18 @@ $(function () {
         alert("該当するデータはありませんでした");
         return;
       }
-      var transactionNumber = transactionDataList.length;
-      var profitLoss = [];
+      chartType = 1;
+      transactionNumber = transactionDataList.length;
+      
+      profitLoss = [];
       profitLoss.push(0);
       
-      var sum = 0;
-      var labelNumber = 0;
-      var transactionNumberList = [];
+      transactionNumberList = [];
       transactionNumberList.push(0);
       
+      sum = 0;
+      labelNumber = 0;
+
       var setYear = 22;
       var year;
       
@@ -456,7 +604,7 @@ $(function () {
 		    transactionNumberList.push(labelNumber);
 		  }
 	  }
-	  drawLinechart(profitLoss, transactionNumberList, "myLineChartYear");
+	  drawLinechart(profitLoss, transactionNumberList, chartType);
 
 	})
 	.fail(function () {
@@ -476,17 +624,23 @@ $(function () {
         alert("該当するデータはありませんでした");
         return;
       }
-      var transactionNumber = transactionDataList.length;
-      var profitLoss = [];
-      profitLoss.push(0);
       
-      var sum = 0;
-      var transactionNumberList = [...Array(transactionNumber + 1).keys()].map(i => i);
+      chartType = 2;
+      transactionNumber = transactionDataList.length;
+      
+      profitLoss = [];
+      profitLoss.push(0);
+
+      transactionNumberList = [...Array(transactionNumber + 1).keys()].map(i => i);
+      
+      sum = 0;
+
+      
       for (var i = 0; i < transactionNumber; i ++) {
 		sum += Number(transactionDataList[i].profitLossConfirm);
 		profitLoss.push(sum);
 	  }
-	  drawLinechart(profitLoss, transactionNumberList, "myLineChartAll");
+	  drawLinechart(profitLoss, transactionNumberList, chartType);
 
 	})
 	.fail(function () {
@@ -500,9 +654,44 @@ $(function () {
 $('#barChartCurrency').hide();
 $('#barChartWeek').hide();
 $('#barChartTime').hide();
+
+$('#closeButton_barChartCurrency').click(function () {
+  $('#barChartCurrency').hide();
+});
+$('#closeButton_barChartWeek').click(function () {
+  $('#barChartYear').hide();
+});
+$('#closeButton_barChartTime').click(function () {
+  $('#barChartTime').hide();
+});
+	
 $(function() {
   
-  function drawBarchart(labels, profit, loss, myBarChart) {
+  var chartType;
+  var title;
+  
+  var profit;
+  var loss;
+  
+  var labels = [];
+  
+  function drawBarchart(labels, profit, loss, chartType) {
+	
+	var myBarChart;
+  	if(chartType == 0) {
+	  myBarChart = "myBarChartCurrency";
+	  title = "通貨別勝敗";
+　　	}
+  	else if(chartType == 1) {
+	  myBarChart = "myBarChartWeek";
+	  title = "曜日別勝敗";
+　　	}
+  	else {
+	  myBarChart = "myBarChartTime";
+	  title = "時間別勝敗";
+　　	}
+	
+	
 	var ctx = document.getElementById(myBarChart);
     new Chart(ctx, {
       type: "bar",
@@ -510,44 +699,30 @@ $(function() {
         labels:  labels, 
         datasets: [
           {
-            label: "profit",                    
+                               
             data: profit,               
             backgroundColor: "red"                    
           },
           {                                               
-            label: "loss",                            
+                                       
             data: loss,                 
             backgroundColor: "blue"                     
           }                                               
         ]
       },
-      options: {
-        //responsive: false,  
-        legend: {                // 凡例の表示位置
-          position: 'bottom'
-        },                
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                min: 0
-              }
-            }
-          ]
-        }
-      }
+	    options: {
+	      responsive: true,
+	      plugins: {
+	        title: {
+	          display: true,
+	          text: title
+	        }  
+	      }
+	    }
     })
   }
   
-  		$('#closeButton_barChartCurrency').click(function () {
-		$('#barChartCurrency').hide();
-	});
-		$('#closeButton_barChartWeek').click(function () {
-		$('#barChartYear').hide();
-	});
-		$('#closeButton_barChartTime').click(function () {
-		$('#barChartTime').hide();
-	});
+
 	
   $("#barchart_currency").click(function() {
 	$('#barChartCurrency').show();
@@ -561,26 +736,28 @@ $(function() {
         alert("該当するデータはありませんでした");
         return;
       }
-      var currencyPair_profit = new Array(10);
-      var currencyPair_loss = new Array(10);
-      currencyPair_profit.fill(0);
-      currencyPair_loss.fill(0);
+      chartType　= 0;
       
-      var labels = ["EURUSD", "EURJPY", "EURGBP", "EURAUD", "USDJPY", "GBPUSD", "GBPJPY", "GBPAUD", "AUDUSD", "AUDJPY"];
+      profit = new Array(10);
+      loss = new Array(10);
+      profit.fill(0);
+      loss.fill(0);
+      
+      labels = ["EURUSD", "EURJPY", "EURGBP", "EURAUD", "USDJPY", "GBPUSD", "GBPJPY", "GBPAUD", "AUDUSD", "AUDJPY"];
 
       for (var i = 0; i < transactionDataList.length; i ++) {
 	    for (var j = 0; j < labels.length; j ++) {
 		  if(transactionDataList[i].currencyPair == labels[j]) {
 	        if(transactionDataList[i].rateDifference > 0) {
-	          currencyPair_profit[j]++;
+	          profit[j]++;
 		    }
 		    else {
-		      currencyPair_loss[j]++;
+		      loss[j]++;
 		    }
 		  }
 		}
 	  }
-	  drawBarchart(labels, currencyPair_profit, currencyPair_loss, "myBarChartCurrency");
+	  drawBarchart(labels, profit, loss, chartType);
     })
 	.fail(function () {
       alert("ファイルが読み込めませんでした");
@@ -599,12 +776,13 @@ $(function() {
         alert("該当するデータはありませんでした");
         return;
       }
-      var weekOfDay_profit = new Array(7);
-      var weekOfDay_loss = new Array(7);
-      weekOfDay_profit.fill(0);
-      weekOfDay_loss.fill(0);
+      chartType = 1;
+      profit = new Array(7);
+      loss = new Array(7);
+      profit.fill(0);
+      loss.fill(0);
       
-      var labels = ["SUN", "MON", "TUE", "WED", "TUE", "FRI", "SAT"];
+      labels = ["SUN", "MON", "TUE", "WED", "TUE", "FRI", "SAT"];
       
 
       for (var i = 0; i < transactionDataList.length; i ++) {
@@ -617,15 +795,15 @@ $(function() {
 	    for (var j = 0; j < labels.length; j ++) {
 		  if(date.getDay() == j) {
 	        if(transactionDataList[i].rateDifference > 0) {
-	          weekOfDay_profit[j]++;
+	          profit[j]++;
 		    }
 		    else {
-		      weekOfDay_loss[j]++;
+		      loss[j]++;
 		    }
 		  }
 		}
 	  }
-	  drawBarchart(labels, weekOfDay_profit, weekOfDay_loss, "myBarChartWeek");
+	  drawBarchart(labels, profit, loss, chartType);
     })
 	.fail(function () {
       alert("ファイルが読み込めませんでした");
@@ -644,12 +822,14 @@ $(function() {
         alert("該当するデータはありませんでした");
         return;
       }
-      var time_profit = new Array(24);
-      var time_loss = new Array(24);
-      time_profit.fill(0);
-      time_loss.fill(0);
+      chartType= 2;
+      profit = new Array(24);
+      loss = new Array(24);
+      profit.fill(0);
+      loss.fill(0);
       
-      var labels = new Array(24);
+      labels = new Array(24);
+      
       let num = 0;
       for (var i = 0; i < labels.length; i++) {
 	    if(i < 10) {
@@ -667,15 +847,15 @@ $(function() {
 	    for (var j = 0; j < labels.length; j ++) {
 		  if(hour == labels[j]) {
 	        if(transactionDataList[i].rateDifference > 0) {
-	          time_profit[j]++;
+	          profit[j]++;
 		    }
 		    else {
-		      time_loss[j]++;
+		      loss[j]++;
 		    }
 		  }
 		}
 	  }
-	  drawBarchart(labels, time_profit, time_loss, "myBarChartTime");
+	  drawBarchart(labels, profit, loss, chartType);
     })
 	.fail(function () {
       alert("ファイルが読み込めませんでした");

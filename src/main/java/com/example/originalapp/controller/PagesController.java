@@ -3,8 +3,9 @@ package com.example.originalapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.originalapp.entity.TransactionData;
 import com.example.originalapp.repository.TransactionDataRepository;
@@ -14,6 +15,8 @@ import java.awt.Point;
 import java.awt.PointerInfo;
 import java.io.File;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,86 +88,121 @@ public class PagesController {
     }
 	
     @RequestMapping(path = "/selenium")
-    public String selenium() {
+    public String selenium(ModelMap modelMap, @RequestParam("year") int year, @RequestParam("month") int month) {
     	
 
 
-    	String  driver_path = "/app/.chromedriver/bin/chromedriver";
-    	//String  driver_path = "./exe/chromedriver.exe";
-    	
-    	String userId = "1318221";
-    	String password = "hamuichi24";
-    	
-    	String emailChart = "hamuichiro8616@gmail.com";
-    	String passwordChart = "Kk248616";
-    	
-    	String newTime = null;
-    	String settlementTime = null;
-    	String currencyPair = null;
-    	String[] newTimeList = new String[2];
-    	String[] settlementTimeList = new String[2];
+	//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+	String  driver_path = "./exe/chromedriver.exe";
+	
+	String userId = "1318221";
+	String password = "hamuichi24";
+	
+	String emailChart = "hamuichiro8616@gmail.com";
+	String passwordChart = "Kk248616";
+	
+	String newTime = null;
+	String settlementTime = null;
+	String currencyPair = null;
+	String[] newTimeList = new String[2];
+	String[] settlementTimeList = new String[2];
+	
+	
+	
+	
+	
+	
+	
+	ChromeOptions options = new ChromeOptions();
+	
+	
+	// ユーザーエージェントの変更
+	options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
+	
+	//options.addArguments("-headless");
+	options.addArguments("-disable-gpu");
+	options.addArguments("-no-sandbox");
+	options.addArguments("--disable-extensions");
+	options.addArguments("--proxy-server=\"direct://\"");
+	options.addArguments("--proxy-bypass-list=*");
+	options.addArguments("--disable-dev-shm-usage");
+	options.addArguments("-window-size=1920,1080");
+	
+	
+	System.setProperty("webdriver.chrome.driver", driver_path);
+	ChromeDriver  driver = new ChromeDriver(options);
+	
+	
+	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
+	
+	driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
+	
+	this.elementSendkeys(driver, "/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]", userId); //ユーザーIDの入力
+	this.elementSendkeys(driver, "/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]", password); //パスワードの入力
+	this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
+	
+	
+	for(int i = 0; i < 50; i++) {
+		continue;
+	}
+	
+	this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span > small"); //約定一覧の選択
+	
+	this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home"); //+ボタンクリック
+	this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.time-area > div:nth-child(2) > label"); //期間指定クリック
+	this.elememtClickSelector(driver, "#DealingFromDatePickerCompId"); //開始日付
+	    
+	  //月初めの選択
+	
+	this.elememtClickXpath(driver, "//*[@id=\"bodyId\"]/div[3]/div[1]/table/thead/tr[2]/th[2]");
+	this.elememtClickXpath(driver, "//*[@id=\"bodyId\"]/div[3]/div[2]/table/tbody/tr/td/span["+month+"]");
+	boolean breakFlag = false;
+	for(int i = 1; i <= 6; i++) {
+		for(int j = 1; j <= 7; j++ ) {
+			String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
+			if( Integer.valueOf(date) == 1) {
+				driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
+				breakFlag = true;
+				break;
+			}
+	
+		}
+		if (breakFlag) {
+			break;
+		}
+	}
 
+	
+	LocalDateTime nowDate =  LocalDateTime.now();
+	DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy");
+	DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("M");
+	int formatNowDate = Integer.parseInt(dtf1.format(nowDate));
+	int formatNowDate2 = Integer.parseInt(dtf2.format(nowDate));
 
-    	
-    
-    	
-        ChromeOptions options = new ChromeOptions();
-        
-        
-        // ユーザーエージェントの変更
-        options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
-        
-        //options.addArguments("-headless");
-        options.addArguments("-disable-gpu");
-        options.addArguments("-no-sandbox");
-        options.addArguments("--disable-extensions");
-        options.addArguments("--proxy-server=\"direct://\"");
-        options.addArguments("--proxy-bypass-list=*");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("-window-size=1920,1080");
-        
-        
-        System.setProperty("webdriver.chrome.driver", driver_path);
-        ChromeDriver  driver = new ChromeDriver(options);
-        
-        
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS); //要素が見つかるまでの待ち時間を設定
-
-        driver.get("https://lionfx.hirose-fx.co.jp/web2/lionfx/#/login"); //証券会社の表示   
-
-        this.elementSendkeys(driver, "/html/body/p7-app/p20-login/div/div/div/form/div[1]/input[1]", userId); //ユーザーIDの入力
-        this.elementSendkeys(driver, "/html/body/p7-app/p20-login/div/div/div/form/div[2]/input[1]", password); //パスワードの入力
-        this.elememtClickSelector(driver, "#lionFxLogin > button"); //ログインボタンのクリック
-        
-        
-        for(int i = 0; i < 50; i++) {
-        	continue;
-        }
-
-        this.elememtClickSelector(driver, "#site-navbar-collapse > ul > li:nth-child(8) > a > gl-switchery > span > small"); //約定一覧の選択
-        
-        this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(2) > button.btn.btn-xs.btn-default.zoombutton.not-in-home"); //+ボタンクリック
-        this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.time-area > div:nth-child(2) > label"); //期間指定クリック
-        this.elememtClickSelector(driver, "#DealingFromDatePickerCompId"); //開始日付
-        
-      //月初めの選択
+	if(formatNowDate == year && formatNowDate2 != month || formatNowDate > year) {
+		month++;
+        this.elememtClickXpath(driver, "//*[@id=\"DealingToDatePickerCompId\"]");
         this.elememtClickXpath(driver, "//*[@id=\"bodyId\"]/div[3]/div[1]/table/thead/tr[2]/th[2]");
-        this.elememtClickXpath(driver, "//*[@id=\"bodyId\"]/div[3]/div[2]/table/tbody/tr/td/span[4]");
-        boolean breakFlag = false;
-        for(int i = 1; i <= 6; i++) {
-        	for(int j = 1; j <= 7; j++ ) {
-        		String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
-        		if( Integer.valueOf(date) == 1) {
-        			driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
-        			breakFlag = true;
-        			break;
-        		}
+        this.elememtClickXpath(driver, "//*[@id=\"bodyId\"]/div[3]/div[2]/table/tbody/tr/td/span["+month+"]");
+        
+    	breakFlag = false;
+    	for(int i = 1; i <= 6; i++) {
+    		for(int j = 1; j <= 7; j++ ) {
+    			String date = driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).getText();
+    			if( Integer.valueOf(date) == 1) {
+    				driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr["+i+"]/td["+j+"]")).click();
+    				breakFlag = true;
+    				break;
+    			}
+    	
+    		}
+    		if (breakFlag) {
+    			break;
+    		}
+    	}
+	  }
+        
 
-        	}
-        	if (breakFlag) {
-        		break;
-        	}
-        }
         
         this.elememtClickSelector(driver, "#dealing-history-id > div.action > div:nth-child(1) > div:nth-child(2) > div.filter-box.display-small-screen > button");  //検索ボタンのクリック
         
@@ -202,13 +240,13 @@ public class PagesController {
         
         
         
-        
+        this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
         
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.cssSelector("#center > div > div.ag-body > div.ag-body-viewport-wrapper > div > div > div")); //全約定履歴の取得
         
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
         	
-        	this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
+        	//this.elememtClickSelector(driver, "#toggleFullscreen > a"); //全画面表示
         	
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
@@ -326,7 +364,7 @@ public class PagesController {
     		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
 
     		  
-    		    File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+    		    byte[] screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.BYTES);
     		    System.out.println(screenshotNew);
     		    //FileUtils.copyFile(screenshotNew, new File(“screenshotNew.png”));
     		    
@@ -358,7 +396,7 @@ public class PagesController {
     		    System.out.println(screenshotSet);
     		    //FileUtils.copyFile(screenshot, new File(“path-to-images/elementshot.png”));
     		    
-    		    driver.switchTo().window(Handle);    
+    		    driver.switchTo().window(Handle); 
         		
         	   	repository.saveAndFlush(transactionData);
         		

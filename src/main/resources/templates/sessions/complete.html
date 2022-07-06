@@ -24,9 +24,7 @@
   </header>
     <main>
   <div th:replace="layouts/layout::contents"></div>
-<div th:replace="sessions/login::modal-login"></div>
   </main>
-
 	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
 	<script th:src="@{https://unpkg.com/micromodal/dist/micromodal.min.js}"></script>
 	<script th:src="@{/scripts/method-convert.js}"></script>
@@ -36,9 +34,9 @@
 	  MicroModal.init();
 	</script>
 	<script>
-	function clickEvent() {
-	var result = confirm('ログアウトしますか？');
-	}
+	  window.onload = function() {
+		    alert("ログインしました");
+		  };
 	</script>
   </body>
 </html>
