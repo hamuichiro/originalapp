@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.example.originalapp.entity.TransactionData;
 import com.example.originalapp.repository.TransactionDataRepository;
 
@@ -40,6 +41,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.originalapp.repository.TransactionDataRepository;
 
+import com.example.originalapp.service.S3Wrapper;
+
 
 
 
@@ -49,6 +52,12 @@ public class PagesController {
 	
     @Autowired //TransactionDataRepositoryを@Autowiredを付けて定義してController内で使用できるようにしている
     private TransactionDataRepository repository;
+    
+    @Autowired
+    private AmazonS3 s3Client;
+    
+    @Autowired
+    S3Wrapper s3;
 
     @RequestMapping("/")
     public String index() {  
@@ -89,7 +98,7 @@ public class PagesController {
     }
 	
     @RequestMapping(path = "/selenium")
-    public String selenium(ModelMap modelMap, @RequestParam("year") int year, @RequestParam("month") int month) {
+    public String selenium(ModelMap modelMap, @RequestParam("year") int year, @RequestParam("month") int month) throws Exception {
     	
 
 
@@ -108,6 +117,8 @@ public class PagesController {
 	String[] newTimeList = new String[2];
 	String[] settlementTimeList = new String[2];
 	
+	
+
 	
 	
 	
@@ -408,8 +419,10 @@ public class PagesController {
     }
 
 
-	private byte[] extracted(ChromeDriver driver) {
-		byte[] screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.BYTES);
-		return screenshotNew;
+	private void extracted(ChromeDriver driver) throws Exception {
+		File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+		String filePath = screenshot.getPath();
+		s3.upLoad(filePath);
+		
 	}
 }

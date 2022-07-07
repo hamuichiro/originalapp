@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-        	.antMatchers("/", "/login", "/logout-complete", "/users/new", "/user", "/selenium",  "/dateList").permitAll() //ログイン不要でアクセス可能
+        	.antMatchers("/", "/login", "/logout", "/users/new", "/user", "/analysistool", "/selenium",  "/dateList").permitAll() //ログイン不要でアクセス可能
                 .anyRequest().authenticated() //上記以外は直リンク禁止
                 // ログアウト処理
                 .and()

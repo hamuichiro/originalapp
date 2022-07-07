@@ -15,9 +15,7 @@
     <link rel="canonical" th:href="@{https://getbootstrap.com/docs/5.2/examples/sign-in/}">
   </head>
   <body class="text-center">
-  <header>
-
-  </header>
+<div th:replace="layouts/layout::header"></div>
     <main>
   <div th:replace="layouts/layout::contents"></div>
   </main>
@@ -28,11 +26,6 @@
 	<script th:src="@{/scripts/script.js}"></script>
 	<script>
 	  MicroModal.init();
-	</script>
-	<script>
-	 window.onload = function() {
-    	  alert('ログアウトしました');
-      }
 	</script>
   </body>
 </html>

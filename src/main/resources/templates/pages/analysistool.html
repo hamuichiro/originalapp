@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -9,56 +9,62 @@
 
     <link rel="stylesheet" href="/css/analysistool.css" th:href="@{/css/analysistool.css}">
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
   </head>
   <body class="text-center">
     <div id="loader-bg">
 	  <div id="loader">
 	    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" alt="Now Loading..."></i>
 	    <p>Now Loading...</p>
-	</div>
+	  </div>
     </div>
     <div class="header">
 
     </div>
     <div class="wrapper" id="wrap">
-      <div class="navigation active">
-      
+      <div class="navigation active">    
         <ul>
           <li class="menue_list">
-            <a href="/">
-              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-              <span class="title">Home</span>
-            </a>
+            <div class="slide-btn">
+              <a href="/">
+                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                <span class="title">Home</span>
+              </a>
+            </div>
           </li>
           <li class="menue_list">
-            <a href="#" class="slide-btn">
-              <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
-              <span class="title">Account</span>
-            </a>
+            <div class="slide-btn">
+              <a href="#">
+                <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
+                <span class="title">Account</span>
+              </a>
+            </div>
             <ul class="dropdown__lists slide-contents">
               <li class="dropdown__list"><a　href="#" id=""></a></li>
               <li class="dropdown__list"><a　href="#" id=""></a></li>
               <li class="dropdown__list"><a　href="#" id=""></a></li>
             </ul>
           </li>
+          
           <li class="menue_list">
-            <a href="#">
-              <span class="icon"><ion-icon name="calendar-number-outline"></ion-icon></span>
-              <span class="title">Calender</span>
-            </a>
+            <div class="slide-btn">
+              <a href="#">
+                <span class="icon"><ion-icon name="calendar-number-outline"></ion-icon></span>
+                <span class="title">Calender</span>
+              </a>
+            </div>
             <ul class="dropdown__lists">
               <li class="dropdown__list"><a　href="#" id=""></a></li>
               <li class="dropdown__list"><a　href="#" id=""></a></li>
               <li class="dropdown__list"><a　href="#" id=""></a></li>
             </ul>
           </li>
-          <li class="menue_list slide-btn" >
-          <div>
-            <a href="#" class="slide-btn">
+          
+          <li class="menue_list" >
+          <div class="slide-btn">
+            <a href="#">
               <span class="icon"><ion-icon name="reader-outline"></ion-icon></span>
-              <span class="title">Date List</span>
+              <span class="title slide-btn">Date List</span>
            </a>
            </div>
            <ul class="dropdown__lists">
@@ -67,27 +73,27 @@
               <li class="dropdown__list"><a　href="#" id="dateList_all"></a>All</li>
             </ul>
           </li>
-          <li class="menue_list slide-btn">
-          <div>
-            <a href="#"  class="slide-btn">
-              <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
-              <span class="title">Bar Chart</span>
-            </a>
-                        <ul class="dropdown__lists">
+          
+          <li class="menue_list">
+            <div class="slide-btn">
+              <a href="#">
+                <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
+                <span class="title slide-btn">Bar Chart</span>
+              </a>
+            </div>
+            <ul class="dropdown__lists">
               <li class="dropdown__list"><a　href="#" id="barchart_currency"></a>By Currency</li>
               <li class="dropdown__list"><a　href="#" id="barchart_week"></a>By Day Of The Week</li>
               <li class="dropdown__list"><a　href="#" id="barchart_time"></a>By Time</li>
             </ul>
-           </div>
-
-            
           </li>
-          <li class="menue_list slide-btn">
-          <div>
-            <a href="#"  class="slide-btn">
-              <span class="icon"><ion-icon name="pulse-outline"></ion-icon></span>
-              <span class="title">Line Chart</span>
-            </a>
+          
+          <li class="menue_list">
+            <div class="slide-btn">
+              <a href="#">
+                <span class="icon"><ion-icon name="pulse-outline"></ion-icon></span>
+                <span class="title">Line Chart</span>
+              </a>
             </div>
             <ul class="dropdown__lists slide-btn">
               <li class="dropdown__list"><a　href="#" id="linechart_month"></a>Monthly</li>
@@ -95,12 +101,13 @@
               <li class="dropdown__list"><a　href="#" id="linechart_all">All</a></li>
             </ul>
           </li>
+          
           <li class="menue_list">
-          <div>
-            <a href="#"  class="slide-btn">
-              <span class="icon"><ion-icon name="pie-chart-outline"></ion-icon></span>
-              <span class="title">Pie Chart</span>
-            </a>
+            <div class="slide-btn">
+              <a href="#">
+                <span class="icon"><ion-icon name="pie-chart-outline"></ion-icon></span>
+                <span class="title">Pie Chart</span>
+              </a>
             </div>
             <ul class="dropdown__lists">  
               <li class="dropdown__list"><a　href="#" id="piechart_long">Long</a></li>
@@ -110,52 +117,60 @@
               <li class="dropdown__list"><a　href="#" id="piechart_all">All</a></li>
             </ul>
           </li>
+          
           <li class="menue_list">
-            <a href="#"  data-micromodal-trigger="acquireData">
-              <span class="icon"><ion-icon name="arrow-redo-outline"></ion-icon></span>
-              <span class="title">Acquire Data</span>
-            </a>
+            <div class="slide-btn">
+              <a href="#"  data-micromodal-trigger="acquireData">
+                <span class="icon"><ion-icon name="arrow-redo-outline"></ion-icon></span>
+                <span class="title">Acquire Data</span>
+              </a>
+            </div>
           </li>
-            <div class="modal" id="acquireData" aria-hidden="true">
-		      <div class="modal-overlay" data-micromodal-close>
-		        <div class="modal-container">
-		          <h2 class="modal-title">Input Data</h2>
-		          <div class="modal-content">
-		    
-		            　　<form class="form-inputdate" method="post" th:action="@{/selenium}">
-		            	<div class="form-floating">
-		            	  <input type="number" class="form-control rounded-3" name="year" id="get_year" value="2022">
-		            	  <label for="get_year">Year</label>
-		          		</div>	
-		            	<div class="form-floating">
-		            	  <input type="number" class="form-control rounded-3" name="month" id="get_month" value="1">
-		            	  <label for="get_month">Month</label>
-		          		</div>		          
-			            <button class="button-get" type="submit" id="button">
-			              Get Date
-			            </button>
-		              </form>
-		      
-		          </div>
-		          <div class="modal-footer">
-		            <button class="button-close" data-micromodal-close>
-		              close
-		            </button>
-		          </div>
-		        </div>
-		      </div>
-		    </div>
+          
+	      <div class="modal" id="acquireData" aria-hidden="true">
+			<div class="modal-overlay" data-micromodal-close>
+			  <div class="modal-container">
+			    <h2 class="modal-title">Input Data</h2>
+			    <div class="modal-content">
+			      <form class="form-inputdate" method="post" th:action="@{/selenium}">
+			        <div class="form-floating">
+			          <input type="number" class="form-control rounded-3" name="year" id="get_year" value="2022">
+			          <label for="get_year">Year</label>
+			      	</div>	
+			        <div class="form-floating">
+			          <input type="number" class="form-control rounded-3" name="month" id="get_month" value="1">
+			          <label for="get_month">Month</label>
+			      	</div>		          
+			        <button class="button-get" type="submit" id="button">
+			           Get Date
+			        </button>
+			      </form>
+			    </div>
+			    <div class="modal-footer">
+			      <button class="button-close" data-micromodal-close>
+			          close
+			      </button>
+			    </div>
+			  </div>
+			</div>
+	      </div>
+			
           <li class="menue_list">
-            <a href="#">
-              <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-              <span class="title">Setting</span>
-            </a>
+            <div>
+              <a href="#">
+                <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                <span class="title">Setting</span>
+              </a>
+            </div>
           </li>
+          
           <li class="menue_list">
-            <a href="#">
-              <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-              <span class="title">Sing Out</span>
-            </a>
+            <div>
+              <a href="#">
+                <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                <span class="title">Sing Out</span>
+              </a>
+            </div>
           </li>
         </ul>
       </div>

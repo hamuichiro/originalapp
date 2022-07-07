@@ -5,6 +5,12 @@
   <head>
   </head>
   <body>
+  <header th:fragment="header">
+      <p>aaaaaaaaaaaaaaaaaaa</p>
+	 <div th:if="${hasMessage}" class="alert alert-dismissible fade show" th:classappend="${class}" role='alert'>
+	 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><span th:text="${message}"></span>
+	 </div>
+  </header>
   
 <div class="demo-cont" th:fragment="contents">
 	  <!-- slider start -->

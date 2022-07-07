@@ -82,9 +82,8 @@ body {
   width: 75px;
   position: fixed;
   background-color: $color-black;
-  box-shadow: 0 7px 14px 0 rgba(255,255,255, 0.3);
+  box-shadow: $box-shadow;
   border-left: 10px solid $color-black;
-
   transition: all 0.5s;
   z-index: 100;
 
@@ -102,25 +101,17 @@ body {
 	  display: block;
 	  position: relative;
 	  border-radius: 15px;
+	  transition: 1s;
 	  z-index: 20;
 	  
-	  &:hover {
-  		background-color: $color-black;
-  		box-shadow: $box-shadow;
-  		width: 220px;
-  		a {
-		  .title {	
-			overflow: visible;
-		  }
-        }
-	  }
+
 	  a {
 	    text-decoration: none;
 	    color: white;
 	    width: 100%;
 	    display: flex;
 	    position: relative;
-	    z-index: 15;
+
 	    .icon {
 		  display: block;
 		  min-width: 45px;
@@ -131,34 +122,33 @@ body {
 		    font-size: 1.5rem;
 		  }
 		}
-		.title {
+		.title {	
 		  padding-left: 40px;
 		  height: 0px;
 		  line-height: 60px;
 		  white-space: nowrap;
-		  overflow: hidden;
-		  z-index: 15;
+
+
+		  
 		}
 	  }
-	  	  .dropdown__lists {
-
+	  .dropdown__lists {
+		text-align: center;	
 		list-style: none;
         position: absolute;
-        top: 30px;
-        left: 0;
-        right: 0;
-        padding-top: 20px;
-        margin-top: 0px;
-        padding-bottom: 10px;
+        top: 60px;
+        left: 55px;
+		width: 165px;
+        padding-bottom: 20px;
 		color: white;
 		background-color: $color-black;
-		box-shadow: $box-shadow;
-		border-radius: 15px;
+		box-shadow: 0 7px 14px 0 rgba(255,255,255, 0.3);
+		border-radius: 0 0 15px 15px;
 	    overflow: hidden;
 		display: none;
 		li {
 			text-align: left;
-			padding-left: 75px;
+			padding-left: 15px;
 		    margin:5px;
 		    cursor: pointer;
 		    cursor: hand;
