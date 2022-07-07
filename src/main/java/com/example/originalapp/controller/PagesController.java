@@ -57,7 +57,7 @@ public class PagesController {
     private AmazonS3 s3Client;
     
     @Autowired
-    private S3Wrapper s3;
+    S3Wrapper s3;
 
     @RequestMapping("/")
     public String index() {  
