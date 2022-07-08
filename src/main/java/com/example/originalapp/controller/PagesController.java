@@ -410,7 +410,7 @@ public class PagesController {
     		    driver.switchTo().window(Handle); 
         		
         	   	repository.saveAndFlush(transactionData);
-        		
+        		break;
         	}
         }
         driver.quit();
@@ -422,6 +422,7 @@ public class PagesController {
 	private void extracted(ChromeDriver driver) throws Exception {
 		File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
 		String filePath = screenshot.getPath();
+		System.out.println(filePath);
 		s3.upLoad(filePath);
 		
 	}
