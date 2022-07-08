@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
 
 @Service
 public class S3Wrapper {
@@ -21,7 +22,7 @@ public class S3Wrapper {
     @Value("${AWS_BUCKET}")
     private String awsBucket;
     
-public void upLoad(String filePath) throws Exception {
+public PutObjectResult upLoad(String filePath) throws Exception {
 	// アップロードするファイル
 	File file = new File(filePath);
 
@@ -45,9 +46,11 @@ public void upLoad(String filePath) throws Exception {
 		);
 		
 		// アップロード
-		s3Client.putObject(request);
+		PutObjectResult putObjectResult  = s3Client.putObject(request);
 		
 		input.close();
+		
+		return putObjectResult;
 	}
 }
 
