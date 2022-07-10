@@ -21,7 +21,7 @@ public class AWSConfiguration {
   @Value("${AWS_DEFAULT_REGION}")
   private String awsDefaultRegion;
   
-  public AmazonS3 s3Client(AWSCredentials awsCredentials) {
+  public AmazonS3 s3Client() {
 		// 認証情報を用意
 		BasicAWSCredentials credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
 		 

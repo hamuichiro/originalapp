@@ -3,6 +3,7 @@ package com.example.originalapp.service;
 import java.io.File;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +23,9 @@ public class S3Wrapper {
     @Value("${AWS_BUCKET}")
     private String awsBucket;
     
-public PutObjectResult upLoad(String filePath) throws Exception {
+public void upLoad(String filePath) throws Exception {
+	
+	
 	// アップロードするファイル
 	File file = new File(filePath);
 
@@ -31,14 +34,14 @@ public PutObjectResult upLoad(String filePath) throws Exception {
 	FileInputStream input = new FileInputStream(file);
 		// メタ情報を生成
 		ObjectMetadata metaData = new ObjectMetadata();
-		metaData.setContentLength(file.length());
+		//metaData.setContentLength(file.length());
 		
 		// リクエストを生成
 		PutObjectRequest request = new PutObjectRequest(
 				// アップロード先バケット名
 				awsBucket,
 				// アップロード後のキー名
-				"upload/example.txt",
+				 file.getName(),
 				// InputStream
 				input,
 				// メタ情報
@@ -46,11 +49,11 @@ public PutObjectResult upLoad(String filePath) throws Exception {
 		);
 		
 		// アップロード
-		PutObjectResult putObjectResult  = s3Client.putObject(request);
+		s3Client.putObject(request);
 		
 		input.close();
 		
-		return putObjectResult;
+
 	}
 }
 
