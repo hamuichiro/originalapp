@@ -10,6 +10,8 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
+
+@Configuration
 public class AWSConfiguration {
 	
   @Value("${AWS_ACCESS_KEY_ID}")
@@ -21,6 +23,7 @@ public class AWSConfiguration {
   @Value("${AWS_DEFAULT_REGION}")
   private String awsDefaultRegion;
   
+  @Bean
   public AmazonS3 s3Client() {
 		// 認証情報を用意
 		BasicAWSCredentials credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
