@@ -51,7 +51,7 @@ public void upLoad(String filePath) throws Exception {
 		// アップロード
 		s3Client.putObject(request);
 		
-		input.close();
+		
 		
 
 	}
