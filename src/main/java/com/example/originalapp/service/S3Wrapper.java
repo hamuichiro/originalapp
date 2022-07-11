@@ -56,5 +56,3 @@ public void upLoad(String filePath) throws Exception {
 
 	}
 }
-
-	
