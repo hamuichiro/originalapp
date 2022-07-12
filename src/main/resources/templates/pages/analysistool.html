@@ -300,25 +300,7 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				   　<tr th:each="transactionData: ${TransactionDatas}">
-				      <td data-label="新規約定日付" th:text="${transactionData.transactionNewDate}"></td>
-				      <td data-label="新規約定時間" th:text="${transactionData.transactionNewTime}"></td>
-				      <td data-label="通貨ペア" th:text="${transactionData.currencyPair}"></td>
-				      <td data-label="ポジション" th:text="${transactionData.transactionType}"></td>
-				      <td data-label="取引量(万通貨)" th:text="${transactionData.transactionLot}"></td>
-				      <td data-label="レート" th:text="${transactionData.rateNew}"></td>
-				      <td data-label="決済日付" th:text="${transactionData.transactionSettlementDate}"></td>
-				      <td data-label="決済時間" th:text="${transactionData.transactionSettlementTime}"></td>
-				      <td data-label="レート" th:text="${transactionData.rateSettlement}"></td>
-				      <td data-label="損益(pips)" th:text="${transactionData.rateDifference}"></td>
-				      <td data-label="損益(円)" th:text="${transactionData.profitLoss}"></td>
-				      <td data-label="損益(%)" th:text="${transactionData.profitlossParseint}"></td>
-				      <td data-label="スワップ" th:text="${transactionData.swap}"></td>
-				      <td data-label="最終損益(円)" th:text="${transactionData.profitLossConfirm}"></td>
-				      <td data-label="最大評価益" ></td>
-				      <td data-label="最大評価損" ></td>
-				      <td data-label="チャート画像"></td>
-				   　</tr>
+
 				  </tbody>
 				</table>
 			</div>   

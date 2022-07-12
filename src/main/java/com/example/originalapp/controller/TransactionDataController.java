@@ -75,5 +75,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 	    }
 	    
+	    //取引データ一覧
+	    @RequestMapping(value = "/dateList")
+	    @ResponseBody
+	    public String tableChart() throws IOException {
+	    	
+	    	List<TransactionData> transactionDatas = repository.findAll();
+	    	
+	    	return getJson(transactionDatas);
+	    }
+	    
+	    
+	    
+	    private String getJson(List<TransactionData> transactionDatas){
+	    	
+	        String retVal = null;
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        
+	        try{
+	            retVal = objectMapper.writeValueAsString(transactionDatas);
+	        } catch (JsonProcessingException e) {
+	            System.err.println(e);
+	        }
+	        
+	        return retVal;
+	    }
+	    
 
 	}

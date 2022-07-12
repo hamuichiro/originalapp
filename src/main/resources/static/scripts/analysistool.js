@@ -61,7 +61,8 @@ $(function () {
 	
     var newDate = (transactionDataList[i].transactionNewDate).substr(3, 5);
     var settlementDate = (transactionDataList[i].transactionNewDate).substr(3, 5);
-  
+    var transactionNumber = transactionDataList[i].transactionNumber;
+    var path = "/transactionNumber?transactionNumber=" + transactionNumber;
     var trTag = $("<tr>");
   
     trTag.append($("<td></td>").text(newDate));
@@ -77,11 +78,44 @@ $(function () {
     trTag.append($("<td></td>").text(transactionDataList[i].profitLoss));
     trTag.append($("<td></td>").text(transactionDataList[i].profitlossParseint));
     trTag.append($("<td></td>").text(transactionDataList[i].profitLossConfirm));
-    trTag.append($("<td></td>").text(""));
-    trTag.append($("<td></td>").text(""));
-    trTag.append($("<td></td>").text(""));
-    $('#tableChart').append(trTag);			
+    trTag.append($('<td><a href="" id="setId">表示</a></td>'));  
+    $('#tableChart').append(trTag);
+    $('#setId').attr('href', path);
+    $('#setId').attr('id', transactionNumber);
+    
+	
+	//$('#transactionNumber').click(function() {
+		
+		//console.log(transactionNumber);
+	//});
+    	
+
   }
+  
+
+  
+  
+  $(function() {
+	$.ajax({
+      url: '/dateList',
+      dataType: 'json',
+      type: "GET"
+    })
+    .done(function (transactionDataList) {
+	  if(!transactionDataList){
+        alert("該当するデータはありませんでした");
+        return;
+      }
+        
+      $('#tableChart').find("tr:gt(0)").remove();
+      for (var i = 0; i < transactionDataList.length; i ++) {
+		drawTabla(transactionDataList, i);	
+      }
+	})
+	.fail(function () {
+      alert("ファイルが読み込めませんでした");
+    });
+  })
 
   $("#dateList_month").click(function() {
 	$.ajax({
@@ -251,6 +285,7 @@ function drawPiechart(winRate, chartType) {
 
   $("#piechart_long").click(function() {
 	$('#pieChartLong').show();
+	
 
 	$.ajax({
       url: '/dateList',
