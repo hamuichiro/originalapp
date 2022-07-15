@@ -323,7 +323,7 @@ public class SeleniumController {
 		String[] newTimeList = new String[2];
 		String[] settlementTimeList = new String[2];
 		String currencyPair = null;
-		String gettransactionNumber = null;
+		
 
 		
 
@@ -342,7 +342,7 @@ public class SeleniumController {
         this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
 
 	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
-	    this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
+	    this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[2]/nav/ul/li[1]");
 	    
 	    
 		TransactionData transactionData = repository.findByTransactionNumber(transactionNumber);
