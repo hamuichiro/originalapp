@@ -334,12 +334,9 @@ public class SeleniumController {
         driver.get("https://jp.tradingview.com/"); //tradigView表示
         
 
-        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/div/span/a/span"); //アイコンクリック
-        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/div/span/a"); //アイコンクリック
-        this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/div[2]/span/span");  //ログインボタンクリック
-
-       
-        //this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div[1]");  //ログインボタンクリック
+        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
+        this.elememtClickXpath(driver, "/html/body/div[6]/div/span/div[1]/div/div/div/button[1]"); //アイコンクリック
+      
         this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]"); //Eメールアイコンクリック
         this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input", emailChart); //メールアドレス入力
         this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
