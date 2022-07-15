@@ -66,8 +66,19 @@ $(function () {
     var transactionNumber = transactionDataList[i].transactionNumber;
     var path = "/transactionNumber?transactionNumber=" + transactionNumber;
     var trTag = $("<tr>");
-  
-    trTag.append($("<td></td>").text(newDate));
+    
+    $(function() {
+	$.ajax({
+      url: '/screenShot',
+      dataType: 'json',
+      type: "GET"
+    })
+    .done(function (screenShot) {
+	  if(!screenShot){
+        alert("該当するデータはありませんでした");
+        return;
+      }
+            trTag.append($("<td></td>").text(newDate));
     trTag.append($("<td></td>").text(transactionDataList[i].transactionNewTime));
     trTag.append($("<td></td>").text(transactionDataList[i].currencyPair));
     trTag.append($("<td></td>").text(transactionDataList[i].transactionType));
@@ -92,15 +103,17 @@ $(function () {
     $('#tableBody').append(trTag);
     $('#setId').attr('href', path);
     $('#setId').attr('id', transactionNumber);
-    $('#setLink').attr('href', transactionDataList[i].screenshotFilePathNew);
-    $('#setImage').attr('src', transactionDataList[i].screenshotFilePathNew);
+    $('#setLink').attr('href', screenShot);
+    $('#setImage').attr('src', screenShot);
+
+	})
+	.fail(function () {
+      alert("ファイルが読み込めませんでした");
+    });
+    })
+  
+
     
-	
-	//$('#transactionNumber').click(function() {
-		
-		//console.log(transactionNumber);
-	//});
-    	
 
   }
   

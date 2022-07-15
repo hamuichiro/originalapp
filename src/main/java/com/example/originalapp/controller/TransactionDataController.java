@@ -39,7 +39,8 @@ import org.springframework.web.multipart.MultipartFile;
 	import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 	import com.example.originalapp.entity.TransactionData;
-	import com.example.originalapp.entity.AccountInf;
+import com.amazonaws.services.s3.model.S3Object;
+import com.example.originalapp.entity.AccountInf;
 	import com.example.originalapp.form.TransactionDataForm;
 	import com.example.originalapp.form.AccountForm;
 	import com.example.originalapp.repository.TransactionDataRepository;
@@ -107,5 +108,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	        return retVal;
 	    }
 	    
+	    @RequestMapping(value = "/screenShot")
+	    @ResponseBody
+	    public String screenShot(String filePath) throws Exception {
+
+	    	return getJsonFile(s3.download(filePath));
+	    }
+	    
+	    private String getJsonFile(S3Object screenShot){
+	    	
+	        String retVal = null;
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        
+	        try{
+	            retVal = objectMapper.writeValueAsString(screenShot);
+	        } catch (JsonProcessingException e) {
+	            System.err.println(e);
+	        }
+	        
+	        return retVal;
+	    }
 
 	}
