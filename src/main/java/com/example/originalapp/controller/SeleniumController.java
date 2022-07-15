@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.S3Object;
 import com.example.originalapp.entity.TransactionData;
 import com.example.originalapp.repository.TransactionDataRepository;
 import com.example.originalapp.service.S3Wrapper;
@@ -322,36 +324,42 @@ public class SeleniumController {
 		String[] settlementTimeList = new String[2];
 		String currencyPair = null;
 		String gettransactionNumber = null;
-		
-		Iterable<TransactionData> transactionDataList = repository.findAll();
-		
-		for(TransactionData transactionData: transactionDataList) {
-			
-			if(transactionData.getTransactionNumber().equals(transactionNumber)) {
 
-        		newTimeList[1] = transactionData.getTransactionNewDate();
-        		newTimeList[0] = "20" + transactionData.getTransactionNewTime().replace("/", "-");
-        		settlementTimeList[1] = transactionData.getTransactionSettlementDate();
-        		settlementTimeList[0] = transactionData.getTransactionSettlementTime().replace("/", "-");
-        		currencyPair = transactionData.getCurrencyPair();
-				break;
-			}
-		}
-		System.out.println(newTimeList[1]);System.out.println(newTimeList[0]);System.out.println(currencyPair);
+		
+
+
+		
 		ChromeDriver driver = this.driver();
     
         driver.get("https://jp.tradingview.com/"); //tradigView表示
         
 
-        
-        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
-        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div[1]");  //ログインボタンクリック
+        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/div/span/a/span"); //アイコンクリック
+        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/div/span/a"); //アイコンクリック
+        this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/div[2]/span/span");  //ログインボタンクリック
+
+       
+        //this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div[1]");  //ログインボタンクリック
         this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]"); //Eメールアイコンクリック
         this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input", emailChart); //メールアドレス入力
         this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
 
 	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
-	    this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
+	    this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
+	    
+	    
+		TransactionData transactionData = repository.findByTransactionNumber(transactionNumber);
+		
+		newTimeList[1] =  "20" + transactionData.getTransactionNewDate().replace("/", "-");
+		newTimeList[0] = transactionData.getTransactionNewTime();
+		settlementTimeList[1] =  "20" + transactionData.getTransactionSettlementDate();
+		settlementTimeList[0] = transactionData.getTransactionSettlementTime().replace("/", "-");
+        		currencyPair = transactionData.getCurrencyPair();
+
+		
+		System.out.println(newTimeList[1]);
+		System.out.println(newTimeList[0]);
+		System.out.println(currencyPair);
 	    
 	    //チャート画像取得
 		    //通貨ペア変更
@@ -379,9 +387,12 @@ public class SeleniumController {
 		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
 
 		  
-		    extracted(driver);
-		    //System.out.println(screenshotNew);
-		    //FileUtils.copyFile(screenshotNew, new File(“screenshotNew.png”));
+			File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+			String filePathNew = screenshotNew.getPath();
+			System.out.println(filePathNew);
+			s3.upLoad(filePathNew);
+			transactionData.setScreenshotFilePathNew(filePathNew);
+
 
 		    
 		    
@@ -405,9 +416,15 @@ public class SeleniumController {
 		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
 		    
 
-		    extracted(driver);
+			File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+			screenshot.renameTo(new File("transactionNumber.png"));
+			//FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
+			String filePath = screenshot.getPath();
+			System.out.println(filePath);
+			s3.upLoad(filePath);
+			transactionData.setScreenshotFilePath(filePath);
 		    
-		    
+			repository.saveAndFlush(transactionData);
 
 		    
 		    driver.quit();
@@ -416,6 +433,7 @@ public class SeleniumController {
 	
 	private void extracted(ChromeDriver driver) throws Exception {
 		File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+		//FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
 		String filePath = screenshot.getPath();
 		System.out.println(filePath);
 		s3.upLoad(filePath);

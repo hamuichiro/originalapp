@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 	@Repository
 	public interface TransactionDataRepository extends JpaRepository<TransactionData, Long> {
 
-	    Iterable<TransactionData> findAllByOrderByTransactionSettlementDate();
+	    TransactionData findByTransactionNumber(String transactionNumber);
 	    //全件取得のソート findAllByOrderBy○○();○○にはソートのキーとなるフィールド名
 	  
 	}

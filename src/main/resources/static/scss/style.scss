@@ -1,83 +1,5 @@
-header {
-	z-index: 20;
-	height: 30px;
-	background-color: black;
-}
-
-.navigate-anchor {
-	display: inline-block;
-    font-size: 22px;
-    line-height: 44px;
-    padding: 0 14px;
-    color: #ffffff;
-    background-color: #444444;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.26);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    }
-button:hover {
-	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.26);
-}
 
 
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-
-
-
-
-
-
-//login画面
   .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -94,10 +16,10 @@ button:hover {
 
   .b-example-divider {
     height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
+
+
     border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+
   }
 
   .b-example-vr {
@@ -132,7 +54,7 @@ button:hover {
 
 .fnc {
 
-  // main variables, basically everything depends on $slidingAT
+
   $slidingAT: 1s;
   $slidingDelay: $slidingAT / 3 * 2;
   $maskAT: $slidingAT*0.7;
@@ -154,9 +76,7 @@ button:hover {
 
   $black: #1F2833;
 
-  /* you can add color names and their values here
-  and then simply add classes like .m--blend-$colorName to .fnc-slide 
-  to apply specific color for mask blend mode */
+
   $bgColors: (
     dark: lighten(#242424, 20%),
     green: #42605E,
@@ -180,7 +100,7 @@ button:hover {
       transition: transform $slidingAT $slidingDelay;
     }
     
-    // iterate through color map and set colors for specific classes
+
     @each $colorTheme, $bgColor in $bgColors {
       .m--blend-#{$colorTheme} {
         .fnc-slide__inner {
@@ -254,7 +174,7 @@ button:hover {
       width: $maskWidth;
       height: $maskHeight;
       margin-right: $headingPadding * -3;
-      // This line basically does all magic with masking effect. Very simple and elegant. Webkit only atm.
+
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 6vh 0, 6vh 61vh, 44vh 61vh, 44vh 6vh, 6vh 6vh);
       transform-origin: 50% 0;
       transition-timing-function: $easing;
@@ -532,7 +452,7 @@ button:hover {
 }
 
 
-/* NOT PART OF COMMON SLIDER STYLES */
+
 $font: 'Open Sans', Helvetica, Arial, sans-serif;
 $creditsAT: 0.7s;
 $creditsWidth: 400px;
@@ -648,19 +568,19 @@ body {
     &-1 {
       .fnc-slide__inner,
       .fnc-slide__mask-inner {
-      
+       
       }
     }
     &-2 {
       .fnc-slide__inner,
       .fnc-slide__mask-inner {
-       
+        
       }
     }
     &-3 {
       .fnc-slide__inner,
       .fnc-slide__mask-inner {
-      
+        
       }
 
       .fnc-slide__inner:before {
@@ -698,8 +618,6 @@ body {
   }
 }
 
-/* COLORFUL SWITCH STYLES 
-   ORIGINAL DEMO - https://codepen.io/suez/pen/WQjwOb */
 $w: 180px;
 $_baseW: 280;
 $h: $w * 120 / $_baseW;

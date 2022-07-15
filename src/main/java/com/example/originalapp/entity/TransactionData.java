@@ -79,6 +79,12 @@ package com.example.originalapp.entity;
 	    
 	    @Column(nullable = false)
 	    private Double profitlossParseint;
+	    
+	    @Column
+	    private String screenshotFilePathNew;
+	    
+	    @Column
+	    private String screenshotFilePath;
 
 
 	    @ManyToOne

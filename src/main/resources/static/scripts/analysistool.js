@@ -36,7 +36,7 @@ $(function(){
 
       
 //ローディング画面      
-$('#button').click(function(){
+$('#getDate').click(function(){
 $(function() {
   var h = $(window).height();
   
@@ -50,6 +50,8 @@ $(window).load(function () { //全ての読み込みが完了したら実行
   $('#wrap').css('display', 'block');
 });
 });
+
+
 
 
 
@@ -77,11 +79,21 @@ $(function () {
     trTag.append($("<td></td>").text(transactionDataList[i].rateDifference));
     trTag.append($("<td></td>").text(transactionDataList[i].profitLoss));
     trTag.append($("<td></td>").text(transactionDataList[i].profitlossParseint));
+    trTag.append($("<td></td>").text(transactionDataList[i].swap));
     trTag.append($("<td></td>").text(transactionDataList[i].profitLossConfirm));
-    trTag.append($('<td><a href="" id="setId">表示</a></td>'));  
-    $('#tableChart').append(trTag);
+    if(transactionDataList[i].screenshotFilePathNew == null) {
+	  trTag.append($('<td><a href="" id="setId">取得</a></td>'));  
+	}
+	else {
+	  trTag.append($('<td><a href="" data-lightbox="group" id="setLink"><img src="" id="setImage" width="10"></a></td>'));
+	}
+    
+    
+    $('#tableBody').append(trTag);
     $('#setId').attr('href', path);
     $('#setId').attr('id', transactionNumber);
+    $('#setLink').attr('href', transactionDataList[i].screenshotFilePathNew);
+    $('#setImage').attr('src', transactionDataList[i].screenshotFilePathNew);
     
 	
 	//$('#transactionNumber').click(function() {

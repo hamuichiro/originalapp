@@ -3,6 +3,7 @@ package com.example.originalapp.service;
 import java.io.File;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.util.IOUtils;
 
 @Service
 public class S3Wrapper {
@@ -23,12 +27,10 @@ public class S3Wrapper {
     @Value("${AWS_BUCKET}")
     private String awsBucket;
     
-public void upLoad(String filePath) throws Exception {
-	
+  public void upLoad(String filePath) throws Exception {	
 	
 	// アップロードするファイル
 	File file = new File(filePath);
-
 	 
 	// === InputStreamからアップロードする場合 ===
 	FileInputStream input = new FileInputStream(file);
@@ -50,9 +52,22 @@ public void upLoad(String filePath) throws Exception {
 		
 		// アップロード
 		s3Client.putObject(request);
-		
-		
-		
-
 	}
+
+  public  S3Object download(String filePath) throws Exception{
+ 
+
+
+      final GetObjectRequest getRequest = new GetObjectRequest(awsBucket, filePath);
+
+      S3Object object = s3Client.getObject(getRequest);
+
+      //FileOutputStream fos = new FileOutputStream(new File("[出力先パス]"));
+      //IOUtils.copy(object.getObjectContent(), fos);
+
+      //fos.close();
+      
+      return object;
+  }
+  
 }

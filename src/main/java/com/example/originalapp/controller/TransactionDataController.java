@@ -43,6 +43,7 @@ import org.springframework.web.multipart.MultipartFile;
 	import com.example.originalapp.form.TransactionDataForm;
 	import com.example.originalapp.form.AccountForm;
 	import com.example.originalapp.repository.TransactionDataRepository;
+import com.example.originalapp.service.S3Wrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -59,6 +60,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 	    @Autowired
 	    private HttpServletRequest request;
+	    
+	    @Autowired
+	    S3Wrapper s3;
 
 
 
@@ -81,6 +85,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    public String tableChart() throws IOException {
 	    	
 	    	List<TransactionData> transactionDatas = repository.findAll();
+	    	
+	    	
 	    	
 	    	return getJson(transactionDatas);
 	    }

@@ -41,5 +41,9 @@ public class TransactionDataForm {
     private Long swap;
 
     private AccountForm user;
+    
+    private String screenshotFilePathNew;
+    
+    private String screenshotFilePath;
 
 }
