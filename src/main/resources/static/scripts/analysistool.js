@@ -65,6 +65,7 @@ $(function () {
     var settlementDate = (transactionDataList[i].transactionNewDate).substr(3, 5);
     var transactionNumber = transactionDataList[i].transactionNumber;
     var path = "/transactionNumber?transactionNumber=" + transactionNumber;
+    var screenShot; 
     var trTag = $("<tr>");
     
     $(function() {
@@ -73,11 +74,15 @@ $(function () {
       dataType: 'json',
       type: "GET"
     })
-    .done(function (screenShot) {
-	  if(!screenShot){
-        alert("該当するデータはありませんでした");
-        return;
-      }
+    .done(function (screenShotFile) {
+		screenShot = screenShotFile;
+
+	})
+	.fail(function () {
+      
+    });
+    })
+  
             trTag.append($("<td></td>").text(newDate));
     trTag.append($("<td></td>").text(transactionDataList[i].transactionNewTime));
     trTag.append($("<td></td>").text(transactionDataList[i].currencyPair));
@@ -105,14 +110,6 @@ $(function () {
     $('#setId').attr('id', transactionNumber);
     $('#setLink').attr('href', screenShot);
     $('#setImage').attr('src', screenShot);
-
-	})
-	.fail(function () {
-      alert("ファイルが読み込めませんでした");
-    });
-    })
-  
-
     
 
   }
