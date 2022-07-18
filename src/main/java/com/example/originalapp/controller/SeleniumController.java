@@ -220,11 +220,11 @@ public class SeleniumController {
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
         
         
-        System.out.println(tradeHistoryAlllist.size());
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
-        	for (int i = 0; i < 100; i++) {
-        		continue;
-        	}
+        	
+        		
+        	new WebDriverWait(driver, Duration.ofSeconds(1));
+        	        
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
@@ -334,13 +334,13 @@ public class SeleniumController {
         	    
         		
         	   	repository.saveAndFlush(transactionData);
-
         	}
+ 
         }
 
        
 
-	        //driver.quit();
+	        driver.quit();
 	        return "redirect:/analysistool";
 	      		
 	}
