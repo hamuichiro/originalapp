@@ -118,7 +118,7 @@ public class SeleniumController {
 		// ユーザーエージェントの変更
 		options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
 		
-		//options.addArguments("-headless");
+		options.addArguments("-headless");
 		options.addArguments("-disable-gpu");
 		options.addArguments("-no-sandbox");
 		options.addArguments("--disable-extensions");
@@ -226,7 +226,7 @@ public class SeleniumController {
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
-        	System.out.println(tradeHistoryList.getAttribute("outerHTML"));
+        	System.out.println(tradeHistoryList.isDisplayed());
         	if(tradeList.size() == 21 || tradeList.size() == 20) { //通貨ペア、約定日時を取り出し、成形、リスト化
         		if(tradeList.size() == 21) {
                		tradeList.remove(2);
@@ -341,7 +341,7 @@ public class SeleniumController {
 	        driver.quit();
 	        return "redirect:/analysistool";
 	      		
-	}
+	}/*
 	
     
     
