@@ -112,7 +112,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    @ResponseBody
 	    public String screenShot(String filePath) throws Exception {
 
-	    	return getJsonFile(s3.download(filePath));
+	    	return getJsonFile(s3.download("screenshot10283841203051632269.png"));
 	    }
 	    
 	    private String getJsonFile(S3Object screenShot){

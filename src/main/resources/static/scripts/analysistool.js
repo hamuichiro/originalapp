@@ -83,7 +83,7 @@ $(function () {
     });
     })
   
-            trTag.append($("<td></td>").text(newDate));
+    trTag.append($("<td></td>").text(newDate));
     trTag.append($("<td></td>").text(transactionDataList[i].transactionNewTime));
     trTag.append($("<td></td>").text(transactionDataList[i].currencyPair));
     trTag.append($("<td></td>").text(transactionDataList[i].transactionType));
