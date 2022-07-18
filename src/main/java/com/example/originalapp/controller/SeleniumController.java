@@ -118,7 +118,7 @@ public class SeleniumController {
 		// ユーザーエージェントの変更
 		options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
 		
-		options.addArguments("-headless");
+		//options.addArguments("-headless");
 		options.addArguments("-disable-gpu");
 		options.addArguments("-no-sandbox");
 		options.addArguments("--disable-extensions");
@@ -219,13 +219,13 @@ public class SeleniumController {
         
         
         System.out.println(tradeHistoryAlllist.size());
-        for(int i = 0; i < tradeHistoryAlllist.size(); i++) { //個別の履歴の内容をリストに格納
+        for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+
         	
-        	WebElement tradeHistoryList = tradeHistoryAlllist.get(i);
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
-        	System.out.println(tradeHistory);
-        	//System.out.println(tradeList);
+        	
+        	System.out.println(tradeHistoryList.getAttribute("outerHTML"));
         	if(tradeList.size() == 21 || tradeList.size() == 20) { //通貨ペア、約定日時を取り出し、成形、リスト化
         		if(tradeList.size() == 21) {
                		tradeList.remove(2);
@@ -335,7 +335,7 @@ public class SeleniumController {
         	}
         }
 
-
+       
 
 	        driver.quit();
 	        return "redirect:/analysistool";
@@ -431,6 +431,7 @@ public class SeleniumController {
 		    
 		    
 		    this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
+	
 		    keydownNew.perform();
 		    
 		    
