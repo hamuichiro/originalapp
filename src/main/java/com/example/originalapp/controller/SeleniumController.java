@@ -224,8 +224,8 @@ public class SeleniumController {
         	WebElement tradeHistoryList = tradeHistoryAlllist.get(i);
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
-        	System.out.println(tradeHistoryList);
-        	System.out.println(tradeHistoryList);
+        	System.out.println(tradeHistory);
+        	System.out.println(tradeList);
         	if(tradeList.size() == 21 || tradeList.size() == 20) { //通貨ペア、約定日時を取り出し、成形、リスト化
         		if(tradeList.size() == 21) {
                		tradeList.remove(2);
