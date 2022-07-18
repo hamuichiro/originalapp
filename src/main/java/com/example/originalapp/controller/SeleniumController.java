@@ -111,7 +111,7 @@ public class SeleniumController {
     
     public ChromeDriver driver() {
 		String  driver_path = "/app/.chromedriver/bin/chromedriver";
-		//String  driver_path = "./exe/chromedriver.exe";
+	    //String  driver_path = "./exe/chromedriver.exe";
 		
 		ChromeOptions options = new ChromeOptions();
 		
@@ -211,8 +211,9 @@ public class SeleniumController {
 		}
 		
 		this.elememtClickXpath(driver, "//*[@id=\"execution-history-detail-simple\"]/label/span[2]"); //詳細表示
-		this.elememtClickId(driver, "execution-history-update"); //更新ボタンpage-liftup
+		this.elememtClickId(driver, "execution-history-update"); //更新ボタン
 		this.elememtClickId(driver, "page-liftup");
+		this.elememtClickId(driver, "time-line");
 		
 		
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
@@ -221,9 +222,7 @@ public class SeleniumController {
         System.out.println(tradeHistoryAlllist.size());
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
 
-        	Actions actions = new Actions(driver);
-        	actions.moveToElement(tradeHistoryList);
-        	actions.perform();
+
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
