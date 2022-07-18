@@ -11,12 +11,15 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -50,6 +53,23 @@ public class SeleniumController {
                 .withTimeout(Duration.ofSeconds(4))
                 .pollingEvery(Duration.ofMillis(500));
         WebElement element = driver.findElement(By.xpath(path)); 
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.perform();
+       
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+    }
+    
+    public void elememtClickId(ChromeDriver  driver, String selecter) {
+    	
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(4))
+                .pollingEvery(Duration.ofMillis(500));
+        WebElement element = driver.findElement(By.id(selecter)); 
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.perform();
        
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
@@ -61,12 +81,25 @@ public class SeleniumController {
                 .withTimeout(Duration.ofSeconds(4))
                 .pollingEvery(Duration.ofMillis(500));
         WebElement element = driver.findElement(By.cssSelector(selecter)); 
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.perform();
        
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
     
-    public void elementSendkeys(ChromeDriver  driver, String path, String keys) {
+    public void elementSendkeys(ChromeDriver  driver, String id, String keys) {
+    	
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(4))
+                .pollingEvery(Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+        WebElement element = driver.findElement(By.id(id)); 
+        element.sendKeys(keys); 
+    }
+    
+    public void elementSendkeysXpath(ChromeDriver  driver, String path, String keys) {
     	
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(4))
@@ -77,22 +110,22 @@ public class SeleniumController {
     }
     
     public ChromeDriver driver() {
-		String  driver_path = "/app/.chromedriver/bin/chromedriver";
-		//String  driver_path = "./exe/chromedriver.exe";
+		//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+		String  driver_path = "./exe/chromedriver.exe";
 		
 		ChromeOptions options = new ChromeOptions();
 		
 		// ユーザーエージェントの変更
 		options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
 		
-		//options.addArguments("-headless");
+		options.addArguments("-headless");
 		options.addArguments("-disable-gpu");
 		options.addArguments("-no-sandbox");
 		options.addArguments("--disable-extensions");
 		options.addArguments("--proxy-server=\"direct://\"");
 		options.addArguments("--proxy-bypass-list=*");
 		options.addArguments("--disable-dev-shm-usage");
-		options.addArguments("-window-size=1920,1080");
+		options.addArguments("-window-size=2220,1080");
 		
 		
 		System.setProperty("webdriver.chrome.driver", driver_path);
@@ -106,6 +139,346 @@ public class SeleniumController {
     }
 	
     @RequestMapping(path = "/selenium")
+	public String transaction(ModelMap modelMap, @RequestParam("year") int year, @RequestParam("month") int month) throws Exception {
+
+		
+		String userId = "1318221";
+		String password = "hamuichi24";
+		
+
+		
+		String newTime = null;
+		String settlementTime = null;
+		String currencyPair = null;
+		String[] newTimeList = new String[2];
+		String[] settlementTimeList = new String[2];
+		
+		
+
+		
+		ChromeDriver driver = this.driver();
+		
+		
+		
+		driver.get("https://lionfx.hirose-fx.co.jp/WTChartWeb/"); //証券会社の表示   
+		
+		this.elementSendkeys(driver, "login-id", userId); //ユーザーIDの入力
+		this.elementSendkeys(driver, "login-pw", password); //パスワードの入力
+		this.elememtClickId(driver, "doLogin"); //ログインボタンのクリック
+		this.elememtClickXpath(driver, "/html/body/div[16]/div[2]/button[1]");
+		
+		this.elememtClickId(driver, "execution-history"); //約定一覧の選択
+		this.elememtClickId(driver, "execution-history-start-yymmdd"); //開始日付
+		
+		//現在の年月取得
+		LocalDateTime nowDate =  LocalDateTime.now();
+		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy");
+		DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("M");
+		int formatNowDate = Integer.parseInt(dtf1.format(nowDate));
+		int formatNowDate2 = Integer.parseInt(dtf2.format(nowDate));
+		int countmonth = formatNowDate2 - month;;
+		int countYear = formatNowDate- year;
+		
+		if(countYear == 0) {
+			if(countmonth == 0) {
+				driver.findElement(By.linkText("1")).click();
+			}
+			else if(countmonth > 0){
+				for(int i = 1; i <= countmonth; i++) {
+					this.elememtClickXpath(driver, "//*[@id=\"ui-datepicker-div\"]/div/a[1]/span");
+				}
+				driver.findElement(By.linkText("1")).click();
+			}
+		}
+		//else if(countYear > 0) {
+			
+		//}
+		
+		this.elememtClickId(driver, "execution-history-end-yymmdd");
+		if(countYear == 0) {
+			if(countmonth == 0) {
+				
+			}
+			else if(countmonth == 1) {
+				driver.findElement(By.linkText("1")).click();
+			}
+			else if(countmonth > 0){
+				for(int i = 1; i <= countmonth - 1; i++) {
+					this.elememtClickXpath(driver, "//*[@id=\"ui-datepicker-div\"]/div/a[1]/span");
+				}
+				driver.findElement(By.linkText("1")).click();
+			}
+		}
+		
+		this.elememtClickXpath(driver, "//*[@id=\"execution-history-detail-simple\"]/label/span[2]"); //詳細表示
+		this.elememtClickId(driver, "execution-history-update"); //更新ボタンpage-liftup
+		this.elememtClickId(driver, "page-liftup");
+		
+		
+        List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
+        
+        
+        System.out.println(tradeHistoryAlllist.size());
+        for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+        	
+        	
+        	String tradeHistory = tradeHistoryList.getText();
+        	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
+        	
+        	
+        	if(tradeList.size() == 21 || tradeList.size() == 20) { //通貨ペア、約定日時を取り出し、成形、リスト化
+        		if(tradeList.size() == 21) {
+               		tradeList.remove(2);
+            		tradeList.remove(3);
+            		tradeList.remove(3);
+            		tradeList.remove(3);
+            		tradeList.remove(3);
+            		tradeList.remove(3);
+            		tradeList.remove(9);
+            		tradeList.remove(10);
+            		tradeList.remove(12);
+            		
+        		}
+        		else {
+               		tradeList.remove(2);
+            		tradeList.remove(3);
+            		tradeList.remove(3);
+            		tradeList.remove(3);
+            		tradeList.remove(3);
+            		tradeList.remove(9);
+            		tradeList.remove(10);
+            		tradeList.remove(12);
+            		
+        		}
+ 
+        		System.out.println(tradeList);
+ 
+        		
+        		double rateDifference = Double.parseDouble(tradeList.get(8).replace(",", "")) / 10;
+        		double profitlossParseint = 0;
+        		double newRate = Double.parseDouble(tradeList.get(6));
+        		
+        		currencyPair = tradeList.get(2);
+        		currencyPair = currencyPair.replace("/", "");
+        		tradeList.set(2, currencyPair);
+        		
+        		
+        		
+        		if(newRate <= 2) {
+        			newRate = newRate * 10000;
+        			
+        		}
+        		else {
+        			newRate = newRate * 100;
+        			
+        		}
+        		
+        		
+        		if((tradeList.get(3)).equals("売")) {
+        			
+        		
+
+        			tradeList.set(3, "Long");
+        		}
+        		else {
+        			
+        			
+
+        			tradeList.set(3, "Short");
+        		}
+
+        		profitlossParseint = rateDifference / newRate * 100;
+        		 
+        	    
+        		
+        		settlementTime = tradeList.get(0);
+        		settlementTimeList = settlementTime.split(" ");
+        		settlementTimeList[1] = settlementTimeList[1].substring(0, 5);
+        		tradeList.set(0, settlementTimeList[0]);
+        		tradeList.add(1, settlementTimeList[1]);
+        		
+        		
+        		
+        		newTime = tradeList.get(6);
+        		newTimeList = newTime.split(" ");
+        		newTimeList[1] = newTimeList[1].substring(0, 5);
+        		tradeList.set(6, newTimeList[0]);
+        		tradeList.add(7, newTimeList[1]);
+        		
+
+        		
+        		
+        		
+        		
+        		TransactionData transactionData = new TransactionData();
+        		transactionData.setTransactionSettlementDate(tradeList.get(0));
+        		transactionData.setTransactionSettlementTime(tradeList.get(1));
+        		transactionData.setTransactionNumber(tradeList.get(2));
+        	    transactionData.setCurrencyPair(tradeList.get(3));
+        	    transactionData.setTransactionType(tradeList.get(4));
+        	    transactionData.setTransactionLot(tradeList.get(5));
+        	    transactionData.setTransactionNewDate(tradeList.get(6));
+        	    transactionData.setTransactionNewTime(tradeList.get(7));
+        	    transactionData.setRateNew(tradeList.get(8));
+        	    transactionData.setRateSettlement(tradeList.get(9));
+        	    transactionData.setProfitLoss(tradeList.get(11).replace(",", ""));
+        	    transactionData.setSwap(tradeList.get(12).replace(",", ""));
+        	    transactionData.setProfitLossConfirm(tradeList.get(13));
+        	    transactionData.setRateDifference(rateDifference);
+        	    transactionData.setProfitlossParseint(Math.round(profitlossParseint * 100.0) / 100.0);
+        	    
+
+        	    
+        		
+        	   	repository.saveAndFlush(transactionData);
+
+        	}
+        }
+
+
+
+	        driver.quit();
+	        return "redirect:/analysistool";
+	      		
+	}
+	
+    
+    
+    @RequestMapping(path = "/transactionNumber")
+	public String screenshot(ModelMap modelMap, @RequestParam("transactionNumber") String transactionNumber) throws Exception {
+    	
+		String emailChart = "hamuichiro8616@gmail.com";
+		String passwordChart = "Kk248616";
+	
+		String[] newTimeList = new String[2];
+		String[] settlementTimeList = new String[2];
+		String currencyPair = null;
+		
+
+		
+
+
+		
+		ChromeDriver driver = this.driver();
+    
+        driver.get("https://jp.tradingview.com/"); //tradigView表示
+        
+
+        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
+        this.elememtClickXpath(driver, "/html/body/div[6]/div/span/div[1]/div/div/div/button[1]"); //アイコンクリック
+      
+        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]"); //Eメールアイコンクリック
+        this.elementSendkeysXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input", emailChart); //メールアドレス入力
+        this.elementSendkeysXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
+
+	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
+	    this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
+	  
+
+	    
+		TransactionData transactionData = repository.findByTransactionNumber(transactionNumber);
+		
+		newTimeList[1] =  transactionData.getTransactionNewDate().replace("/", "-");
+		newTimeList[0] = transactionData.getTransactionNewTime();
+		settlementTimeList[1] =  transactionData.getTransactionSettlementDate().replace("/", "-");
+		settlementTimeList[0] = transactionData.getTransactionSettlementTime();
+        currencyPair = transactionData.getCurrencyPair();
+
+		
+		System.out.println(newTimeList[1]);
+		System.out.println(newTimeList[0]);
+		System.out.println(currencyPair);
+		
+	    //チャート画像取得
+		    //通貨ペア変更
+		this.elememtClickId(driver, "header-toolbar-symbol-search");
+
+			
+			this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[2]/div/div[2]/div[1]/input", currencyPair);
+			this.elememtClickXpath(driver, "/html/body/div[5]/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]");
+			
+			
+			this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
+			Actions actionProvider = new Actions(driver);
+		    Action keydownNew = actionProvider.keyDown(Keys.ALT).sendKeys("g").build();
+		    keydownNew.perform();
+		    
+		    
+		    //新規約定時チャート画像取得
+		    for(int j=0; j< 10; j++) { //日付の入力
+		        this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+  
+		    }
+		    this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", newTimeList[0]);
+
+		   
+		    for(int j=0; j< 5; j++) { //時間の入力
+		    	this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+
+		    }
+		    this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", newTimeList[1]);
+
+		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
+
+		  
+			File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+			String filePathNew = screenshotNew.getPath();
+			System.out.println(filePathNew);
+			s3.upLoad(filePathNew);
+			transactionData.setScreenshotFilePathNew(filePathNew);
+
+
+		    
+		    
+		    this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
+		    keydownNew.perform();
+		    
+		    
+		    //決済時チャート画像取得
+		    for(int j=0; j< 10; j++) { //日付の入力
+		        this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+  
+		    }
+		    this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", settlementTimeList[0]);
+
+		   
+		    for(int j=0; j< 5; j++) { //時間の入力
+		    	this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
+
+		    }
+		    this.elementSendkeysXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", settlementTimeList[1]);
+
+		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
+		    
+
+			File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+			//screenshot.renameTo(new File("transactionNumber.png"));
+			//FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
+			String filePath = screenshot.getPath();
+			System.out.println(filePath);
+			s3.upLoad(filePath);
+			transactionData.setScreenshotFilePath(filePath);
+		    
+			repository.saveAndFlush(transactionData);
+
+		    
+		    driver.quit();
+		    return "redirect:/analysistool";
+	}
+	
+	private void extracted(ChromeDriver driver) throws Exception {
+		File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
+		//FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
+		String filePath = screenshot.getPath();
+		System.out.println(filePath);
+		s3.upLoad(filePath);
+		
+	}
+    /*Actions actionProvider = new Actions(driver);
+    Action keydownNew = actionProvider.keyDown(Keys.ALT).sendKeys("g").build();
+    keydownNew.perform();
+	
+	@RequestMapping(path = "/selenium")
 	public String transaction(ModelMap modelMap, @RequestParam("year") int year, @RequestParam("month") int month) throws Exception {
 
 		
@@ -312,131 +685,6 @@ public class SeleniumController {
 	        driver.quit();
 	        return "redirect:/analysistool";
 	      		
-	}
-	
-    @RequestMapping(path = "/transactionNumber")
-	public String screenshot(ModelMap modelMap, @RequestParam("transactionNumber") String transactionNumber) throws Exception {
-    	
-		String emailChart = "hamuichiro8616@gmail.com";
-		String passwordChart = "Kk248616";
-	
-		String[] newTimeList = new String[2];
-		String[] settlementTimeList = new String[2];
-		String currencyPair = null;
-		
+	}*/
 
-		
-
-
-		
-		ChromeDriver driver = this.driver();
-    
-        driver.get("https://jp.tradingview.com/"); //tradigView表示
-        
-
-        this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[3]/button[1]"); //アイコンクリック
-        this.elememtClickXpath(driver, "/html/body/div[6]/div/span/div[1]/div/div/div/button[1]"); //アイコンクリック
-      
-        this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]"); //Eメールアイコンクリック
-        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[1]/div[1]/input", emailChart); //メールアドレス入力
-        this.elementSendkeys(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[2]/div[1]/input", passwordChart); //パスワード入力
-
-	    this.elememtClickXpath(driver, "/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); //ログインボタンクリック
-	    this.elememtClickXpath(driver, "/html/body/div[2]/div[3]/div[2]/div[2]/nav/ul/li[1]");
-	    
-	    
-		TransactionData transactionData = repository.findByTransactionNumber(transactionNumber);
-		
-		newTimeList[1] =  "20" + transactionData.getTransactionNewDate().replace("/", "-");
-		newTimeList[0] = transactionData.getTransactionNewTime();
-		settlementTimeList[1] =  "20" + transactionData.getTransactionSettlementDate();
-		settlementTimeList[0] = transactionData.getTransactionSettlementTime().replace("/", "-");
-        		currencyPair = transactionData.getCurrencyPair();
-
-		
-		System.out.println(newTimeList[1]);
-		System.out.println(newTimeList[0]);
-		System.out.println(currencyPair);
-	    
-	    //チャート画像取得
-		    //通貨ペア変更
-			this.elememtClickSelector(driver, "#header-toolbar-symbol-search > div");
-			this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[2]/div/div[2]/div[1]/input", currencyPair);
-			this.elememtClickXpath(driver, "/html/body/div[5]/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]");
-			this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
-		    
-		    
-		    
-		    //新規約定時チャート画像取得
-		    for(int j=0; j< 10; j++) { //日付の入力
-		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-  
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", newTimeList[0]);
-
-		   
-		    for(int j=0; j< 5; j++) { //時間の入力
-		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", newTimeList[1]);
-
-		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
-
-		  
-			File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
-			String filePathNew = screenshotNew.getPath();
-			System.out.println(filePathNew);
-			s3.upLoad(filePathNew);
-			transactionData.setScreenshotFilePathNew(filePathNew);
-
-
-		    
-		    
-		    this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); //移動ボタンクリック
-
-		    
-		    //決済時チャート画像取得
-		    for(int j=0; j< 10; j++) { //日付の入力
-		        this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-  
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/span/span[1]/input", settlementTimeList[0]);
-
-		   
-		    for(int j=0; j< 5; j++) { //時間の入力
-		    	this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", Keys.chord(Keys.BACK_SPACE));
-
-		    }
-		    this.elementSendkeys(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[3]/div/div/div[1]/div[2]/span/span[1]/input", settlementTimeList[1]);
-
-		    this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/div/div[1]/div/div[4]/div/span/button"); //移動ボタンクリック
-		    
-
-			File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
-			//screenshot.renameTo(new File("transactionNumber.png"));
-			//FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
-			String filePath = screenshot.getPath();
-			System.out.println(filePath);
-			s3.upLoad(filePath);
-			transactionData.setScreenshotFilePath(filePath);
-		    
-			repository.saveAndFlush(transactionData);
-
-		    
-		    driver.quit();
-		    return "redirect:/analysistool";
-	}
-	
-	private void extracted(ChromeDriver driver) throws Exception {
-		File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div")).getScreenshotAs(OutputType.FILE);
-		//FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
-		String filePath = screenshot.getPath();
-		System.out.println(filePath);
-		s3.upLoad(filePath);
-		
-	}
-    /*Actions actionProvider = new Actions(driver);
-    Action keydownNew = actionProvider.keyDown(Keys.CONTROL).keyDown(Keys.ALT).sendKeys("s").build();
-    keydownNew.perform();*/
 }

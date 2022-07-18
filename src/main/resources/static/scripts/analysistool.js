@@ -61,8 +61,8 @@ $(function () {
 
   function drawTabla(transactionDataList, i) {
 	
-    var newDate = (transactionDataList[i].transactionNewDate).substr(3, 5);
-    var settlementDate = (transactionDataList[i].transactionNewDate).substr(3, 5);
+    var newDate = (transactionDataList[i].transactionNewDate).substr(5, 5);
+    var settlementDate = (transactionDataList[i].transactionSettlementDate).substr(5, 5);
     var transactionNumber = transactionDataList[i].transactionNumber;
     var path = "/transactionNumber?transactionNumber=" + transactionNumber;
     var screenShot; 
