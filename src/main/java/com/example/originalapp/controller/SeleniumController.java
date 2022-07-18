@@ -215,7 +215,7 @@ public class SeleniumController {
 		this.elememtClickId(driver, "execution-history-update"); //更新ボタン
 		this.elememtClickId(driver, "page-liftup");
 		this.elememtClickId(driver, "time-line");
-
+		new WebDriverWait(driver, Duration.ofSeconds(2));
 
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
         
@@ -223,7 +223,7 @@ public class SeleniumController {
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
         	
         		
-        	new WebDriverWait(driver, Duration.ofSeconds(1));
+        	new WebDriverWait(driver, Duration.ofSeconds(2));
         	        
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
