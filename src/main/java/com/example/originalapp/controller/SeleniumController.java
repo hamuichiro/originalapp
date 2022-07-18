@@ -343,7 +343,7 @@ public class SeleniumController {
 	        //driver.quit();
 	        return "redirect:/analysistool";
 	      		
-	}/*
+	}
 	
     
     
