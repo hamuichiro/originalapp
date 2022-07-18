@@ -23,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -118,7 +119,7 @@ public class SeleniumController {
 		// ユーザーエージェントの変更
 		options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
 		
-		options.addArguments("-headless");
+		//options.addArguments("-headless");
 		options.addArguments("-disable-gpu");
 		options.addArguments("-no-sandbox");
 		options.addArguments("--disable-extensions");
@@ -214,15 +215,16 @@ public class SeleniumController {
 		this.elememtClickId(driver, "execution-history-update"); //更新ボタン
 		this.elememtClickId(driver, "page-liftup");
 		this.elememtClickId(driver, "time-line");
-		
-		
+
+
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
         
         
         System.out.println(tradeHistoryAlllist.size());
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
-
-
+for(int i= 0; i< 100; i++) {
+	continue;
+}
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
@@ -338,7 +340,7 @@ public class SeleniumController {
 
        
 
-	        driver.quit();
+	        //driver.quit();
 	        return "redirect:/analysistool";
 	      		
 	}/*
