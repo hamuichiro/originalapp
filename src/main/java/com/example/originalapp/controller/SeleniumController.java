@@ -221,7 +221,9 @@ public class SeleniumController {
         System.out.println(tradeHistoryAlllist.size());
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
 
-        	
+        	Actions actions = new Actions(driver);
+        	actions.moveToElement(tradeHistoryList);
+        	actions.perform();
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
