@@ -225,7 +225,7 @@ public class SeleniumController {
         	for (int i = 0; i < 100; i++) {
         		continue;
         	}
-        	String tradeHistory = tradeHistoryList.getAttribute("textContent");
+        	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
         	System.out.println(tradeHistoryList.isDisplayed());
