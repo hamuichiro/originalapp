@@ -225,7 +225,7 @@ public class SeleniumController {
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	System.out.println(tradeHistory);
-        	System.out.println(tradeList);
+        	//System.out.println(tradeList);
         	if(tradeList.size() == 21 || tradeList.size() == 20) { //通貨ペア、約定日時を取り出し、成形、リスト化
         		if(tradeList.size() == 21) {
                		tradeList.remove(2);
@@ -251,7 +251,7 @@ public class SeleniumController {
             		
         		}
  
-        		System.out.println(tradeList);
+        		//System.out.println(tradeList);
  
         		
         		double rateDifference = Double.parseDouble(tradeList.get(8).replace(",", "")) / 10;
