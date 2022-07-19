@@ -216,16 +216,16 @@ public class SeleniumController {
 		this.elememtClickId(driver, "page-liftup");
 		this.elememtClickId(driver, "time-line");
 		
-
+    	for(int i = 0; i < 200; i++) {
+    		continue;
+    	}
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
         
         
         for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
         	
         		
-        	for(int i = 0; i < 200; i++) {
-        		continue;
-        	}
+
         	        
         	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
