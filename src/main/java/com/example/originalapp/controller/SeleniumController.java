@@ -221,7 +221,7 @@ public class SeleniumController {
         
         for(int i = 1; driver.findElements(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).size() > 0; i++) {
         	String tradeHistory = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).getText();
-        	if(tradeHistory == "") {
+        	if(tradeHistory == null) {
         		break;
         	}
         
