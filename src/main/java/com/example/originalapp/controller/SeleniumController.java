@@ -221,13 +221,13 @@ public class SeleniumController {
         
         for(int i = 1; driver.findElements(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).size() > 0; i++) {
         	String tradeHistory = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).getText();
-        	if(tradeHistory == null) {
-        		break;
-        	}
+
         
 
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
-        	
+        	if(tradeList.size() == 0) {
+        		break;
+        	}
        
         	if(tradeList.size() == 21 || tradeList.size() == 20) { //通貨ペア、約定日時を取り出し、成形、リスト化
         		if(tradeList.size() == 21) {
