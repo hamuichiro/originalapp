@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -219,11 +220,9 @@ public class SeleniumController {
 
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
         
-        for(int i = 1; driver.findElements(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).size() > 0; i++) {
-        	if(i >= tradeHistoryAlllist.size()) {
-        		break;
-        	}
-        	System.out.println(driver.findElements(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).size());
+        for(int i = 1; driver.findElements(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).size() == 1; i++) {
+        	try {
+        	
         	String tradeHistory = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).getText();
 
         
@@ -337,8 +336,14 @@ public class SeleniumController {
         		
         	   	repository.saveAndFlush(transactionData);
         	}
+            } catch (NoSuchElementException e) {
+            	driver.quit();
+    	        return "redirect:/analysistool";
+                
+            }
  
         }
+
 
        
 
