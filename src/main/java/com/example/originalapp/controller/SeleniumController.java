@@ -219,18 +219,16 @@ public class SeleniumController {
     	for(int i = 0; i < 200; i++) {
     		continue;
     	}
-        List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
+        //List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
         
-        
-        for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+        for(int i = 1; driver.findElements(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).size() > 0; i++) {
+        	String tradeHistory = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).getText();
         	
-        		
+        
 
-        	        
-        	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
         	
-        	System.out.println(tradeHistoryList.isDisplayed());
+       
         	if(tradeList.size() == 21 || tradeList.size() == 20) { //通貨ペア、約定日時を取り出し、成形、リスト化
         		if(tradeList.size() == 21) {
                		tradeList.remove(2);
