@@ -219,7 +219,7 @@ public class SeleniumController {
 		
 		
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
-        
+        try {
         for(int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 
         	
@@ -347,6 +347,10 @@ public class SeleniumController {
 
  
         }
+    	}catch(NoSuchElementException e) {
+    		driver.quit();
+	        return "redirect:/analysistool";
+    	}
 
 
        
