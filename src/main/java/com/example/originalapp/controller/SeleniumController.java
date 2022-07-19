@@ -111,8 +111,8 @@ public class SeleniumController {
     }
     
     public ChromeDriver driver() {
-		//String  driver_path = "/app/.chromedriver/bin/chromedriver";
-	    String  driver_path = "./exe/chromedriver.exe";
+		String  driver_path = "/app/.chromedriver/bin/chromedriver";
+	    //String  driver_path = "./exe/chromedriver.exe";
 		
 		ChromeOptions options = new ChromeOptions();
 		
