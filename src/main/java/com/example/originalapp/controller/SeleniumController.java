@@ -346,7 +346,7 @@ public class SeleniumController {
         	}    	
         	catch(NoSuchElementException e) {
         		driver.quit();
-    	        
+        		return "redirect:/analysistool";
         	}
 
 
