@@ -112,8 +112,8 @@ public class SeleniumController {
     }
     
     public ChromeDriver driver() {
-		String  driver_path = "/app/.chromedriver/bin/chromedriver";
-	    //String  driver_path = "./exe/chromedriver.exe";
+		//String  driver_path = "/app/.chromedriver/bin/chromedriver";
+	    String  driver_path = "./exe/chromedriver.exe";
 		
 		ChromeOptions options = new ChromeOptions();
 		
@@ -217,14 +217,18 @@ public class SeleniumController {
 		this.elememtClickId(driver, "page-liftup");
 		this.elememtClickId(driver, "time-line");
 		
-
+		
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
         
-        for(int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+        /*for(int i = 1; i <= tradeHistoryAlllist.size(); i++) {
         	try {
         	
-        	String tradeHistory = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).getText();
-
+        	String tradeHistory = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).getText();*/
+        for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+        	
+        	WebElement firstResult = new WebDriverWait(driver, Duration.ofSeconds(10))
+        	        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[1]")));
+        	String tradeHistory = tradeHistoryList.getText();
         	ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
 
        
@@ -334,12 +338,7 @@ public class SeleniumController {
         		
         	   	repository.saveAndFlush(transactionData);
         	}
-            } catch (NoSuchElementException e) {
-            	
-            	driver.quit();
-    	        return "redirect:/analysistool";
-                
-            }
+
  
         }
 
