@@ -142,7 +142,7 @@ public class SeleniumController {
 	
     @RequestMapping(path = "/selenium")
 	public String transaction(ModelMap modelMap, @RequestParam("year") int year, @RequestParam("month") int month) throws Exception {
-
+    	System.out.println("##############################################################################################");
 		
 		String userId = "1318221";
 		String password = "hamuichi24";
@@ -219,7 +219,8 @@ public class SeleniumController {
 		
 		
         List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); //全約定履歴の取得
-        
+        System.out.println("#######################");
+        System.out.println(tradeHistoryAlllist.size());
         for(int i = 1; i <= tradeHistoryAlllist.size(); i++) {
         	String tradeHistory = "";
         	try {
