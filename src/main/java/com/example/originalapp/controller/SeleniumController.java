@@ -223,6 +223,7 @@ public class SeleniumController {
         	if(i >= tradeHistoryAlllist.size()) {
         		break;
         	}
+        	System.out.println(driver.findElements(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).size());
         	String tradeHistory = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["+i+"]")).getText();
 
         
@@ -255,7 +256,7 @@ public class SeleniumController {
             		
         		}
  
-        		//System.out.println(tradeList);
+        		
  
         		
         		double rateDifference = Double.parseDouble(tradeList.get(8).replace(",", "")) / 10;
