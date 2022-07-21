@@ -124,6 +124,7 @@ public class SeleniumController {
 		options.addArguments("--proxy-bypass-list=*");
 		options.addArguments("--disable-dev-shm-usage");
 		options.addArguments("-window-size=2220,1080");
+		options.addArguments("--lang=ja-JP");
 
 		System.setProperty("webdriver.chrome.driver", driver_path);
 
@@ -218,7 +219,7 @@ public class SeleniumController {
 		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
-		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+		/*for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			WebElement tradeHistoryList;
 			try {
 				tradeHistoryList = driver.findElement(By.xpath(
@@ -237,15 +238,15 @@ public class SeleniumController {
 					.size() == 0) {
 				driver.quit();
 				return "redirect:/analysistool";
-			}
+			}*/
 
-		/*System.out.println(tradeHistoryAlllist);
+		System.out.println(tradeHistoryAlllist);
 			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
 				  if (tradeHistoryList.isDisplayed() == false) {
 					  new WebDriverWait(driver, Duration.ofSeconds(1000)).until(ExpectedConditions.textToBePresentInElementLocated(
 							     By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[10]"), "なし"));
  
-						  }*/
+						  }
 
 				  System.out.println(tradeHistoryList);
 			  String tradeHistory = tradeHistoryList.getText();
