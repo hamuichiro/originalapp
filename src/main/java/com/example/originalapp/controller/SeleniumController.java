@@ -108,7 +108,7 @@ public class SeleniumController {
 
 	public ChromeDriver driver() {
 		String driver_path = "/app/.chromedriver/bin/chromedriver";
-		// String driver_path = "./exe/chromedriver.exe";
+		//String driver_path = "./exe/chromedriver.exe";
 
 		ChromeOptions options = new ChromeOptions();
 
@@ -205,7 +205,17 @@ public class SeleniumController {
 		this.elememtClickId(driver, "page-liftup");
 		this.elememtClickId(driver, "time-line");
 
-		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
+		
+		List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
+		for (int i = 1; driver.findElements(By
+				.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
+						+ i + "]"))
+				.size() > 0; i++) {
+			tradeHistoryAlllist.add(driver.findElement(By.xpath(
+						"/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i
+								+ "]")));
+		}
+		/*List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
 		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
@@ -225,16 +235,18 @@ public class SeleniumController {
 					.size() == 0) {
 				driver.quit();
 				return "redirect:/analysistool";
-			}
+			}*/
 
-			/*
-			 * for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
-			 * 
-			 * WebElement firstResult = new WebDriverWait(driver, Duration.ofSeconds(100))
-			 * .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-			 * "/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[1]"
-			 * ))); String tradeHistory = tradeHistoryList.getText();
-			 */
+		System.out.println(tradeHistoryAlllist);
+			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+			  
+			  /*WebElement firstResult = new WebDriverWait(driver, Duration.ofSeconds(100))
+			  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+			  "/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[1]"
+			  ))); */
+				  System.out.println(tradeHistoryList);
+			  String tradeHistory = tradeHistoryList.getText();
+			  System.out.println(tradeHistory);
 			ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
 
 			if (tradeList.size() == 21 || tradeList.size() == 20) { // 通貨ペア、約定日時を取り出し、成形、リスト化
