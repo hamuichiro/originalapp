@@ -107,8 +107,8 @@ public class SeleniumController {
 	}
 
 	public ChromeDriver driver() {
-		String driver_path = "/app/.chromedriver/bin/chromedriver";
-		//String driver_path = "./exe/chromedriver.exe";
+		//String driver_path = "/app/.chromedriver/bin/chromedriver";
+		String driver_path = "./exe/chromedriver.exe";
 
 		ChromeOptions options = new ChromeOptions();
 
@@ -221,6 +221,7 @@ public class SeleniumController {
 								+ "]")));
 		}*/
 		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
+		int size = tradeHistoryAlllist.size();
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
 		
@@ -245,15 +246,23 @@ public class SeleniumController {
 				driver.quit();
 				return "redirect:/analysistool";
 			}*/
-int i = 1;
+
 		System.out.println(tradeHistoryAlllist);
 			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
-				  
-					 Duration waitTime = Duration.ofSeconds(10);
-					 WebDriverWait wait = new WebDriverWait(driver, waitTime);
-					 WebElement element = wait.until(ExpectedConditions.
-	                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i + "]")));
-i++;
+				  try {
+						 Duration waitTime = Duration.ofSeconds(10);
+						 WebDriverWait wait = new WebDriverWait(driver, waitTime);
+						 if(size < 70) {
+							 WebElement element = wait.until(ExpectedConditions.
+				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[10]")));
+						 }
+						 else if (size >100) {
+							 WebElement element = wait.until(ExpectedConditions.
+				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[40]")));
+						 }
+						  
+
+					
 			  System.out.println(tradeHistoryList.isDisplayed());
 			  String tradeHistory = tradeHistoryList.getText();
 			  System.out.println(tradeHistory);
@@ -340,6 +349,9 @@ i++;
 
 				repository.saveAndFlush(transactionData);
 			}
+			    }catch(Exception e){
+			        e.printStackTrace();
+			      }
 
 		}
 
