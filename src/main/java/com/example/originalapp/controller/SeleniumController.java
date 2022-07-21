@@ -236,7 +236,7 @@ public class SeleniumController {
 				driver.quit();
 				return "redirect:/analysistool";
 			}*/
-		  for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+		  for (int i = 1; i <= 20; i++) {
 	  new WebDriverWait(driver, Duration.ofSeconds(10))
 	  .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 	  "/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i +"]"
