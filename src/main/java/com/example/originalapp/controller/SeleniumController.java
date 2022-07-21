@@ -130,7 +130,11 @@ public class SeleniumController {
 
 		ChromeDriver driver = new ChromeDriver(options);
 
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); // 要素が見つかるまでの待ち時間を設定
+		// 要素が見つかるまでの待ち時間を設定
+		Duration waitTime = Duration.ofSeconds(20);
+	    driver.manage().timeouts().implicitlyWait(waitTime);
+	    driver.manage().timeouts().pageLoadTimeout(waitTime);
+	    driver.manage().timeouts().scriptTimeout(waitTime);
 
 		return driver;
 
@@ -219,36 +223,38 @@ public class SeleniumController {
 		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
-		/*for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+		
+		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			WebElement tradeHistoryList;
 			try {
-				tradeHistoryList = driver.findElement(By.xpath(
-						"/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i
-								+ "]"));
+				 Duration waitTime = Duration.ofSeconds(10);
+				 WebDriverWait wait = new WebDriverWait(driver, waitTime);
+				 tradeHistoryList = wait.until(ExpectedConditions.
+                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i
+								+ "]")));
+
 
 			} catch (NoSuchElementException e) {
 				break;
 			}
-			finally{
-				driver.quit();
-			}
-			if (driver.findElements(By
+
+			/*if (driver.findElements(By
 					.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
 							+ i + "]"))
 					.size() == 0) {
 				driver.quit();
 				return "redirect:/analysistool";
-			}*/
+			}
 
-		System.out.println(tradeHistoryAlllist);
+		/*System.out.println(tradeHistoryAlllist);
 			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
 				  if (tradeHistoryList.isDisplayed() == false) {
 					  new WebDriverWait(driver, Duration.ofSeconds(10000)).until(ExpectedConditions.textToBePresentInElementLocated(
 							     By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[10]/div[5]"), "なし"));
  
-						  }
+						  }*/
 
-				  System.out.println(tradeHistoryList);
+			  System.out.println(tradeHistoryList.isDisplayed());
 			  String tradeHistory = tradeHistoryList.getText();
 			  System.out.println(tradeHistory);
 			ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
