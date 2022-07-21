@@ -231,7 +231,7 @@ public class SeleniumController {
 				 Duration waitTime = Duration.ofSeconds(10);
 				 WebDriverWait wait = new WebDriverWait(driver, waitTime);
 				 tradeHistoryList = wait.until(ExpectedConditions.
-                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[30]")));
+                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i + "]")));
 
 
 			} catch (NoSuchElementException e) {
