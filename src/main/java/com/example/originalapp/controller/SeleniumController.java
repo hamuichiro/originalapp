@@ -211,8 +211,8 @@ public class SeleniumController {
 		this.elememtClickId(driver, "time-line");
 
 		
-		//List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
-		/*for (int i = 1; driver.findElement(By
+		/*List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
+		for (int i = 1; driver.findElement(By
 				.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
 						+ i + "]"))
 				.isDisplayed() ; i++) {
@@ -221,25 +221,24 @@ public class SeleniumController {
 								+ "]")));
 		}*/
 		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
-		int size = tradeHistoryAlllist.size();
+		
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
 		
-		/*for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			WebElement tradeHistoryList;
 			try {
 				 Duration waitTime = Duration.ofSeconds(10);
 				 WebDriverWait wait = new WebDriverWait(driver, waitTime);
 				 tradeHistoryList = wait.until(ExpectedConditions.
-                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i
-								+ "]")));
+                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[30]")));
 
 
 			} catch (NoSuchElementException e) {
 				break;
 			}
 
-			if (driver.findElements(By
+			/*if (driver.findElements(By
 					.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
 							+ i + "]"))
 					.size() == 0) {
@@ -248,22 +247,7 @@ public class SeleniumController {
 			}*/
 
 		System.out.println(tradeHistoryAlllist);
-			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
-				  try {
-						 Duration waitTime = Duration.ofSeconds(10);
-						 WebDriverWait wait = new WebDriverWait(driver, waitTime);
-						 if(size < 70) {
-							 WebElement element = wait.until(ExpectedConditions.
-				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[30]")));
-						 }
-						 else if (size < 110) {
-							 WebElement element = wait.until(ExpectedConditions.
-				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[40]")));
-						 }
-						 else {
-							 WebElement element = wait.until(ExpectedConditions.
-				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[50]")));
-						 }
+
 						  
 
 					
@@ -353,9 +337,7 @@ public class SeleniumController {
 
 				repository.saveAndFlush(transactionData);
 			}
-			    }catch(Exception e){
-			        e.printStackTrace();
-			      }
+
 
 		}
 
