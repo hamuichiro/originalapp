@@ -206,8 +206,8 @@ public class SeleniumController {
 		this.elememtClickId(driver, "time-line");
 
 		
-		/*List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
-		for (int i = 1; driver.findElement(By
+		//List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
+		/*for (int i = 1; driver.findElement(By
 				.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
 						+ i + "]"))
 				.isDisplayed() ; i++) {
@@ -218,16 +218,18 @@ public class SeleniumController {
 		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
-		/*for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
-			String tradeHistory = "";
+		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+			WebElement tradeHistoryList;
 			try {
-				tradeHistory = driver.findElement(By.xpath(
+				tradeHistoryList = driver.findElement(By.xpath(
 						"/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i
-								+ "]"))
-						.getText();
+								+ "]"));
 
 			} catch (NoSuchElementException e) {
 				break;
+			}
+			finally{
+				driver.quit();
 			}
 			if (driver.findElements(By
 					.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
@@ -235,15 +237,15 @@ public class SeleniumController {
 					.size() == 0) {
 				driver.quit();
 				return "redirect:/analysistool";
-			}*/
+			}
 
-		System.out.println(tradeHistoryAlllist);
+		/*System.out.println(tradeHistoryAlllist);
 			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
 				  if (tradeHistoryList.isDisplayed() == false) {
 					  new WebDriverWait(driver, Duration.ofSeconds(1000)).until(ExpectedConditions.textToBePresentInElementLocated(
 							     By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[10]"), "なし"));
  
-						  }
+						  }*/
 
 				  System.out.println(tradeHistoryList);
 			  String tradeHistory = tradeHistoryList.getText();
