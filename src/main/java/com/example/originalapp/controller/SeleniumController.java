@@ -217,9 +217,7 @@ public class SeleniumController {
 						.getText();
 
 			} catch (NoSuchElementException e) {
-				System.out.println(e);
-				driver.quit();
-				return "redirect:/";
+				break;
 			}
 			if (driver.findElements(By
 					.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
