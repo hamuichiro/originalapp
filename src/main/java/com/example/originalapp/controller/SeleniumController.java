@@ -254,15 +254,15 @@ public class SeleniumController {
 						 WebDriverWait wait = new WebDriverWait(driver, waitTime);
 						 if(size < 70) {
 							 WebElement element = wait.until(ExpectedConditions.
-				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[20]")));
+				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[30]")));
 						 }
 						 else if (size < 100) {
 							 WebElement element = wait.until(ExpectedConditions.
-				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[30]")));
+				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[40]")));
 						 }
 						 else {
 							 WebElement element = wait.until(ExpectedConditions.
-				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[40]")));
+				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[50]")));
 						 }
 						  
 
