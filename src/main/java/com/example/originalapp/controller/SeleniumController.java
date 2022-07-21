@@ -240,7 +240,7 @@ public class SeleniumController {
 		System.out.println(tradeHistoryAlllist);
 			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
 				  if (tradeHistoryList.isDisplayed() == false) {
-					  new WebDriverWait(driver, Duration.ofSeconds(100));
+					  new WebDriverWait(driver, Duration.ofSeconds(200));
  
 						  }
 
