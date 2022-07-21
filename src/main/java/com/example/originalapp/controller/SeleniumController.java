@@ -224,7 +224,7 @@ public class SeleniumController {
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
 		
-		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+		/*for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			WebElement tradeHistoryList;
 			try {
 				 Duration waitTime = Duration.ofSeconds(10);
@@ -238,21 +238,20 @@ public class SeleniumController {
 				break;
 			}
 
-			/*if (driver.findElements(By
+			if (driver.findElements(By
 					.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
 							+ i + "]"))
 					.size() == 0) {
 				driver.quit();
 				return "redirect:/analysistool";
-			}
+			}*/
 
-		/*System.out.println(tradeHistoryAlllist);
+		System.out.println(tradeHistoryAlllist);
 			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
-				  if (tradeHistoryList.isDisplayed() == false) {
-					  new WebDriverWait(driver, Duration.ofSeconds(10000)).until(ExpectedConditions.textToBePresentInElementLocated(
-							     By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[10]/div[5]"), "なし"));
- 
-						  }*/
+					 Duration waitTime = Duration.ofSeconds(10);
+					 WebDriverWait wait = new WebDriverWait(driver, waitTime);
+					 tradeHistoryList = wait.until(ExpectedConditions.
+	                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[10]")));
 
 			  System.out.println(tradeHistoryList.isDisplayed());
 			  String tradeHistory = tradeHistoryList.getText();
