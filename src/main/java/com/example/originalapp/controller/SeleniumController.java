@@ -206,19 +206,19 @@ public class SeleniumController {
 		this.elememtClickId(driver, "time-line");
 
 		
-		List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
-		for (int i = 1; driver.findElements(By
+		/*List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
+		for (int i = 1; driver.findElement(By
 				.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
 						+ i + "]"))
-				.size() > 0; i++) {
+				.isDisplayed() ; i++) {
 			tradeHistoryAlllist.add(driver.findElement(By.xpath(
 						"/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i
 								+ "]")));
-		}
-		/*List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
+		}*/
+		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
-		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
+		/*for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			String tradeHistory = "";
 			try {
 				tradeHistory = driver.findElement(By.xpath(
