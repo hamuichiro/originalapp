@@ -235,6 +235,7 @@ public class SeleniumController {
 
 
 			} catch (NoSuchElementException e) {
+				driver.close();
 				break;
 			}
 
@@ -246,12 +247,12 @@ public class SeleniumController {
 				return "redirect:/analysistool";
 			}*/
 
-		System.out.println(tradeHistoryAlllist);
+		
 
 						  
 
 					
-			  System.out.println(tradeHistoryList.isDisplayed());
+			  
 			  String tradeHistory = tradeHistoryList.getText();
 			  System.out.println(tradeHistory);
 			ArrayList<String> tradeList = new ArrayList<String>(Arrays.asList(tradeHistory.split("\n")));
