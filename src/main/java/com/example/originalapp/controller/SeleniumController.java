@@ -221,23 +221,20 @@ public class SeleniumController {
 								+ "]")));
 		}*/
 		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
-		
+		try {
 		System.out.println("#######################");
 		System.out.println(tradeHistoryAlllist.size());
 		
 		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			WebElement tradeHistoryList;
-			try {
+			
 				 Duration waitTime = Duration.ofSeconds(10);
 				 WebDriverWait wait = new WebDriverWait(driver, waitTime);
 				 tradeHistoryList = wait.until(ExpectedConditions.
                         presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i + "]")));
 
 
-			} catch (NoSuchElementException e) {
-				driver.close();
-				break;
-			}
+
 
 			/*if (driver.findElements(By
 					.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
@@ -340,6 +337,10 @@ public class SeleniumController {
 			}
 
 
+		}
+		} catch (NoSuchElementException e) {
+			driver.close();
+			
 		}
 
 		driver.quit();
