@@ -245,14 +245,15 @@ public class SeleniumController {
 				driver.quit();
 				return "redirect:/analysistool";
 			}*/
-
+int i = 1;
 		System.out.println(tradeHistoryAlllist);
 			  for(WebElement tradeHistoryList : tradeHistoryAlllist) { //個別の履歴の内容をリストに格納
+				  
 					 Duration waitTime = Duration.ofSeconds(10);
 					 WebDriverWait wait = new WebDriverWait(driver, waitTime);
 					 WebElement element = wait.until(ExpectedConditions.
-	                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[10]")));
-
+	                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i + "]")));
+i++;
 			  System.out.println(tradeHistoryList.isDisplayed());
 			  String tradeHistory = tradeHistoryList.getText();
 			  System.out.println(tradeHistory);
