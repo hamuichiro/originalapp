@@ -256,7 +256,7 @@ public class SeleniumController {
 							 WebElement element = wait.until(ExpectedConditions.
 				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[30]")));
 						 }
-						 else if (size < 100) {
+						 else if (size < 110) {
 							 WebElement element = wait.until(ExpectedConditions.
 				                        presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[40]")));
 						 }
