@@ -423,7 +423,7 @@ public class SeleniumController {
 
 		File screenshot = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div"))
 				.getScreenshotAs(OutputType.FILE);
-		screenshot.renameTo(new File("transactionNumber.png"));
+		//screenshot.renameTo(new File("transactionNumber.png"));
 		// FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
 		String filePath = screenshot.getPath();
 		System.out.println(filePath);
