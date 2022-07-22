@@ -107,8 +107,8 @@ public class SeleniumController {
 	}
 
 	public ChromeDriver driver() {
-		String driver_path = "/app/.chromedriver/bin/chromedriver";
-		//String driver_path = "./exe/chromedriver.exe";
+		//String driver_path = "/app/.chromedriver/bin/chromedriver";
+		String driver_path = "./exe/chromedriver.exe";
 
 		ChromeOptions options = new ChromeOptions();
 
@@ -210,7 +210,8 @@ public class SeleniumController {
 		this.elememtClickId(driver, "page-liftup");
 		this.elememtClickId(driver, "time-line");
 
-		
+		List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("//*[text()=\"iPhone\"]"));
+		//System.out.println(tradeHistoryAlllist.size());
 		/*List<WebElement> tradeHistoryAlllist = new ArrayList<WebElement>();
 		for (int i = 1; driver.findElement(By
 				.xpath("/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div["
@@ -220,10 +221,10 @@ public class SeleniumController {
 						"/html/body/div[1]/div[1]/div/div[5]/div[3]/div[1]/div[1]/div/div[5]/div/div[3]/div[2]/div[" + i
 								+ "]")));
 		}*/
-		List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
-		try {
-		System.out.println("#######################");
-		System.out.println(tradeHistoryAlllist.size());
+		//List<WebElement> tradeHistoryAlllist = driver.findElements(By.className("list-body-row")); // 全約定履歴の取得
+		//try {
+		//System.out.println("#######################");
+		//System.out.println(tradeHistoryAlllist.size());
 		
 		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			WebElement tradeHistoryList;
@@ -338,10 +339,9 @@ public class SeleniumController {
 
 
 		}
-		} catch (NoSuchElementException e) {
-			driver.close();
+		
 			
-		}
+		
 
 		driver.quit();
 		return "redirect:/analysistool";
