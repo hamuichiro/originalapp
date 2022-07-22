@@ -111,8 +111,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    @RequestMapping(value = "/screenShot")
 	    @ResponseBody
 	    public String screenShot(String filePath) throws Exception {
+	    TransactionData transactionData = repository.findByTransactionNumber(filePath);
 
-	    	return getJsonFile(s3.download("screenshot10283841203051632269.png"));
+	    	return getJsonFile(s3.download(transactionData.getScreenshotFilePathNew()));
 	    }
 	    
 	    private String getJsonFile(S3Object screenShot){
