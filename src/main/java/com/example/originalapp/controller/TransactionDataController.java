@@ -112,9 +112,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    @ResponseBody
 	    public String screenShot(String filePath) throws Exception {
 	    TransactionData transactionData = repository.findByTransactionNumber(filePath);
+	    System.out.println(transactionData.getScreenshotFilePathNew());
 	    S3Object screenShot = s3.download(transactionData.getScreenshotFilePathNew());
 	    System.out.println("###################################");
-	    System.out.println(screenShot);
+	    System.out.println(transactionData.getScreenshotFilePathNew());
 	    	return getJsonFile(screenShot);
 	    }
 	    
