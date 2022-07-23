@@ -107,8 +107,8 @@ public class SeleniumController {
 	}
 
 	public ChromeDriver driver() {
-		String driver_path = "/app/.chromedriver/bin/chromedriver";
-		// String driver_path = "./exe/chromedriver.exe";
+		//String driver_path = "/app/.chromedriver/bin/chromedriver";
+		String driver_path = "./exe/chromedriver.exe";
 
 		ChromeOptions options = new ChromeOptions();
 
@@ -210,7 +210,7 @@ public class SeleniumController {
 		this.elememtClickId(driver, "page-liftup");
 		this.elememtClickId(driver, "time-line");
 
-		List<WebElement> tradeHistoryAlllist = driver.findElements(By.xpath("//*[text()=\"iPhone\"]"));
+		List<WebElement> tradeHistoryAlllist = driver.findElements(By.cssSelector("#execution-history-body .list-body-row"));
 
 		for (int i = 1; i <= tradeHistoryAlllist.size(); i++) {
 			WebElement tradeHistoryList = driver.findElement(By
@@ -305,7 +305,7 @@ public class SeleniumController {
 
 		}
 
-		driver.quit();
+		//driver.quit();
 		return "redirect:/analysistool";
 
 	}
