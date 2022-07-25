@@ -391,7 +391,8 @@ public class SeleniumController {
 		File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div"))
 				.getScreenshotAs(OutputType.FILE);
 		String filePathNew = screenshotNew.getPath();
-		String resultNew = filePathNew.substring(34);
+		String resultNew = filePathNew.substring(5);
+		System.out.println(filePathNew);
 		System.out.println(resultNew);
 		s3.upLoad(filePathNew);
 		transactionData.setScreenshotFilePathNew(resultNew);
