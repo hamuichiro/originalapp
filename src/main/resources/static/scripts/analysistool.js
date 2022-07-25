@@ -76,14 +76,7 @@ $(function () {
     })
     .done(function (screenShotFile) {
 		screenShot = screenShotFile;
-
-	})
-	.fail(function () {
-      
-    });
-    })
-  
-    trTag.append($("<td></td>").text(newDate));
+		     trTag.append($("<td></td>").text(newDate));
     trTag.append($("<td></td>").text(transactionDataList[i].transactionNewTime));
     trTag.append($("<td></td>").text(transactionDataList[i].currencyPair));
     trTag.append($("<td></td>").text(transactionDataList[i].transactionType));
@@ -103,6 +96,13 @@ $(function () {
 	else {
 	  trTag.append($('<td><a href="" data-lightbox="group" id="setLink"><img src="" id="setImage" width="10"></a></td>'));
 	}
+
+	})
+	.fail(function () {
+      
+    });
+    })
+
     
     
     $('#tableBody').append(trTag);
