@@ -337,7 +337,8 @@ public class SeleniumController {
 
 		this.elememtClickXpath(driver,
 				"/html/body/div[6]/div/div[2]/div/div/div/div/div/div/form/div[5]/div[2]/button"); // ログインボタンクリック
-		this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/a");
+		this.elememtClickXpath(driver, "/html/body/div[3]/div[3]/div[2]/div[2]/nav/ul/li[1]/div");
+		this.elememtClickXpath(driver, "//*[@id=\"overlap-manager-root\"]/div/span/div[1]/div/div/div/a[1]/span[2]");
 
 		TransactionData transactionData = repository.findByTransactionNumber(transactionNumber);
 
@@ -390,9 +391,10 @@ public class SeleniumController {
 		File screenshotNew = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[1]/div"))
 				.getScreenshotAs(OutputType.FILE);
 		String filePathNew = screenshotNew.getPath();
-		System.out.println(filePathNew);
+		String resultNew = filePathNew.substring(34);
+		System.out.println(resultNew);
 		s3.upLoad(filePathNew);
-		transactionData.setScreenshotFilePathNew(filePathNew);
+		transactionData.setScreenshotFilePathNew(resultNew);
 
 		this.elememtClickXpath(driver, "/html/body/div[2]/div[1]/div[1]/div/div[2]/div/div[2]/span"); // 移動ボタンクリック
 
@@ -426,9 +428,10 @@ public class SeleniumController {
 		//screenshot.renameTo(new File("transactionNumber.png"));
 		// FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
 		String filePath = screenshot.getPath();
-		System.out.println(filePath);
+		String result = filePath.substring(34);
+		System.out.println(result);
 		s3.upLoad(filePath);
-		transactionData.setScreenshotFilePath(filePath);
+		transactionData.setScreenshotFilePath(result);
 
 		repository.saveAndFlush(transactionData);
 
@@ -441,8 +444,9 @@ public class SeleniumController {
 				.getScreenshotAs(OutputType.FILE);
 		// FileUtils.copyFile(screenshot, new File(“screenshotNew.png”));
 		String filePath = screenshot.getPath();
-		System.out.println(filePath);
-		s3.upLoad(filePath);
+		String result = filePath.substring(34);
+		System.out.println(result);
+		s3.upLoad(result);
 
 	}
 	/*
