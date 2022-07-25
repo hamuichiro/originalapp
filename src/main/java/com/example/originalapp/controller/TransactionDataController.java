@@ -114,7 +114,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	   
 	    TransactionData transactionData = repository.findByTransactionNumber(filePath);
 	    
-	    S3Object screenShot = s3.download(transactionData.getScreenshotFilePathNew());
+	    S3Object screenShot = s3.download("screenshot10283841203051632269.png");
 
 	    	return getJsonFile(screenShot);
 	    }
