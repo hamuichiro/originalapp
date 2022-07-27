@@ -65,6 +65,7 @@ $(function () {
     var settlementDate = (transactionDataList[i].transactionSettlementDate).substr(5, 5);
     var transactionNumber = transactionDataList[i].transactionNumber;
     var path = "/transactionNumber?transactionNumber=" + transactionNumber;
+    var filePath = transactionDataList[i].screenshotFilePathNew;
     var screenShot; 
     var trTag = $("<tr>");
     
@@ -72,6 +73,7 @@ $(function () {
 	$.ajax({
       url: '/screenShot',
       dataType: 'json',
+      data: filePath,
       type: "GET"
     })
     .done(function (screenShotFile) {
