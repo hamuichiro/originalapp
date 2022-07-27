@@ -81,7 +81,7 @@ package com.example.originalapp.entity;
 	    private Double profitlossParseint;
 	    
 	    @Column
-	    private String screenshotFilePathNew;
+	    private String screenshotFilePathNew = "sample.png";
 	    
 	    @Column
 	    private String screenshotFilePath;
