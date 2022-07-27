@@ -99,7 +99,7 @@ $(function () {
     trTag.append($("<td></td>").text(transactionDataList[i].profitlossParseint));
     trTag.append($("<td></td>").text(transactionDataList[i].swap));
     trTag.append($("<td></td>").text(transactionDataList[i].profitLossConfirm));
-    if(screenShot == null) {
+    if(filePath == "sample.png") {
 	  trTag.append($('<td><a href="" id="setId">取得</a></td>'));  
 	}
 	else {
