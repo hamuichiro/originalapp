@@ -108,9 +108,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	        return retVal;
 	    }
 	    
-	    @RequestMapping(value = "/screenShot", method = RequestMethod.GET)
+	    @GetMapping(value = "/screenShot")
 	    @ResponseBody
-	    public String screenShot(@RequestParam("filePath") String filePath) throws Exception {
+	    public String screenShot(@RequestParam String filePath) throws Exception {
 	      S3Object screenShot;
 	      System.out.println(filePath);
 	      TransactionData transactionData = repository.findByTransactionNumber(filePath);
