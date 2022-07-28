@@ -118,6 +118,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    	  return null;
 	      }
 	      else {
+	    	  System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		    	System.out.println(transactionData.getScreenshotFilePathNew());
 		    	screenShot = s3.download(transactionData.getScreenshotFilePathNew());    	  
 	      }
