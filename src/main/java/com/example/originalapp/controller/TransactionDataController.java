@@ -114,6 +114,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    	S3Object screenShot;
 	   
 	      TransactionData transactionData = repository.findByTransactionNumber(filePath);
+	      System.out.println(transactionData);
 	      if(transactionData == null) {
 	    	  return null;
 	      }
