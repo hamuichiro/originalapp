@@ -108,7 +108,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	        return retVal;
 	    }
 	    
-	    @RequestMapping(value = "/screenShot")
+	    @RequestMapping(value = "/screenShot", method = RequestMethod.GET)
 	    @ResponseBody
 	    public String screenShot(@RequestParam("filePath") String filePath) throws Exception {
 	      S3Object screenShot;
