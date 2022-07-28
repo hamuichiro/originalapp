@@ -60,7 +60,7 @@ $(window).load(function () { //全ての読み込みが完了したら実行
 $(function () {
 
   function drawTabla(transactionDataList, i) {
-	
+	console.log(transactionDataList);
     var newDate = (transactionDataList[i].transactionNewDate).substr(5, 5);
     var settlementDate = (transactionDataList[i].transactionSettlementDate).substr(5, 5);
     var transactionNumber = transactionDataList[i].transactionNumber;
@@ -68,6 +68,8 @@ $(function () {
     var filePath = transactionDataList[i].screenshotFilePathNew;
     var screenShot; 
     var trTag = $("<tr>");
+    
+    
     
     $(function() {
 	$.ajax({
