@@ -112,7 +112,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    @ResponseBody
 	    public String screenShot(String filePath) throws Exception {
 	    	S3Object screenShot;
-	   
+	    	System.out.println(filePath);
 	      TransactionData transactionData = repository.findByTransactionNumber(filePath);
 	      System.out.println(transactionData);
 	      if(transactionData == null) {
