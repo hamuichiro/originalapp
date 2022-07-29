@@ -40,6 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 	import com.example.originalapp.entity.TransactionData;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.example.originalapp.entity.AccountInf;
 	import com.example.originalapp.form.TransactionDataForm;
 	import com.example.originalapp.form.AccountForm;
@@ -112,7 +113,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    @GetMapping(value = "/screenShot")
 	    @ResponseBody
 	    public String screenShot(@RequestParam String filePath) throws Exception {
-	      S3Object screenShot;
+	    	S3ObjectInputStream screenShot;
 	      
 	      //TransactionData transactionData = repository.findByScreenshotFilePathNew(filePath);
 	      //System.out.println(transactionData);
@@ -135,7 +136,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    
 
 	    
-	    private String getJsonFile(S3Object screenShot){
+	    private String getJsonFile(S3ObjectInputStream screenShot){
 	    	
 	        String retVal = "";
 	        ObjectMapper objectMapper = new ObjectMapper();

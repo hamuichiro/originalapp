@@ -16,6 +16,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 
 @Service
@@ -54,20 +55,21 @@ public class S3Wrapper {
 		s3Client.putObject(request);
 	}
 
-  public  S3Object download(String filePath) throws Exception{
+  public  S3ObjectInputStream download(String filePath) throws Exception{
  
 
 
       GetObjectRequest getRequest = new GetObjectRequest(awsBucket, filePath);
 
       S3Object object = s3Client.getObject(getRequest);
+      S3ObjectInputStream inputStream = object.getObjectContent();
 
       //FileOutputStream fos = new FileOutputStream(new File("[出力先パス]"));
       //IOUtils.copy(object.getObjectContent(), fos);
 
       //fos.close();
       
-      return object;
+      return inputStream;
   }
   
 }
