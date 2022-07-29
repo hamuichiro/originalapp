@@ -114,15 +114,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    public String screenShot(@RequestParam String filePath) throws Exception {
 	      S3Object screenShot;
 	      
-	      TransactionData transactionData = repository.findByScreenshotFilePathNew(filePath);
-	      System.out.println(transactionData);
-	      if(transactionData == null) {
+	      //TransactionData transactionData = repository.findByScreenshotFilePathNew(filePath);
+	      //System.out.println(transactionData);
+	      if(filePath == "sample.png") {
 	    	  return null;
 	      }
 	      else {
 	    	  System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		    	System.out.println(transactionData.getScreenshotFilePathNew());
-		    	screenShot = s3.download(transactionData.getScreenshotFilePathNew());    	  
+		    	//System.out.println(transactionData.getScreenshotFilePathNew());
+		    	screenShot = s3.download(filePath);    	  
 	      }
 	
 	
