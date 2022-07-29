@@ -75,7 +75,7 @@ $(function () {
 	$.ajax({
       url: '/screenShot',
       dataType: 'json',
-      data: filePath,
+      data: {filePath: 'filePath'},
       type: "GET"
     })
     .done(function (screenShotFile) {
