@@ -58,7 +58,7 @@ public class S3Wrapper {
  
 
 
-      final GetObjectRequest getRequest = new GetObjectRequest(awsBucket, "dir/" + filePath);
+      final GetObjectRequest getRequest = new GetObjectRequest(awsBucket, filePath);
 
       S3Object object = s3Client.getObject(getRequest);
 
