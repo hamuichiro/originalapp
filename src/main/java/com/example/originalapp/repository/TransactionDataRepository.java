@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 	@Repository
 	public interface TransactionDataRepository extends JpaRepository<TransactionData, Long> {
 
-	    TransactionData findByTransactionNumber(String transactionNumber);
+	    TransactionData findByscreenshotFilePathNew(String transactionNumber);
 	    //全件取得のソート findAllByOrderBy○○();○○にはソートのキーとなるフィールド名
 	  
 	}
