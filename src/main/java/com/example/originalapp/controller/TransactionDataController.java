@@ -23,7 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 	import org.slf4j.LoggerFactory;
 	import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.beans.factory.annotation.Value;
-	import org.springframework.security.core.Authentication;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 	import org.springframework.stereotype.Controller;
 	import org.springframework.ui.Model;
 	import org.springframework.util.Base64Utils;
@@ -113,7 +114,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    @GetMapping(value = "/screenShot")
 	    @ResponseBody
 	    public String screenShot(@RequestParam String filePath) throws Exception {
-	    	S3ObjectInputStream screenShot;
+	    	ResponseEntity<byte[]> screenShot;
 	      
 	      //TransactionData transactionData = repository.findByScreenshotFilePathNew(filePath);
 	      //System.out.println(transactionData);
@@ -136,7 +137,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	    
 
 	    
-	    private String getJsonFile(S3ObjectInputStream screenShot){
+	    private String getJsonFile(ResponseEntity<byte[]> screenShot){
 	    	
 	        String retVal = "";
 	        ObjectMapper objectMapper = new ObjectMapper();

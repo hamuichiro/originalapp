@@ -5,9 +5,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.URLEncoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
@@ -55,7 +60,7 @@ public class S3Wrapper {
 		s3Client.putObject(request);
 	}
 
-  public  S3ObjectInputStream download(String filePath) throws Exception{
+  public  ResponseEntity<byte[]> download(String filePath) throws Exception{
  
 
 
@@ -63,13 +68,17 @@ public class S3Wrapper {
 
       S3Object object = s3Client.getObject(getRequest);
       S3ObjectInputStream inputStream = object.getObjectContent();
-
-      //FileOutputStream fos = new FileOutputStream(new File("[出力先パス]"));
-      //IOUtils.copy(object.getObjectContent(), fos);
-
-      //fos.close();
       
-      return inputStream;
+      byte[] bytes = IOUtils.toByteArray(inputStream);
+      String fileName = URLEncoder.encode(filePath, "UTF-8").replaceAll("\\+", "%20");
+
+      HttpHeaders httpHeaders = new HttpHeaders();
+      httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+      httpHeaders.setContentLength(bytes.length);
+      httpHeaders.setContentDispositionFormData("attachment", fileName);
+
+      return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
+      
   }
   
 }
